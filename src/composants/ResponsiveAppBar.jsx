@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import mtp from '../assets/img/mtp.png'
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['Accueil','Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -43,11 +43,7 @@ function ResponsiveAppBar() {
           <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
             <img src={mtp} style={{ width: '70px', height: '80px', objectFit: 'cover' }} alt="Logo" />
           </Box>
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+          <Typography variant="h6" noWrap component="a" href="#app-bar-with-responsive-menu"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -63,8 +59,7 @@ function ResponsiveAppBar() {
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton size="large" aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" 
             onClick={handleOpenNavMenu}
-              color="black"
-            >
+              color="black">
               <MenuIcon />
             </IconButton>
             <Menu id="menu-appbar" anchorEl={anchorElNav} anchorOrigin={{vertical: 'bottom',horizontal: 'left',}}keepMounted
