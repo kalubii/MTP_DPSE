@@ -7,7 +7,8 @@ const Jumbotron = () => {
  const theme = useTheme();
 
  return (
-    <div className='container mt-5'>
+    <div className='container'>
+    <Box sx={{marginTop:5, [theme.breakpoints.down('md')]:{marginTop:2}}}>
       <Box
         sx={{
           backgroundColor:'#9ad29c',
@@ -16,9 +17,10 @@ const Jumbotron = () => {
           padding: 4,
           borderRadius: 20,
           width: 'fit-content',
-          [theme.breakpoints.down('md')]: { //Lorsque la taille de l'écran diminue
+          [theme.breakpoints.down('md')]: { //responsive
             border: 0,
             backgroundColor: "#fff",
+            padding:2,
           },
         }}
       >
@@ -26,30 +28,32 @@ const Jumbotron = () => {
         eos illum beatae optio, distinctio debitis in voluptate iusto aliquid nesciunt quod impedit sapiente <br />
         voluptatum excepturi, deleniti numquam?
       </Box>
-      <div className='my-4'>
-        <Box
-          sx={{
-            backgroundColor:'#9ad29c',
-            display: 'flex',
-            flexDirection: 'column',
-            padding: 4,
-            borderRadius: 20,
-            width: 'fit-content',
-            marginLeft: 50,
-            [theme.breakpoints.down('md')]: {
-              border: 0,
-              backgroundColor: "#fff",
-              margin: 'auto',
-              justifyContent: 'center',
-              alignItems:'center',
-            },
-          }}
-        >
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Atque facilis recusandae pariatur <br />
-          eos illum beatae optio, distinctio debitis in voluptate iusto aliquid nesciunt quod impedit sapiente <br />
-          voluptatum excepturi, deleniti numquam?
+      
+      <Box sx={{marginY:3, [theme.breakpoints.down('md')]:{marginY:0}}}>
+          <Box
+            sx={{
+              backgroundColor:'#9ad29c',
+              display: 'flex',
+              flexDirection: 'column',
+              padding: 4,
+              borderRadius: 20,
+              width: 'fit-content',
+              marginLeft: 50,
+              [theme.breakpoints.down('md')]: {
+                backgroundColor: "#fff",
+                border: 0,
+                margin: 'auto',
+                justifyContent: 'center',
+                alignItems:'center',
+                padding:2,
+              },
+            }}
+          >
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Atque facilis recusandae pariatur <br />
+            eos illum beatae optio, distinctio debitis in voluptate iusto aliquid nesciunt quod impedit sapiente <br />
+            voluptatum excepturi, deleniti numquam?
+          </Box>
         </Box>
-      </div>
 
       <Box
         sx={{
@@ -62,12 +66,14 @@ const Jumbotron = () => {
           [theme.breakpoints.down('md')]: {
             border: 0,
             backgroundColor: "#fff",
+            padding:2,
           },
         }}
       >
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Atque facilis recusandae pariatur <br />
         eos illum beatae optio, distinctio debitis in voluptate iusto aliquid nesciunt quod impedit sapiente <br />
         voluptatum excepturi, deleniti numquam?
+      </Box>
       </Box>
     </div>
  );
