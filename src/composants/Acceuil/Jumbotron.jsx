@@ -10,15 +10,15 @@ const Jumbotron = () => {
     <div className='container mt-5'>
       <Box
         sx={{
+          backgroundColor:'#9ad29c',
           display: 'flex',
           flexDirection: 'column',
           padding: 4,
           borderRadius: 20,
-          border: 1,
           width: 'fit-content',
           [theme.breakpoints.down('md')]: { //Lorsque la taille de l'écran diminue
             border: 0,
-            marginLeft: 0,
+            backgroundColor: "#fff",
           },
         }}
       >
@@ -29,17 +29,19 @@ const Jumbotron = () => {
       <div className='my-4'>
         <Box
           sx={{
+            backgroundColor:'#9ad29c',
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
             padding: 4,
             borderRadius: 20,
-            border: 1,
             width: 'fit-content',
-            margin: 'auto',
+            marginLeft: 50,
             [theme.breakpoints.down('md')]: {
               border: 0,
+              backgroundColor: "#fff",
+              margin: 'auto',
+              justifyContent: 'center',
+              alignItems:'center',
             },
           }}
         >
@@ -51,15 +53,15 @@ const Jumbotron = () => {
 
       <Box
         sx={{
+          backgroundColor:'#9ad29c',
           display: 'flex',
           flexDirection: 'column',
           padding: 4,
           borderRadius: 20,
-          border: 1,
           width: 'fit-content',
           [theme.breakpoints.down('md')]: {
             border: 0,
-            marginLeft: 0,
+            backgroundColor: "#fff",
           },
         }}
       >
