@@ -19,7 +19,7 @@ const images = [
       '/src/assets/img/images.jfif',
  },
  {
-    label: '67h, Antananarivo',
+    label:'Imerikasinina, Antananarivo',
     imgPath:
     '/src/assets/img/images1.jfif',
  },
@@ -29,7 +29,7 @@ const images = [
     '/src/assets/img/images2.jfif',
  },
  {
-    label: 'Imerikasinina, Antananarivo',
+    label: '67h, Antananarivo',
     imgPath:
     '/src/assets/img/imagess.jfif',
  },
@@ -45,7 +45,7 @@ const images = [
   },
 ];
 
-function SwipeableTextMobileStepper() {
+function Slider() {
  const theme = useTheme();
  const [activeStep, setActiveStep] = React.useState(0);
  const maxSteps = images.length;
@@ -123,4 +123,4 @@ function SwipeableTextMobileStepper() {
  );
 }
 
-export default SwipeableTextMobileStepper;
+export default Slider;
