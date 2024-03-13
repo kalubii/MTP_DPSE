@@ -63,7 +63,7 @@ function Slider() {
  };
 
  return (
-    <Box sx={{ maxWidth: 400, flexGrow: 1,margin:"auto", justifyContent:"center" }}>
+    <Box sx={{ maxWidth: 450, flexGrow: 1,margin:"auto", justifyContent:"center" }}>
       <Paper square elevation={0}
         sx={{
           display: 'flex',
@@ -77,7 +77,7 @@ function Slider() {
       </Paper>
       <AutoPlaySwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={activeStep} onChangeIndex={handleStepChange}
         enableMouseEvents
-        interval={2000} // Délai de 3 secondes entre chaque transition automatique
+        interval={2000} // Délai de  secondes entre chaque transition automatique
       >
         {images.map((step, index) => (
           <div key={step.label}>
@@ -86,7 +86,7 @@ function Slider() {
                 sx={{
                  height: 255,
                  display: 'block',
-                 maxWidth: 400,
+                 maxWidth: 450,
                  overflow: 'hidden',
                  width: '100%',
                 }}
