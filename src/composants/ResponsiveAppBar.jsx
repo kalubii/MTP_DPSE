@@ -16,7 +16,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
 
 const pages = ['Accueil','Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+//const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -37,9 +37,13 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  
+  const onCLickAcceuil = () => {
+    navigate('/');
+  };
 
   return (
-    <AppBar position="static" style={{backgroundColor:"#fafafa", marginBottom:"50px"}} className='container rounded' >
+    <AppBar position="static" style={{backgroundColor:"#fafafa", marginBottom:"50px",marginTop:"10px"}} className='container rounded' >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
@@ -75,8 +79,8 @@ function ResponsiveAppBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu} color="black">
+              {pages.map((page,index) => (
+                <MenuItem key={page} onClick={index === 0 ? onCLickAcceuil : handleCloseNavMenu} color="black">
                   <Typography>{page}</Typography>
                 </MenuItem>
               ))}
@@ -91,8 +95,8 @@ function ResponsiveAppBar() {
             </Typography>
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button key={page} onClick={handleCloseNavMenu} sx={{ my: 2, color: 'black', display: 'block' }}>
+            {pages.map((page,index) => (
+              <Button key={page} onClick={index === 0 ? onCLickAcceuil : handleCloseNavMenu} sx={{ my: 2, color: 'black', display: 'block' }}>
                 {page}
               </Button>
             ))}
@@ -112,11 +116,11 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              {/* {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
-              ))}
+              ))} */}
             </Menu>
           </Box>
         </Toolbar>

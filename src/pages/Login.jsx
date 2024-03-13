@@ -14,13 +14,14 @@ import {
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../providers/AuthProviders'
+import ResponsiveAppBar from '../composants/ResponsiveAppBar'
 
 const Login = () => {
   const { login } = useAuth()
   const [etat, setEtat] = useState({ username: '', password: '' })
   const [message, setMessage] = useState('')
 
-  const handleEmailChange = (event) => {
+  const handleUserNameChange = (event) => {
     setEtat({ ...etat, username: event.target.value })
   }
 
@@ -40,11 +41,12 @@ const Login = () => {
           navigate('/home')
       }
     } catch (error) {
-        setMessage('Incorrect username or password')
+        setMessage('Identifiants incorrects!! Veuillez contacter l`administrateur')
     }
   }
 
-  return (
+  return (<>
+    <ResponsiveAppBar/>
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <Box
@@ -60,26 +62,26 @@ const Login = () => {
         </Avatar>
 
         <Typography component="h1" variant="h5">
-          Sign in
+          Se Connecter
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
             id="username"
-            label="Email Address"
+            label="Identifiant"
             fullWidth
             name="username"
             autoComplete="username"
             autoFocus
             value={etat.username}
-            onChange={handleEmailChange}
+            onChange={handleUserNameChange}
           />
           <TextField
             margin="normal"
             required
             name="password"
-            label="Password"
+            label="Mot de Passe"
             fullWidth
             type="password"
             id="password"
@@ -98,7 +100,7 @@ const Login = () => {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}>
-            Connecter
+            Valider
           </Button>
           {message && (
             <Alert
@@ -123,6 +125,7 @@ const Login = () => {
         </Box>
       </Box>
     </Container>
+  </>
   )
 }
 

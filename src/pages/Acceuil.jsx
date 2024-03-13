@@ -9,7 +9,7 @@ import TypeWriter from '../composants/Acceuil/TypeWriter'
 
 const Acceuil = () => {
   return (
-    <div className='mt-2'>
+    <div>
         <ResponsiveAppBar/>
         <div className='d-flex m-auto justify-content-center mb-4'>
          <TypeWriter/>
