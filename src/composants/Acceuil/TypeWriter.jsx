@@ -6,17 +6,17 @@ import { TypeWriterText } from 'type-writer-text';
 const TypeWriter = () => {
     const theme = useTheme();
     const [showText, setShowText] = useState(true);
-
- useEffect(() => {
-    let timer;
-    const hideText = () => {
-      setShowText(false);
-      timer = setTimeout(() => {
-        setShowText(true);
-      }, 1000);
-    };
-    return () => clearTimeout(timer);
- }, []);
+    
+    useEffect(() => {
+      let timer;
+      const hideText = () => {
+        setShowText(false);
+        timer = setTimeout(() => {
+          setShowText(true);
+        }, 1000);
+      };
+      return () => clearTimeout(timer);
+   }, []);
 
  return (
     <Box sx={{fontFamily: 'Berlin Sans FB', fontSize:"3rem", color: '#739574', [theme.breakpoints.down('md')]:{fontSize:"2rem"}}} >

@@ -57,7 +57,7 @@ const Login = () => {
           alignItems: 'center',
           marginBottom: 3
         }}>
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+        <Avatar sx={{ m: 1, bgcolor: 'success.main' }}>
           <Lock />
         </Avatar>
 
@@ -96,6 +96,7 @@ const Login = () => {
           />
 
           <Button
+            color='success'
             type="submit"
             fullWidth
             variant="contained"

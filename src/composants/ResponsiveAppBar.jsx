@@ -68,7 +68,7 @@ function ResponsiveAppBar() {
               color="black">
               <MenuIcon />
             </IconButton>
-            <Menu id="menu-appbar" anchorEl={anchorElNav} anchorOrigin={{vertical: 'bottom',horizontal: 'left',}}keepMounted
+            <Menu id="menu-appbar"  anchorEl={anchorElNav} anchorOrigin={{vertical: 'bottom',horizontal: 'left',}}keepMounted
               transformOrigin={{
                 vertical: 'top',
                 horizontal: 'left',
@@ -80,8 +80,8 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page,index) => (
-                <MenuItem key={page} onClick={index === 0 ? onCLickAcceuil : handleCloseNavMenu} color="black">
-                  <Typography>{page}</Typography>
+                <MenuItem  key={page} onClick={index === 0 ? onCLickAcceuil : handleCloseNavMenu} color="black">
+                  <Typography >{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -103,9 +103,9 @@ function ResponsiveAppBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Login">
+            <Tooltip title="Se Connecter">
               <IconButton onClick={handleClickLogin} sx={{ p: 0 }}>
-                <AccountCircleIcon  fontSize='large' alt="Login" />
+                <AccountCircleIcon fontSize='large' alt="Login" />
               </IconButton>
             </Tooltip>
             <Menu sx={{ mt: '45px' }} id="menu-appbar" anchorEl={anchorElUser} anchorOrigin={{vertical: 'top',horizontal: 'right',}} keepMounted
