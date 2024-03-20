@@ -7,9 +7,11 @@ import Paper from '@mui/material/Paper';
 import Deposits from './Deposits';
 import Orders from './Orders';
 import Chart from './Diagramme';
+import Title from './Title';
+
 
 function Dashboard() {
-  return (
+  return (<>
         <Box
           component="main"
           sx={{
@@ -61,6 +63,7 @@ function Dashboard() {
             </Grid>
           </Container>
         </Box>
+        </>
   );
 }
 

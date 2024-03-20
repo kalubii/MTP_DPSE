@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
 import { LineChart, axisClasses } from '@mui/x-charts';
 
-import Title from './Title';
+import Title from './SousTitle';
 
 // Generate Sales Data
 function createData(time, amount) {
@@ -24,7 +24,7 @@ const data = [
 function Chart() {
   const theme = useTheme();
 
-  return (
+  return (<>
     <React.Fragment>
       <Title>Today</Title>
       <div style={{ width: '100%', flexGrow: 1, overflow: 'hidden'}}>
@@ -73,6 +73,7 @@ function Chart() {
         />
       </div>
     </React.Fragment>
+    </>
   );
 }
 

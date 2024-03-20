@@ -7,7 +7,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { DirectionsCar,ListAlt,  Menu, NoteAdd, PowerSettingsNew, Timeline } from '@mui/icons-material';
+import { DirectionsCar,ListAlt, MoreVert, NoteAddOutlined, PowerSettingsNew, Timeline } from '@mui/icons-material';
 import { Formulaire } from './Formulaire';
 import Listes from './Listes';
 import Viabilite from './Viabilite';
@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../providers/AuthProviders';
 import Dashboard from './Dashboard/Dashboard';
 import mtp from '../../../assets/img/mtp.png';
+import Title from './Dashboard/Title';
 
 export default function TemporaryDrawer() {
   const [open, setOpen] = React.useState(false);
@@ -53,7 +54,7 @@ const DrawerList = (
         }}> 
           <ListItemButton>
             <ListItemIcon >
-              {index === 0 ? <Timeline/> : index === 1 ? <NoteAdd/> : index === 2 ? <ListAlt /> : index === 3 ? <DirectionsCar/> : null }
+              {index === 0 ? <Timeline/> : index === 1 ? <NoteAddOutlined/> : index === 2 ? <ListAlt /> : index === 3 ? <DirectionsCar/> : null }
             </ListItemIcon>
             <ListItemText primary={text} />
           </ListItemButton>
@@ -80,15 +81,15 @@ const DrawerList = (
 
 return (
  <div>
-    <Button onClick={toggleDrawer(true)}> <Menu fontSize='medium'/>Ouvrir le Menu</Button>
+    <Button onClick={toggleDrawer(true)}> <MoreVert fontSize='medium'/> Menu</Button>
     <Drawer open={open} onClose={toggleDrawer(false)} variant='persistent'>
       {DrawerList}
     </Drawer>
 
-    <div className='container d-flex'>
-      {selectedIndex === 0 && <Dashboard/>}
-      {selectedIndex === 1 && <Formulaire/>}
-      {selectedIndex === 2 && <Listes/>}
+    <div className='container'>
+      {selectedIndex === 0 && <><Title>Tableau de Bord</Title> <Dashboard/></>}
+      {selectedIndex === 1 && <><Title>Formulaire de saisie</Title> <Formulaire/></>}
+      {selectedIndex === 2 && <><Title>Liste des Données</Title> <Listes/></>}
       {selectedIndex === 3 && <Viabilite/>}
     </div>
     
