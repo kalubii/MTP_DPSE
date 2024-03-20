@@ -19,7 +19,7 @@ const TypeWriter = () => {
    }, []);
 
  return (
-    <Box sx={{fontFamily: 'Berlin Sans FB', fontSize:"3rem", color: '#739574', [theme.breakpoints.down('md')]:{fontSize:"2rem"}}} >
+    <Box sx={{fontFamily: 'Berlin Sans FB', fontSize:"3rem", color: '#739574', [theme.breakpoints.down('md')]:{fontSize:"1.6rem"}}} >
       {showText && (
         <TypeWriterText
           text={"Le Ministère des Travaux Publics"}

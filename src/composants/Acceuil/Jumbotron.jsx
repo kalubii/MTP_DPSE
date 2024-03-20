@@ -20,7 +20,8 @@ const Jumbotron = () => {
           [theme.breakpoints.down('md')]: { //responsive
             border: 0,
             backgroundColor: "#fff",
-            padding:2,
+            padding:1,
+            margin: 0,
           },
         }}
       >
@@ -29,7 +30,7 @@ const Jumbotron = () => {
         voluptatum excepturi, deleniti numquam?
       </Box>
       
-      <Box sx={{marginY:3, [theme.breakpoints.down('md')]:{marginY:0}}}>
+      <Box sx={{marginY:3, [theme.breakpoints.down('md')]:{marginY:2}}}>
           <Box
             sx={{
               backgroundColor:'#9ad29c',
@@ -40,12 +41,13 @@ const Jumbotron = () => {
               width: 'fit-content',
               marginLeft: 50,
               [theme.breakpoints.down('md')]: {
-                backgroundColor: "#fff",
-                border: 0,
-                margin: 'auto',
-                justifyContent: 'center',
-                alignItems:'center',
-                padding:2,
+                backgroundColor:'#fff',
+                borderTop: 2,
+                borderBottom: 2,
+                borderRadius: 0,
+                borderColor:'#9ad29c',
+                margin: 0,
+                padding:1,
               },
             }}
           >
@@ -64,9 +66,8 @@ const Jumbotron = () => {
           borderRadius: 20,
           width: 'fit-content',
           [theme.breakpoints.down('md')]: {
-            border: 0,
             backgroundColor: "#fff",
-            padding:2,
+            padding:1,
           },
         }}
       >

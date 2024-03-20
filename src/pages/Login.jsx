@@ -57,7 +57,7 @@ const Login = () => {
           alignItems: 'center',
           marginBottom: 3
         }}>
-        <Avatar sx={{ m: 1, bgcolor: 'success.main' }}>
+        <Avatar sx={{ m: 1, bgcolor: '#739574' }}>
           <Lock />
         </Avatar>
 

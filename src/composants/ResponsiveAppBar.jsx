@@ -15,7 +15,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
 
-const pages = ['Accueil','Products', 'Pricing', 'Blog'];
+const pages = ['Accueil','Directions', 'A Propos', 'Contact'];
 //const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -88,7 +88,7 @@ function ResponsiveAppBar() {
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, flexDirection: 'row', justifyContent: 'center' }}>
             <img src={mtp} style={{ width: '60px', height: '60px', objectFit: 'cover', marginRight: '10px' }} alt="Logo" />
-            <Typography variant="h5" noWrap component="a" href="#app-bar-with-responsive-menu"
+            <Typography variant="h5" noWrap component="a" href="#app-bar-with-responsive-menu" 
               sx={{mr: 2,flexGrow: 1,fontFamily: 'monospace',fontWeight: 700,letterSpacing: '.3rem',color: 'inherit',textDecoration: 'none',
               }}
             >
