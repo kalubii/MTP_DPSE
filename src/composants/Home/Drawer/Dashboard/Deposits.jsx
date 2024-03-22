@@ -6,16 +6,18 @@ function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function Deposits() {
+function Deposits() {
   return (
     <React.Fragment>
-      <Title>Recent Deposits</Title>
+      <Title>Nombre des travaux</Title>
       <Typography component="p" variant="h4">
-        $3,024.00
+        3,024.00
       </Typography>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
-        on 15 March, 2019
+        En 2024
       </Typography>
     </React.Fragment>
   );
 }
+
+export default Deposits

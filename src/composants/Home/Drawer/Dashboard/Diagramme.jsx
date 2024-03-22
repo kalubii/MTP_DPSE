@@ -10,15 +10,12 @@ function createData(time, amount) {
 }
 
 const data = [
-  createData('00:00', 0),
-  createData('03:00', 300),
-  createData('06:00', 600),
-  createData('09:00', 800),
-  createData('12:00', 1500),
-  createData('15:00', 2000),
-  createData('18:00', 2400),
-  createData('21:00', 2400),
-  createData('24:00'),
+  createData('2019', 200), //nb travaux par Année
+  createData('2020', 247),
+  createData('2021', 300),
+  createData('2022', 240),
+  createData('2023', 400),
+  createData('2024', 500),
 ];
 
 function Chart() {
@@ -26,18 +23,23 @@ function Chart() {
 
   return (<>
     <React.Fragment>
-      <Title>Today</Title>
-      <div style={{ width: '100%', flexGrow: 1, overflow: 'hidden'}}>
+      <Title>Statistique</Title>
+      <div style={{ width: '100%', flexGrow: 1, overflow: 'hidden', backgroundColor:'white'}}>
         <LineChart
           dataset={data}
           margin={{
             top: 16,
             right: 20,
             left: 70,
-            bottom: 30,
+            bottom: 50,
           }}
           xAxis={[
             {
+              label: 'Année',
+              labelStyle: {
+                ...theme.typography.body1,
+                fill: theme.palette.text.primary,
+              },
               scaleType: 'point',
               dataKey: 'time',
               tickNumber: 2,
@@ -46,13 +48,13 @@ function Chart() {
           ]}
           yAxis={[
             {
-              label: 'Sales ($)',
+              label: 'Nombre de travaux',
               labelStyle: {
                 ...theme.typography.body1,
                 fill: theme.palette.text.primary,
               },
               tickLabelStyle: theme.typography.body2,
-              max: 2500,
+              max: 1000, 
               tickNumber: 3,
             },
           ]}

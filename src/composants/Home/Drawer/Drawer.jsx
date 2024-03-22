@@ -14,8 +14,9 @@ import Viabilite from './Viabilite';
 import { Divider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../providers/AuthProviders';
-import Dashboard from './Dashboard/Dashboard';
 import mtp from '../../../assets/img/mtp.png';
+import { useTheme } from '@mui/material/styles';
+import Dashboard from './Dashboard/Dashboard';
 import Title from './Dashboard/Title';
 
 export default function TemporaryDrawer() {
@@ -23,6 +24,7 @@ export default function TemporaryDrawer() {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const {logout} = useAuth()
   const navigate = useNavigate()
+  const theme = useTheme()
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -67,7 +69,7 @@ const DrawerList = (
         {['Quitter'].map((text, index) => (
           <ListItem key={text} disablePadding onClick={onLogout} sx={{ color: '#e53935'}}>
             <ListItemButton>
-              <ListItemIcon sx={{ color: '#e53935'}}>
+              <ListItemIcon sx={{ color: 'red'}}>
                 {index === 0 ? <PowerSettingsNew /> : null}
               </ListItemIcon>
               <ListItemText primary={text} />
@@ -81,15 +83,15 @@ const DrawerList = (
 
 return (
  <div>
-    <Button onClick={toggleDrawer(true)}> <MoreVert fontSize='medium'/> Menu</Button>
+    <Button onClick={toggleDrawer(true)} variant='contained' color='info' sx={{[theme.breakpoints.down('md')]:{marginBottom: 3}}} > <MoreVert fontSize='medium'/> Menu</Button>
     <Drawer open={open} onClose={toggleDrawer(false)} variant='persistent'>
       {DrawerList}
     </Drawer>
 
     <div className='container'>
-      {selectedIndex === 0 && <><Title>Tableau de Bord</Title> <Dashboard/></>}
-      {selectedIndex === 1 && <><Title>Formulaire de saisie</Title> <Formulaire/></>}
-      {selectedIndex === 2 && <><Title>Liste des Données</Title> <Listes/></>}
+      {selectedIndex === 0 && <><Title> <Timeline fontSize='large' sx={{marginRight:1, [theme.breakpoints.down('md')]:{fontSize:"1.7rem"}}}/>Tableau de Bord</Title> <Dashboard/></>}
+      {selectedIndex === 1 && <><Title> <NoteAddOutlined fontSize='large' sx={{marginRight:1, [theme.breakpoints.down('md')]:{fontSize:"1.7rem"}}}/>Formulaire de saisie</Title> <Formulaire/></>}
+      {selectedIndex === 2 && <><Title> <ListAlt fontSize='large' sx={{marginRight:1, [theme.breakpoints.down('md')]:{fontSize:"1.7rem"}}}/>Liste des Données</Title> <Listes/></>}
       {selectedIndex === 3 && <Viabilite/>}
     </div>
     
