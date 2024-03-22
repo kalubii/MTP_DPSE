@@ -1,0 +1,15 @@
+diff --git a/node_modules/react-swipeable-views-utils/lib/autoPlay.js b/node_modules/react-swipeable-views-utils/lib/autoPlay.js
+index 79e78b0..d172959 100644
+--- a/node_modules/react-swipeable-views-utils/lib/autoPlay.js
++++ b/node_modules/react-swipeable-views-utils/lib/autoPlay.js
+@@ -121,8 +121,8 @@ function autoPlay(MyComponent) {
+       } // eslint-disable-next-line camelcase,react/sort-comp
+ 
+     }, {
+-      key: "UNSAFE_componentWillReceiveProps",
+-      value: function UNSAFE_componentWillReceiveProps(nextProps) {
++      key: "componentDidUpdate",
++      value: function componentDidUpdate(nextProps) {
+         var index = nextProps.index;
+ 
+         if (typeof index === 'number' && index !== this.props.index) {
