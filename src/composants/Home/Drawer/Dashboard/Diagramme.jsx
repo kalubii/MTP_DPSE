@@ -23,7 +23,7 @@ function Chart() {
 
   return (<>
     <React.Fragment>
-      <Title>Statistique</Title>
+      <Title>Statistique d'investissement</Title>
       <div style={{ width: '100%', flexGrow: 1, overflow: 'hidden', backgroundColor:'white'}}>
         <LineChart
           dataset={data}

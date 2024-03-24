@@ -23,7 +23,7 @@ const TypeWriter = () => {
       {showText && (
         <TypeWriterText
           text={"Le Ministère des Travaux Publics"}
-          animationSpeed={100}
+          animationSpeed={60}
           cursorProps={{ color: 'rgba(0,0,0,0.87)', blinkSpeed: '0.8s' }}
           showCursor={false}
         />
