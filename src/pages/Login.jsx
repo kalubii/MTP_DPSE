@@ -14,9 +14,13 @@ import {
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../providers/AuthProviders'
-import ResponsiveAppBar from '../composants/ResponsiveAppBar'
+import TypeWriter from '../composants/Acceuil/TypeWriter'
+import mtp from '../assets/img/mtp.png'
+import { useTheme } from '@mui/material/styles';
+
 
 const Login = () => {
+  const theme = useTheme()
   const { login } = useAuth()
   const [etat, setEtat] = useState({ username: '', password: '' })
   const [message, setMessage] = useState('')
@@ -46,16 +50,26 @@ const Login = () => {
   }
 
   return (<>
-    <ResponsiveAppBar/>
+      <Box sx={{ display: { xs: 'none', md: 'flex' }, margin:'auto',justifyContent:'center'}}>
+          <img src={mtp} style={{ width: '90px', height: '120px', objectFit: 'cover' }} alt="Logo" />
+      </Box>
+      <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, flexDirection: 'row', justifyContent: 'center',marginTop:2 }}>
+            <img src={mtp} style={{ width: '80px', height: '90px', objectFit: 'cover'}} alt="Logo" />
+      </Box>
+    <Box sx={{display:'flex', margin:'auto',justifyContent:'center'}}>
+      <TypeWriter/>
+    </Box>
+    
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <Box
         sx={{
-          marginTop: 8,
+          marginTop: 5,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          marginBottom: 3
+          marginBottom: 3,
+          [theme.breakpoints.down('md')]:{marginTop:4}
         }}>
         <Avatar sx={{ m: 1, bgcolor: '#739574' }}>
           <Lock />
@@ -90,10 +104,10 @@ const Login = () => {
             onChange={handlePasswordChange}
           />
 
-          <FormControlLabel
+          {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
-          />
+          /> */}
 
           <Button
             color='success'
