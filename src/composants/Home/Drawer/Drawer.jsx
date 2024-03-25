@@ -7,7 +7,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { DirectionsCar,ListAlt, MoreVert, NoteAddOutlined, PowerSettingsNew, Timeline } from '@mui/icons-material';
+import { Assignment, DirectionsCar,ListAlt, MoreVert, NoteAddOutlined, PowerSettingsNew, Timeline } from '@mui/icons-material';
 import { Formulaire } from './Formulaire';
 import Listes from './Listes';
 import Viabilite from './Viabilite';
@@ -36,7 +36,7 @@ export default function TemporaryDrawer() {
 
   const onLogout = () =>{
     logout()
-    navigate('/')
+    navigate('/login')
   }
 
 const DrawerList = (
@@ -50,7 +50,7 @@ const DrawerList = (
         </Box>
 
     <List >
-      {['Tableau de Bord', 'Formulaire d`ajout ', 'Listes', 'Viabilité des Routes'].map((text, index) => (
+      {['Tableau de Bord', 'Formulaire d`ajout ', 'Base de données','Viabilité des Routes'].map((text, index) => (
         <ListItem key={text} disablePadding onClick={function () {
           return onItemClicked(index);
         }}> 
@@ -91,7 +91,7 @@ return (
     <div className='container'>
       {selectedIndex === 0 && <><Title> <Timeline fontSize='large' sx={{marginRight:1, [theme.breakpoints.down('md')]:{fontSize:"1.7rem"}}}/>Tableau de Bord</Title> <Dashboard/></>}
       {selectedIndex === 1 && <><Title> <NoteAddOutlined fontSize='large' sx={{marginRight:1, [theme.breakpoints.down('md')]:{fontSize:"1.7rem"}}}/>Formulaire de saisie</Title> <Formulaire/></>}
-      {selectedIndex === 2 && <><Title> <ListAlt fontSize='large' sx={{marginRight:1, [theme.breakpoints.down('md')]:{fontSize:"1.7rem"}}}/>Liste des Données</Title> <Listes/></>}
+      {selectedIndex === 2 && <><Title> <ListAlt fontSize='large' sx={{marginRight:1, [theme.breakpoints.down('md')]:{fontSize:"1.7rem"}}}/>Base de Données</Title> <Listes/></>}
       {selectedIndex === 3 && <Viabilite/>}
     </div>
     
