@@ -45,7 +45,7 @@ const Login = () => {
           navigate('/home')
       }
     } catch (error) {
-        setMessage('Identifiants incorrects!! Veuillez contacter l`administrateur')
+        setMessage('Identifiants incorrects!! Veuillez contacter l`administrateur du système.')
     }
   }
 
@@ -56,8 +56,9 @@ const Login = () => {
       <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, flexDirection: 'row', justifyContent: 'center',marginTop:2 }}>
             <img src={mtp} style={{ width: '80px', height: '90px', objectFit: 'cover'}} alt="Logo" />
       </Box>
-    <Box sx={{display:'flex', margin:'auto',justifyContent:'center'}}>
-      <TypeWriter/>
+
+    <Box sx={{display:'flex', margin:'auto',justifyContent:'center', fontFamily: 'Berlin Sans FB', fontSize:"2rem", color: '#739574'}}>
+      Veuillez vous identifiez s'il vous plaît
     </Box>
     
     <Container component="main" maxWidth="xs">
@@ -71,13 +72,13 @@ const Login = () => {
           marginBottom: 3,
           [theme.breakpoints.down('md')]:{marginTop:4}
         }}>
-        <Avatar sx={{ m: 1, bgcolor: '#739574' }}>
+        <Avatar sx={{ m: 1, bgcolor: 'success.main' }}>
           <Lock />
         </Avatar>
 
-        <Typography component="h1" variant="h5">
+        {/* <Typography component="h1" variant="h5">
           Se Connecter
-        </Typography>
+        </Typography> */}
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
             margin="normal"
