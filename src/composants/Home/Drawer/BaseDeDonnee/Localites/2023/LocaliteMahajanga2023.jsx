@@ -2,14 +2,19 @@ import React, { useEffect, useState } from 'react'
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import axios from 'axios';
+import Modifier from '../../CRUD/Modifier';
+import Loading from '../../../../../Loading'
+import { Box } from '@mui/material';
 
 const LocaliteMahajanga2023 = () => {
     const [Mahajanga,setMahajanga] = useState([])
-
+    const [loading, setLoading] = useState(true);
     useEffect(()=>{
     axios.get('http://localhost:8081/localiteMahajanga')
-    .then(res => setMahajanga(res.data))
-    .catch(err => console.log(err));
+    .then(res => setMahajanga(res.data),
+    setLoading(false))
+    .catch(err => console.log(err),
+    setLoading(false));
   },[])
 
   return (<>
@@ -28,8 +33,10 @@ const LocaliteMahajanga2023 = () => {
                       <TableCell>{localite.Nature_surface}</TableCell>
                       <TableCell>{localite.Region}</TableCell>
                       <TableCell>{localite.Gestionnaire_de_axe}</TableCell>
+                      <TableCell><Modifier/></TableCell>
                     </TableRow>
         )})}
+        {loading && <Box > <Loading/></Box>}
     </>
   )
 }

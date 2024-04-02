@@ -5,13 +5,13 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import axios from 'axios';
 import LocaliteTana2023 from '../composants/Home/Drawer/BaseDeDonnee/Localites/2023/LocaliteTana2023';
 import LocaliteAntsiranana2023 from '../composants/Home/Drawer/BaseDeDonnee/Localites/2023/LocaliteAntsiranana2023';
 import LocaliteMahajanga2023 from '../composants/Home/Drawer/BaseDeDonnee/Localites/2023/LocaliteMahajanga2023';
 import LocaliteFianarantsoa2023 from '../composants/Home/Drawer/BaseDeDonnee/Localites/2023/LocaliteFianarantsoa2023';
 import LocaliteToamasina2023 from '../composants/Home/Drawer/BaseDeDonnee/Localites/2023/LocaliteToamasina2023';
 import LocaliteToliara2023 from '../composants/Home/Drawer/BaseDeDonnee/Localites/2023/LocaliteToliara2023';
+import SearchBar from '../composants/Home/Drawer/BaseDeDonnee/SearchBar';
 
 function ListeLocalite() {
 
@@ -82,12 +82,8 @@ function ListeLocalite() {
     },
   ];
 
-
-
-
-
-
-  return(<>        
+  return(<>  
+  <Box sx={{marginBottom:4}}>      
         <Box
               sx={{
                 '& .MuiTextField-root': { m: 1, width: '25ch' },
@@ -99,7 +95,7 @@ function ListeLocalite() {
                 <TextField
                   id="outlined-select-currency"
                   select
-                  label="Region"
+                  label="District"
                   defaultValue="Antananarivo"
                 >
                   {Regions.map((option) => (
@@ -111,8 +107,9 @@ function ListeLocalite() {
                   ))}
                 </TextField>
         </Box>
+        
+        <Box sx={{display:'flex',justifyContent:'center',margin:'auto'}}>
 
-      <Box sx={{display:'flex',justifyContent:'center',margin:'auto'}}>
             <TextField
             id="standard-select-currency"
             select
@@ -128,13 +125,18 @@ function ListeLocalite() {
                 </MenuItem>
               ))}
             </TextField>
+            <Box sx={{marginLeft:3}}>
+                <SearchBar/>
+            </Box>
         </Box>
+  </Box>
+
         <Box>
           <React.Fragment>
               <Table size="small">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Provinces</TableCell>
+                    <TableCell>District</TableCell>
                     <TableCell>Axes</TableCell>
                     <TableCell>Section</TableCell>
                     <TableCell>PK Début</TableCell>
@@ -159,6 +161,7 @@ function ListeLocalite() {
                 </TableBody>
               </Table>
             </React.Fragment>
+
           </Box>
       </>
     )

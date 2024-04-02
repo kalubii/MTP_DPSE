@@ -2,14 +2,20 @@ import React, { useEffect, useState } from 'react'
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import axios from 'axios';
+import Modifier from '../../CRUD/Modifier';
+import Loading from '../../../../../Loading'
+import { Box } from '@mui/material';
 
 const LocaliteAntsiranana2023 = () => {
     const [Antsiranana,setAntsiranana] = useState([])
-
+    const [loading, setLoading] = useState(true);
     useEffect(()=>{
     axios.get('http://localhost:8081/localiteAntsiranana')
-    .then(res => setAntsiranana(res.data))
-    .catch(err => console.log(err));
+    .then(res => 
+      setAntsiranana(res.data),
+      setLoading(false))
+    .catch(err => console.log(err),
+              setLoading(false));
   },[])  
 
   return (<>
@@ -28,8 +34,10 @@ const LocaliteAntsiranana2023 = () => {
                       <TableCell>{localite.Nature_surface}</TableCell>
                       <TableCell>{localite.Region}</TableCell>
                       <TableCell>{localite.Gestionnaire_de_axe}</TableCell>
+                      <TableCell><Modifier/></TableCell>
                     </TableRow>
         )})}
+        {loading && <Box> <Loading/></Box>}
     </>
   )
 }

@@ -4,17 +4,13 @@ import {
   Avatar,
   Box,
   Button,
-  Checkbox,
   Container,
   CssBaseline,
-  FormControlLabel,
   TextField,
-  Typography
 } from '@mui/material'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../providers/AuthProviders'
-import TypeWriter from '../composants/Acceuil/TypeWriter'
 import mtp from '../assets/img/mtp.png'
 import { useTheme } from '@mui/material/styles';
 
@@ -50,6 +46,14 @@ const Login = () => {
   }
 
   return (<>
+  <Box
+   sx={{
+    backgroundColor: '#7fd162',
+    backgroundImage: `linear-gradient(0deg, #7fd162 5%, #cfeabb 33%, #ffffff 98%, #f5fff2 99%, #ffffff 100%)`,
+    backgroundSize: 'cover',
+    height: '100vh',
+    width: '100vw',
+ }}>
       <Box sx={{ display: { xs: 'none', md: 'flex' }, margin:'auto',justifyContent:'center'}}>
           <img src={mtp} style={{ width: '90px', height: '120px', objectFit: 'cover' }} alt="Logo" />
       </Box>
@@ -61,86 +65,87 @@ const Login = () => {
       Veuillez vous identifiez s'il vous plaît
     </Box>
     
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <Box
-        sx={{
-          marginTop: 5,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          marginBottom: 3,
-          [theme.breakpoints.down('md')]:{marginTop:4}
-        }}>
-        <Avatar sx={{ m: 1, bgcolor: 'success.main' }}>
-          <Lock />
-        </Avatar>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: 5,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              marginBottom: 3,
+              [theme.breakpoints.down('md')]:{marginTop:4}
+            }}>
+            <Avatar sx={{ m: 1, bgcolor: 'success.main' }}>
+              <Lock />
+            </Avatar>
 
-        {/* <Typography component="h1" variant="h5">
-          Se Connecter
-        </Typography> */}
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
-            margin="normal"
-            required
-            id="username"
-            label="Identifiant"
-            fullWidth
-            name="username"
-            autoComplete="username"
-            autoFocus
-            value={etat.username}
-            onChange={handleUserNameChange}
-          />
-          <TextField
-            margin="normal"
-            required
-            name="password"
-            label="Mot de Passe"
-            fullWidth
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={etat.password}
-            onChange={handlePasswordChange}
-          />
+            {/* <Typography component="h1" variant="h5">
+              Se Connecter
+            </Typography> */}
+            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+              <TextField
+                margin="normal"
+                required
+                id="username"
+                label="Identifiant"
+                fullWidth
+                name="username"
+                autoComplete="username"
+                autoFocus
+                value={etat.username}
+                onChange={handleUserNameChange}
+              />
+              <TextField
+                margin="normal"
+                required
+                name="password"
+                label="Mot de Passe"
+                fullWidth
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                value={etat.password}
+                onChange={handlePasswordChange}
+              />
 
-          {/* <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          /> */}
+              {/* <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              /> */}
 
-          <Button
-            color='success'
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}>
-            Valider
-          </Button>
-          {message && (
-            <Alert
-              icon={<Error fontSize="inherit" />}
-              severity="error">
-              {message}
-            </Alert>
-          )}
-          {/* <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link to="/inscription" variant="body2">
-                {' '}
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid> */}
-        </Box>
-      </Box>
-    </Container>
+              <Button
+                color='success'
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}>
+                Valider
+              </Button>
+              {message && (
+                <Alert
+                  icon={<Error fontSize="inherit" />}
+                  severity="error">
+                  {message}
+                </Alert>
+              )}
+              {/* <Grid container>
+                <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link to="/inscription" variant="body2">
+                    {' '}
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
+              </Grid> */}
+            </Box>
+          </Box>
+        </Container>
+    </Box>
   </>
   )
 }

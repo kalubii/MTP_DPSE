@@ -33,6 +33,21 @@ const Viabilite = () => {
       value: 'Mahajanga',
       label: 'Mahajanga',
     },
+    {
+      id: 4,
+      value: 'Fianarantsoa',
+      label: 'Fianarantsoa',
+    },
+    {
+      id: 5,
+      value: 'Toamasina',
+      label: 'Toamasina',
+    },
+    {
+      id: 6,
+      value: 'Toliara',
+      label: 'Toliara',
+    },
   ];
 
   function preventDefault(event) {
@@ -53,7 +68,7 @@ const Viabilite = () => {
             <TextField
               id="outlined-select-currency"
               select
-              label="Region"
+              label="Provinces"
               defaultValue="Antananarivo"
             >
               {Regions.map((option) => (
@@ -74,17 +89,23 @@ const Viabilite = () => {
               <Table size="small">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Année</TableCell>
+                    <TableCell>Province</TableCell>
                     <TableCell>Axes</TableCell>
+                    <TableCell>PK Début</TableCell>
+                    <TableCell>PK Fin</TableCell>
                     <TableCell>Localisation (PK)</TableCell>
                     <TableCell>Travaux</TableCell>
                     <TableCell>Avancement</TableCell>
+                    <TableCell>Année</TableCell>
                     <TableCell align="right">Coût (Ar)</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {Regions.map((row) => (
                     <TableRow key={row.id}>
+                      <TableCell></TableCell>
+                      <TableCell></TableCell>
+                      <TableCell></TableCell>
                       <TableCell></TableCell>
                       <TableCell></TableCell>
                       <TableCell></TableCell>

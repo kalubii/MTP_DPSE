@@ -1,7 +1,15 @@
-import React from 'react'
-import Lottie from "lottie-react";
-import RoadConstruction from "../assets/animation/RoadConstruction.json"
-import 'bootstrap/dist/css/bootstrap.min.css';
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import { CircularProgress } from '@mui/material';
+
+export default function LinearIndeterminate() {
+  return (
+    <Box sx={{display:'flex', justifyContent:'center',margin:'auto'}}>
+      <CircularProgress disableShrink/>
+    </Box>
+  );
+}
+
 
 // const defaultOptions = {
 //  loop: true,
@@ -19,10 +27,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 //     </>
 //  )
 // };
-const Loading = () => {
-   return (<div style={{margin:'auto',display:'flex',width:'60%'}}>
-      <Lottie loop={true} autoPlay={true} animationData={RoadConstruction}/>
-   </div>)
-}
-
-export default Loading
+// const Loading = () => {
+//    return (<div style={{margin:'auto',display:'flex',width:'60%'}}>
+//       <Lottie loop={true} autoPlay={true} animationData={RoadConstruction}/>
+//    </div>)
+// }

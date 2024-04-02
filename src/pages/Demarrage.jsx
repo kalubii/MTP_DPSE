@@ -1,7 +1,6 @@
-import React, { useState,useEffect } from 'react';
-import Loading from '../composants/Loading';
+import React, { useState } from 'react';
 import mtp from '../assets/img/mtp.png';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import TypeWriter from '../composants/Acceuil/TypeWriter';
@@ -22,6 +21,9 @@ const Demarrage = () => {
     //     clearInterval(timer)
     //   }
     // }, [])
+    const handleClick = () =>{
+      navigate('/login')
+    }
     
     
     return (
@@ -40,6 +42,12 @@ const Demarrage = () => {
         </Box> */}
         <Box sx={{ display:'flex', margin:'auto',justifyContent:'center'}}>
           <TypeWriter/>
+        </Box>
+
+        <Box sx={{marginTop:5}}>
+          <Button onClick={handleClick} color='success' sx={{ display:'flex', margin:'auto',justifyContent:'center'}} variant="contained">
+              Entrer
+          </Button>
         </Box>
   </div>
   )
