@@ -4,6 +4,7 @@ import { Box, Button } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import TypeWriter from '../composants/Acceuil/TypeWriter';
+import Footer from '../composants/Acceuil/Footer';
 
 
 const Demarrage = () => {
@@ -27,7 +28,8 @@ const Demarrage = () => {
     
     
     return (
-  <div className='container'>
+  <div className='container' style={{backgroundImage: `url('/src/assets/img/wave-haikei.png.png')`,
+  backgroundSize:'cover'}}>
         
         <Box sx={{ display: { xs: 'none', md: 'flex' }, margin:'auto',justifyContent:'center', marginTop:15}}>
             <img src={mtp} style={{ width: '200px', height: '220px', objectFit: 'cover' }} alt="Logo" />
@@ -48,6 +50,10 @@ const Demarrage = () => {
           <Button onClick={handleClick} color='success' sx={{ display:'flex', margin:'auto',justifyContent:'center'}} variant="contained">
               Entrer
           </Button>
+        </Box>
+
+        <Box>
+          <Footer/>
         </Box>
   </div>
   )

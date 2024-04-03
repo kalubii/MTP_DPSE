@@ -7,6 +7,7 @@ import TableRow from '@mui/material/TableRow';
 import { Box, MenuItem, TextField } from '@mui/material';
 import SearchBar from '../composants/Home/Drawer/BaseDeDonnee/SearchBar';
 import Projet from '../composants/Home/Drawer/BaseDeDonnee/Projets/Projet';
+import Ajouter from '../composants/Home/Drawer/BaseDeDonnee/CRUD/Ajouter';
 
 
 const ListeProjets = () => {
@@ -53,6 +54,8 @@ const ListeProjets = () => {
     ];
 
   return (<>
+
+    <Ajouter/>
     <Box sx={{marginBottom:4}}>
         <Box sx={{display:'flex',justifyContent:'center',margin:'auto'}}>
             <TextField

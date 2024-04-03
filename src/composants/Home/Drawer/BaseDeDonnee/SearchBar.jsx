@@ -16,7 +16,8 @@ const SearchBar = () => {
   };
 
   return (<>
-       <Box sx={{display:'flex'}}>       
+       <Box sx={{display:'flex'}}>   
+        <TextField id="standard-search" sx={{marginX:4}} label="Region" type="search" variant="standard"/>    
         <TextField id="standard-search" label="Axes" type="search" variant="standard"/>
         <TextField id="standard-search" sx={{marginX:4}} label="PK Début" type="search" variant="standard"/>
         <TextField id="standard-search" label="PK Fin" type="search" variant="standard"/>

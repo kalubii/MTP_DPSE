@@ -15,100 +15,126 @@ const db = mysql2.createConnection({
 
 // REQUETE LOCALITE
 
-app.get('/localiteTana', (req, res) =>{
-    const sql = "SELECT * FROM antananarivo"
+// app.get('/liste_RN/:axe/:region/:pk_debut/:pk_fin',(req,res) => {
+//     let sql = "SELECT * FROM localite WHERE region = ?";
+//     let params = [req.params.region];
+
+//     if (req.params.axe) {
+//         sql += " AND AXES = ?";
+//         params.push(req.params.searchAxe);
+//     }
+//     if (req.params.pk_debut) {
+//         sql += " AND PK_DEBUT = ?";
+//         params.push(req.params.pk_debut);
+//     }
+//     if (req.params.pk_fin) {
+//         sql += " AND PK_FIN = ?";
+//         params.push(req.params.pk_fin);
+//     }
+//     if (req.params.region) {
+//         sql += " AND REGION = ?";
+//         params.push(req.params.region);
+//     }
+
+//     db.query(sql, params, (err, result) => {
+//         if (err) return res.json({ Message: err });
+//         return res.json(result);
+//     })
+
+// })
+
+app.get('/localite_RN', (req, res) =>{
+    let params = []
+    let sql = "SELECT * from localite"
+
+    if (req.query.axe) {
+        sql += " AND AXES = ?";
+        params.push(req.query.axe);
+    }
+
+    if (req.query.pkFin) {
+        sql += " AND PK_FIN = ?";
+        params.push(req.query.pkFin);
+    }
+
+    if (req.query.pkDebut) {
+        sql += " AND PK_DEBUT = ?";
+        params.push(req.query.pkDebut);
+    }
     db.query(sql, (err,result)=>{
-        if(err) return res.json({Message:"Erreur de serveur"})
+        if(err) return res.json({Message:err})
         return res.json(result);
     })
 
 })
-app.get('/localiteAntsiranana', (req, res) =>{
-    const sql = "SELECT * FROM antsiranana"
-    db.query(sql, (err,result)=>{
-        if(err) return res.json({Message:"Erreur de serveur"})
-        return res.json(result);
-    })
+// app.get('/localiteAntsiranana', (req, res) =>{
+//     const sql = "SELECT * FROM antsiranana"
+//     db.query(sql, (err,result)=>{
+//         if(err) return res.json({Message:"Erreur de serveur"})
+//         return res.json(result);
+//     })
 
-})
-app.get('/localiteFianarantsoa', (req, res) =>{
-    const sql = "SELECT * FROM fianarantsoa"
-    db.query(sql, (err,result)=>{
-        if(err) return res.json({Message:"Erreur de serveur"})
-        return res.json(result);
-    })
+// })
+// app.get('/localiteFianarantsoa', (req, res) =>{
+//     const sql = "SELECT * FROM fianarantsoa"
+//     db.query(sql, (err,result)=>{
+//         if(err) return res.json({Message:"Erreur de serveur"})
+//         return res.json(result);
+//     })
 
-})
-app.get('/localiteMahajanga', (req, res) =>{
-    const sql = "SELECT * FROM mahajanga"
-    db.query(sql, (err,result)=>{
-        if(err) return res.json({Message:"Erreur de serveur"})
-        return res.json(result);
-    })
+// })
+// app.get('/localiteMahajanga', (req, res) =>{
+//     const sql = "SELECT * FROM mahajanga"
+//     db.query(sql, (err,result)=>{
+//         if(err) return res.json({Message:"Erreur de serveur"})
+//         return res.json(result);
+//     })
 
-})
-app.get('/localiteToamasina', (req, res) =>{
-    const sql = "SELECT * FROM toamasina"
-    db.query(sql, (err,result)=>{
-        if(err) return res.json({Message:"Erreur de serveur"})
-        return res.json(result);
-    })
+// })
+// app.get('/localiteToamasina', (req, res) =>{
+//     const sql = "SELECT * FROM toamasina"
+//     db.query(sql, (err,result)=>{
+//         if(err) return res.json({Message:"Erreur de serveur"})
+//         return res.json(result);
+//     })
 
-})
-app.get('/localiteToliara', (req, res) =>{
-    const sql = "SELECT * FROM toliara"
-    db.query(sql, (err,result)=>{
-        if(err) return res.json({Message:"Erreur de serveur"})
-        return res.json(result);
-    })
+// })
+// app.get('/localiteToliara', (req, res) =>{
+//     const sql = "SELECT * FROM toliara"
+//     db.query(sql, (err,result)=>{
+//         if(err) return res.json({Message:"Erreur de serveur"})
+//         return res.json(result);
+//     })
 
-})
+// })
 
 // REQUETE PROJET
-// app.get('/projet/:annee/:searchAxe/:pkDebut/:pkFin', (req, res) =>{
+app.get('/projet/:annee/:searchAxe/:pkDebut/:pkFin', (req, res) =>{
     
-//     let sql = ""
+    let sql = ""
     
-//    if(req.params.searchAxe != "null" && req.params.pkDebut != "null" && req.params.pkFin != "null"){
-//     console.log(req.params.searchAxe)
-//     sql =  "SELECT * FROM projet WHERE _date= '"+req.params.annee+"' AXE= '"+req.params.searchAxe+"' PK_DEBUT ='"+req.params.pkDebut+"' PK_FIN ='"+req.params.pkFin+"'"
-//    }else if(req.params.searchAxe != "null" && req.params.pkDebut != "null"){
-//     sql =  "SELECT * FROM projet WHERE _date= "+req.params.annee+"' AXE= '"+req.params.searchAxe+"' PK_DEBUT ='"+req.params.pkDebut+"'"
-//    }else if(req.params.searchAxe != "null"){
-//     sql =  "SELECT * FROM projet WHERE _date= '"+req.params.annee+" AXE= '"+req.params.searchAxe+"'"
-//    }else if(req.params.searchAxe != "null" && req.params.pkFin != "null"){
-//     sql =  "SELECT * FROM projet WHERE _date= '"+req.params.annee+"' AXE= '"+req.params.searchAxe+"' PK_FIN ='"+req.params.pkFin+"'"
-//    }else if(req.params.pkDebut != "null"){
-//     sql =  "SELECT * FROM projet WHERE _date= '"+req.params.annee+"' PK_DEBUT ='"+req.params.pkDebut+"'"
-//    } else if(req.params.pkFin != "null"){
-//     sql =  "SELECT * FROM projet WHERE _date= '"+req.params.annee+"' PK_FIN ='"+req.params.pkFin+"'"
-//    }else if (req.params.pkDebut != "null" && req.params.pkFin != "null"){
-//     sql =  "SELECT * FROM projet WHERE _date= '"+req.params.annee+"' PK_DEBUT ='"+req.params.pkDebut+"' PK_FIN ='"+req.params.pkFin+"'"
-//    }else if(req.params.searchAxe != "null" && req.params.pkFin != "null"){
-//     sql =  "SELECT * FROM projet WHERE _date= '"+req.params.annee+"' AXE= '"+req.params.searchAxe+"' PK_FIN ='"+req.params.pkFin+"'"
-//    }
+   if(req.params.searchAxe != "null" && req.params.pkDebut != "null" && req.params.pkFin != "null"){
+    sql =  "SELECT * FROM projet WHERE _date= '"+req.params.annee+"' AXE= '"+req.params.searchAxe+"' PK_DEBUT ='"+req.params.pkDebut+"' PK_FIN ='"+req.params.pkFin+"'"
+   }else if(req.params.searchAxe != "null" && req.params.pkDebut != "null"){
+    sql =  "SELECT * FROM projet WHERE _date= "+req.params.annee+"' AXE= '"+req.params.searchAxe+"' PK_DEBUT ='"+req.params.pkDebut+"'"
+   }else if(req.params.searchAxe != "null"){
+    sql =  "SELECT * FROM projet WHERE _date= '"+req.params.annee+" AXE= '"+req.params.searchAxe+"'"
+   }else if(req.params.searchAxe != "null" && req.params.pkFin != "null"){
+    sql =  "SELECT * FROM projet WHERE _date= '"+req.params.annee+"' AXE= '"+req.params.searchAxe+"' PK_FIN ='"+req.params.pkFin+"'"
+   }else if(req.params.pkDebut != "null"){
+    sql =  "SELECT * FROM projet WHERE _date= '"+req.params.annee+"' PK_DEBUT ='"+req.params.pkDebut+"'"
+   } else if(req.params.pkFin != "null"){
+    sql =  "SELECT * FROM projet WHERE _date= '"+req.params.annee+"' PK_FIN ='"+req.params.pkFin+"'"
+   }else if (req.params.pkDebut != "null" && req.params.pkFin != "null"){
+    sql =  "SELECT * FROM projet WHERE _date= '"+req.params.annee+"' PK_DEBUT ='"+req.params.pkDebut+"' PK_FIN ='"+req.params.pkFin+"'"
+   }else if(req.params.searchAxe != "null" && req.params.pkFin != "null"){
+    sql =  "SELECT * FROM projet WHERE _date= '"+req.params.annee+"' AXE= '"+req.params.searchAxe+"' PK_FIN ='"+req.params.pkFin+"'"
+   }
 
-   app.get('/projet/:annee/:searchAxe/:pkDebut/:pkFin', (req, res) => {
-    let sql = "SELECT * FROM projet WHERE _date = ?";
-    let params = [req.params.annee];
-
-    if (req.params.searchAxe) {
-        sql += " AND AXE = ?";
-        params.push(req.params.searchAxe);
-    }
-    if (req.params.pkDebut) {
-        sql += " AND PK_DEBUT = ?";
-        params.push(req.params.pkDebut);
-    }
-    if (req.params.pkFin) {
-        sql += " AND PK_FIN = ?";
-        params.push(req.params.pkFin);
-    }
-
-    db.query(sql, params, (err, result) => {
-        if (err) return res.json({ Message: err });
+    (sql, (err,result)=>{
+        if(err) return res.json({Message:err})
         return res.json(result);
-    });
+    })
 })
 
 // app.get('/projet2022', (req, res) =>{

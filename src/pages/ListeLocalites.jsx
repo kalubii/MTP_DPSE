@@ -5,18 +5,27 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import LocaliteTana2023 from '../composants/Home/Drawer/BaseDeDonnee/Localites/2023/LocaliteTana2023';
-import LocaliteAntsiranana2023 from '../composants/Home/Drawer/BaseDeDonnee/Localites/2023/LocaliteAntsiranana2023';
-import LocaliteMahajanga2023 from '../composants/Home/Drawer/BaseDeDonnee/Localites/2023/LocaliteMahajanga2023';
-import LocaliteFianarantsoa2023 from '../composants/Home/Drawer/BaseDeDonnee/Localites/2023/LocaliteFianarantsoa2023';
-import LocaliteToamasina2023 from '../composants/Home/Drawer/BaseDeDonnee/Localites/2023/LocaliteToamasina2023';
-import LocaliteToliara2023 from '../composants/Home/Drawer/BaseDeDonnee/Localites/2023/LocaliteToliara2023';
 import SearchBar from '../composants/Home/Drawer/BaseDeDonnee/SearchBar';
+import Liste_RN from '../composants/Home/Drawer/BaseDeDonnee/Localites/Liste_RN';
+import Ajouter from '../composants/Home/Drawer/BaseDeDonnee/CRUD/Ajouter';
 
 function ListeLocalite() {
 
   const [dateSelectedIndex, setDateSelectedIndex] = useState(0);
-  const [regionSelectedIndex, setRegionSelectedIndex] = useState('Antananarivo');
+  const [regionSelectedIndex, setRegionSelectedIndex] = useState('ANTANANARIVO');
+  const [axeSearch,setAxeSearch] = useState(null)
+  const [pkDebutSearch,setpkDebutSearch] = useState(null)
+  const [pkFinSearch,setpkFinSearch] = useState(null)
+
+  const handleAxeChange =(e)=>{
+    setAxeSearch(e.target.value)
+  }
+  const handleDebutChange =(e)=>{
+    setpkDebutSearch(e.target.value)
+  }
+  const handleFinChange =(e)=>{
+    setpkFinSearch(e.target.value)
+  }
 
   const onItemClicked = (index) => {
     setDateSelectedIndex(index);
@@ -51,38 +60,33 @@ function ListeLocalite() {
 
   const Regions = [
     {
-      id: 1,
-      value: 'Antananarivo',
-      label: 'Antananarivo',
+      value: 'ANTANANARIVO',
+      label: 'ANTANANARIVO',
     },
     {
-      id: 2,
-      value: 'Antsiranana',
-      label: 'Antsiranana',
+      value: 'ANTSIRANANA',
+      label: 'ANTSIRANANA',
     },
     {
-      id: 3,
-      value: 'Mahajanga',
-      label: 'Mahajanga',
+      value: 'MAHAJANGA',
+      label: 'MAHAJANGA',
     },
     {
-      id: 4,
-      value: 'Fianarantsoa',
-      label: 'Fianarantsoa',
+      value: 'FIANARANTSOA',
+      label: 'FIANARANTSOA',
     },
     {
-      id: 5,
-      value: 'Toamasina',
-      label: 'Toamasina',
+      value: 'TOAMASINA',
+      label: 'TOAMASINA',
     },
     {
-      id: 6,
-      value: 'Toliara',
-      label: 'Toliara',
+      value: 'TOLIARA',
+      label: 'TOLIARA',
     },
   ];
 
   return(<>  
+  <Ajouter/>
   <Box sx={{marginBottom:4}}>      
         <Box
               sx={{
@@ -95,8 +99,8 @@ function ListeLocalite() {
                 <TextField
                   id="outlined-select-currency"
                   select
-                  label="District"
-                  defaultValue="Antananarivo"
+                  label="Regions"
+                  defaultValue="ANTANANARIVO"
                 >
                   {Regions.map((option) => (
                     <MenuItem key={option.value} value={option.value} onClick={()=>{
@@ -136,9 +140,9 @@ function ListeLocalite() {
               <Table size="small">
                 <TableHead>
                   <TableRow>
-                    <TableCell>District</TableCell>
+                    <TableCell></TableCell>
+                    <TableCell>Regions</TableCell>
                     <TableCell>Axes</TableCell>
-                    <TableCell>Section</TableCell>
                     <TableCell>PK Début</TableCell>
                     <TableCell>Localité Début</TableCell>
                     <TableCell>PK Fin</TableCell>
@@ -146,17 +150,17 @@ function ListeLocalite() {
                     <TableCell>Longueur (km)</TableCell>
                     <TableCell>Longueur traitée (km)</TableCell>
                     <TableCell>Nature Surface</TableCell>
-                    <TableCell>Région</TableCell>
-                    <TableCell>Gestionnaire de l'axe</TableCell>
+                    <TableCell>Trafic</TableCell>
+                    <TableCell>District</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  { dateSelectedIndex === 3 && regionSelectedIndex == "Antananarivo"?<LocaliteTana2023/>: 
-                    dateSelectedIndex === 3 && regionSelectedIndex == "Antsiranana"?<LocaliteAntsiranana2023/>:
-                    dateSelectedIndex === 3 && regionSelectedIndex == "Mahajanga"?<LocaliteMahajanga2023/>:
-                    dateSelectedIndex === 3 && regionSelectedIndex == "Fianarantsoa"?<LocaliteFianarantsoa2023/>:
-                    dateSelectedIndex === 3 && regionSelectedIndex == "Toamasina"?<LocaliteToamasina2023/>:
-                    dateSelectedIndex === 3 && regionSelectedIndex == "Toliara"?<LocaliteToliara2023/>: null
+                  { regionSelectedIndex == "ANTANANARIVO"?<Liste_RN region={regionSelectedIndex} axeSearch={axeSearch} pkFinSearch={pkFinSearch} pkDebutSearch={pkDebutSearch}/>: 
+                    regionSelectedIndex == "ANTSIRANANA"?<Liste_RN region={regionSelectedIndex} axeSearch={axeSearch} pkFinSearch={pkFinSearch} pkDebutSearch={pkDebutSearch}/>:
+                    regionSelectedIndex == "MAHAJANGA"?<Liste_RN region={regionSelectedIndex} axeSearch={axeSearch} pkFinSearch={pkFinSearch} pkDebutSearch={pkDebutSearch}/>:
+                    regionSelectedIndex == "FIANARANTSOA"?<Liste_RN region={regionSelectedIndex} axeSearch={axeSearch} pkFinSearch={pkFinSearch} pkDebutSearch={pkDebutSearch}/>:
+                    regionSelectedIndex == "TOAMASINA"?<Liste_RN region={regionSelectedIndex} axeSearch={axeSearch} pkFinSearch={pkFinSearch} pkDebutSearch={pkDebutSearch}/>:
+                    regionSelectedIndex == "TOLIARA"?<Liste_RN region={regionSelectedIndex} axeSearch={axeSearch} pkFinSearch={pkFinSearch} pkDebutSearch={pkDebutSearch}/>: null
                   }
                 </TableBody>
               </Table>

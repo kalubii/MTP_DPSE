@@ -31,7 +31,6 @@ const Projet = (props) => {
         }else{
             pkFinSearch = props.pkFinSearch
         }
-
         axios.get('http://localhost:8081/projet/'+props.date+"/"+axeSearch+"/"+pkDebutSearch+"/"+pkFinSearch)
         .then(res => {
             setData(res.data);
@@ -41,7 +40,7 @@ const Projet = (props) => {
             console.log(err);
             setLoading(false);
         });
-        }, [props.date, props.axeSearch, props.pkDebutSearch, props.pkFinSearch]);
+    }, [props.date]);
 
   return (<>
     
