@@ -7,33 +7,17 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import SearchBar from '../composants/Home/Drawer/BaseDeDonnee/SearchBar';
 import Liste_RN from '../composants/Home/Drawer/BaseDeDonnee/Localites/Liste_RN';
-import Ajouter from '../composants/Home/Drawer/BaseDeDonnee/CRUD/Ajouter';
+
+
 
 function ListeLocalite() {
 
   const [dateSelectedIndex, setDateSelectedIndex] = useState(0);
-  const [regionSelectedIndex, setRegionSelectedIndex] = useState('ANTANANARIVO');
-  const [axeSearch,setAxeSearch] = useState(null)
-  const [pkDebutSearch,setpkDebutSearch] = useState(null)
-  const [pkFinSearch,setpkFinSearch] = useState(null)
-
-  const handleAxeChange =(e)=>{
-    setAxeSearch(e.target.value)
-  }
-  const handleDebutChange =(e)=>{
-    setpkDebutSearch(e.target.value)
-  }
-  const handleFinChange =(e)=>{
-    setpkFinSearch(e.target.value)
-  }
-
-  const onItemClicked = (index) => {
-    setDateSelectedIndex(index);
-   };
-
-   const onRegionClicked = (name) => {
-    setRegionSelectedIndex(name)
-   };
+  const [faritanySelectedIndex, setfaritanySelectedIndex] = useState('ANTANANARIVO');
+  const [regionSearch,setRegionSearch] = useState('')
+  const [axeSearch,setAxeSearch] = useState('')
+  const [pkDebutSearch,setpkDebutSearch] = useState('')
+  const [pkFinSearch,setpkFinSearch] = useState('')
 
   const annees = [
     {
@@ -85,53 +69,52 @@ function ListeLocalite() {
     },
   ];
 
+  const onItemClicked = (index) => {
+    setDateSelectedIndex(index);
+   };
+
+   const onFaritanyCliked = (name) => {
+    setfaritanySelectedIndex(name)
+    console.log(name)
+   };
+
+
   return(<>  
-  <Ajouter/>
   <Box sx={{marginBottom:4}}>      
-        <Box
-              sx={{
-                '& .MuiTextField-root': { m: 1, width: '25ch' },
-                display:'flex',
-                justifyContent:'center'
-              }}
-              noValidate
-              autoComplete="off">
-                <TextField
-                  id="outlined-select-currency"
-                  select
-                  label="Regions"
-                  defaultValue="ANTANANARIVO"
-                >
+        <Box noValidate  autoComplete="off" sx={{'& .MuiTextField-root': { m: 1, width: '25ch' }, display:'flex', justifyContent:'center'}}>
+            <TextField select label="Faritany" id="outlined-select-currency" defaultValue="ANTANANARIVO">
+
                   {Regions.map((option) => (
                     <MenuItem key={option.value} value={option.value} onClick={()=>{
-                      return onRegionClicked(option.value)
+                      return onFaritanyCliked(option.value)
                     }}>
                       {option.label}
                     </MenuItem>
                   ))}
-                </TextField>
+            </TextField>
         </Box>
         
         <Box sx={{display:'flex',justifyContent:'center',margin:'auto'}}>
 
-            <TextField
-            id="standard-select-currency"
-            select
-            label="Année"
-            defaultValue="2024"
-              variant="standard"
-            >
-              {annees.map((option,index) => (
-                <MenuItem key={option.value} value={option.value} onClick={() =>{
-                  return onItemClicked(index)
-                }}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-            <Box sx={{marginLeft:3}}>
-                <SearchBar/>
-            </Box>
+          <TextField label="Année" id="standard-select-currency" select defaultValue="2024" variant="standard">
+                {annees.map((option,index) => (
+                  <MenuItem key={option.value} value={option.value} onClick={() =>{
+                    return onItemClicked(index)
+                  }}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+          </TextField>
+            
+          <Box sx={{marginLeft:3}}>
+                <SearchBar  
+                  handleRegionChange={(e) => setRegionSearch(e.target.value)}
+                  handleAxeChange={(e) => setAxeSearch(e.target.value)}
+                  handleDebutChange={(e) => setpkDebutSearch(e.target.value)}
+                  handleFinChange={(e) => setpkFinSearch(e.target.value)}
+                />
+          </Box>
+
         </Box>
   </Box>
 
@@ -141,8 +124,9 @@ function ListeLocalite() {
                 <TableHead>
                   <TableRow>
                     <TableCell></TableCell>
-                    <TableCell>Regions</TableCell>
-                    <TableCell>Axes</TableCell>
+                    <TableCell sx={{paddingRight:11}}>Regions</TableCell>
+                    <TableCell sx={{paddingRight:10}}>Axes</TableCell>
+                    <TableCell>Section</TableCell>
                     <TableCell>PK Début</TableCell>
                     <TableCell>Localité Début</TableCell>
                     <TableCell>PK Fin</TableCell>
@@ -155,12 +139,14 @@ function ListeLocalite() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  { regionSelectedIndex == "ANTANANARIVO"?<Liste_RN region={regionSelectedIndex} axeSearch={axeSearch} pkFinSearch={pkFinSearch} pkDebutSearch={pkDebutSearch}/>: 
-                    regionSelectedIndex == "ANTSIRANANA"?<Liste_RN region={regionSelectedIndex} axeSearch={axeSearch} pkFinSearch={pkFinSearch} pkDebutSearch={pkDebutSearch}/>:
-                    regionSelectedIndex == "MAHAJANGA"?<Liste_RN region={regionSelectedIndex} axeSearch={axeSearch} pkFinSearch={pkFinSearch} pkDebutSearch={pkDebutSearch}/>:
-                    regionSelectedIndex == "FIANARANTSOA"?<Liste_RN region={regionSelectedIndex} axeSearch={axeSearch} pkFinSearch={pkFinSearch} pkDebutSearch={pkDebutSearch}/>:
-                    regionSelectedIndex == "TOAMASINA"?<Liste_RN region={regionSelectedIndex} axeSearch={axeSearch} pkFinSearch={pkFinSearch} pkDebutSearch={pkDebutSearch}/>:
-                    regionSelectedIndex == "TOLIARA"?<Liste_RN region={regionSelectedIndex} axeSearch={axeSearch} pkFinSearch={pkFinSearch} pkDebutSearch={pkDebutSearch}/>: null
+
+                  {
+                    <Liste_RN  
+                      faritanySelectedIndex = {faritanySelectedIndex}
+                      regionSearch={regionSearch}
+                      axeSearch={axeSearch} 
+                      pkFinSearch={pkFinSearch} 
+                      pkDebutSearch={pkDebutSearch}/>
                   }
                 </TableBody>
               </Table>

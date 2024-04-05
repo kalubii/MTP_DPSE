@@ -8,7 +8,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { Assignment, DirectionsCar,ListAlt, MoreVert, NoteAddOutlined, PowerSettingsNew, Timeline } from '@mui/icons-material';
-import { Formulaire } from './Formulaire';
 import Listes from './Listes';
 import Viabilite from './Viabilite';
 import { Divider } from '@mui/material';
@@ -18,6 +17,7 @@ import mtp from '../../../assets/img/mtp.png';
 import { useTheme } from '@mui/material/styles';
 import Dashboard from './Dashboard/Dashboard';
 import Title from './Dashboard/Title';
+import Formulaire from './Formulaire_insertion/Formulaire';
 
 export default function TemporaryDrawer() {
   const [open, setOpen] = React.useState(false);
@@ -50,13 +50,13 @@ const DrawerList = (
         </Box>
 
     <List >
-      {['Tableau de Bord', 'Formulaire d`ajout ', 'Base de données','Viabilité des Routes'].map((text, index) => (
+      {['Tableau de Bord', 'Formulaire d`ajout ', 'Viabilité des Routes'].map((text, index) => (
         <ListItem key={text} disablePadding onClick={function () {
           return onItemClicked(index);
         }}> 
           <ListItemButton>
             <ListItemIcon >
-              {index === 0 ? <Timeline/> : index === 1 ? <NoteAddOutlined/> : index === 2 ? <ListAlt /> : index === 3 ? <DirectionsCar/> : null }
+              {index === 0 ? <Timeline/> : index === 1 ? <NoteAddOutlined/> : index === 2 ? <DirectionsCar /> : null }
             </ListItemIcon>
             <ListItemText primary={text} />
           </ListItemButton>
@@ -91,8 +91,7 @@ return (
     <div className='container'>
       {selectedIndex === 0 && <><Title> <Timeline fontSize='large' sx={{marginRight:1, [theme.breakpoints.down('md')]:{fontSize:"1.7rem"}}}/>Tableau de Bord</Title> <Dashboard/></>}
       {selectedIndex === 1 && <><Title> <NoteAddOutlined fontSize='large' sx={{marginRight:1, [theme.breakpoints.down('md')]:{fontSize:"1.7rem"}}}/>Formulaire de saisie</Title> <Formulaire/></>}
-      {selectedIndex === 2 && <><Title> <ListAlt fontSize='large' sx={{marginRight:1, [theme.breakpoints.down('md')]:{fontSize:"1.7rem"}}}/>Base de Données</Title> <Listes/></>}
-      {selectedIndex === 3 && <Viabilite/>}
+      {selectedIndex === 2 && <><Title> <ListAlt fontSize='large' sx={{marginRight:1, [theme.breakpoints.down('md')]:{fontSize:"1.7rem"}}}/>Viabilité des Routes</Title> <Listes/></>}
     </div>
     
  </div>

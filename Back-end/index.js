@@ -15,6 +15,77 @@ const db = mysql2.createConnection({
 
 // REQUETE LOCALITE
 
+app.get('/localite_RN', (req, res) => {
+    // Extraction des paramètres de requête
+    const faritany = req.query.faritany;
+    const regions = req.query.region ? req.query.region.split(',') : [];
+    const axes = req.query.axe ? req.query.axe.split(',') : [];
+    const pkDebut = req.query.pkDebut;
+    const pkFin = req.query.pkFin;
+
+    console.log('Faritany:', faritany);
+   
+    let sql = 'SELECT * FROM localite WHERE 1=1';
+
+    if(faritany){
+    sql += ` AND FARITANY = '${faritany}'`;
+    }
+
+    if (regions.length > 0) {
+       sql += ` AND REGION IN (${regions.map(region => `'${region}'`).join(',')})`;
+    }
+    if (axes.length > 0) {
+       sql += ` AND AXES IN (${axes.map(axe => `'${axe}'`).join(',')})`;
+    }
+    if (pkDebut) {
+       sql += ` AND PK_DEBUT >= ${pkDebut}`;
+    }
+    if (pkFin) {
+       sql += ` AND PK_FIN <= ${pkFin}`;
+    }
+
+     db.query(sql, (err, results) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.json(results);
+        }
+    });
+});
+
+//REQUETE PROJET
+
+app.get('/projet',(req,res)=>{
+
+    const regions = req.query.region ? req.query.region.split(',') : [];
+    const axes = req.query.axe ? req.query.axe.split(',') : [];
+    const pkDebut = req.query.pkDebut;
+    const pkFin = req.query.pkFin;
+   
+    let sql = 'SELECT * FROM projet WHERE 1=1';
+    if (regions.length > 0) {
+       sql += ` AND REGIONS_CONCERNEES IN (${regions.map(region => `'${region}'`).join(',')})`;
+    }
+    if (axes.length > 0) {
+       sql += ` AND AXE IN (${axes.map(axe => `'${axe}'`).join(',')})`;
+    }
+    if (pkDebut) {
+       sql += ` AND PK_DEBUT >= ${pkDebut}`;
+    }
+    if (pkFin) {
+       sql += ` AND PK_FIN <= ${pkFin}`;
+    }
+
+     db.query(sql, (err, results) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.json(results);
+        }
+    });
+});
+
+
 // app.get('/liste_RN/:axe/:region/:pk_debut/:pk_fin',(req,res) => {
 //     let sql = "SELECT * FROM localite WHERE region = ?";
 //     let params = [req.params.region];
@@ -41,32 +112,32 @@ const db = mysql2.createConnection({
 //         return res.json(result);
 //     })
 
+// // })
+
+// app.get('/localite_RN', (req, res) =>{
+//     let params = []
+//     let sql = "SELECT * from localite"
+
+//     if (req.query.axe) {
+//         sql += " AND AXES = ?";
+//         params.push(req.query.axe);
+//     }
+
+//     if (req.query.pkFin) {
+//         sql += " AND PK_FIN = ?";
+//         params.push(req.query.pkFin);
+//     }
+
+//     if (req.query.pkDebut) {
+//         sql += " AND PK_DEBUT = ?";
+//         params.push(req.query.pkDebut);
+//     }
+//     db.query(sql, (err,result)=>{
+//         if(err) return res.json({Message:err})
+//         return res.json(result);
+//     })
+
 // })
-
-app.get('/localite_RN', (req, res) =>{
-    let params = []
-    let sql = "SELECT * from localite"
-
-    if (req.query.axe) {
-        sql += " AND AXES = ?";
-        params.push(req.query.axe);
-    }
-
-    if (req.query.pkFin) {
-        sql += " AND PK_FIN = ?";
-        params.push(req.query.pkFin);
-    }
-
-    if (req.query.pkDebut) {
-        sql += " AND PK_DEBUT = ?";
-        params.push(req.query.pkDebut);
-    }
-    db.query(sql, (err,result)=>{
-        if(err) return res.json({Message:err})
-        return res.json(result);
-    })
-
-})
 // app.get('/localiteAntsiranana', (req, res) =>{
 //     const sql = "SELECT * FROM antsiranana"
 //     db.query(sql, (err,result)=>{
@@ -109,33 +180,31 @@ app.get('/localite_RN', (req, res) =>{
 // })
 
 // REQUETE PROJET
-app.get('/projet/:annee/:searchAxe/:pkDebut/:pkFin', (req, res) =>{
-    
-    let sql = ""
-    
-   if(req.params.searchAxe != "null" && req.params.pkDebut != "null" && req.params.pkFin != "null"){
-    sql =  "SELECT * FROM projet WHERE _date= '"+req.params.annee+"' AXE= '"+req.params.searchAxe+"' PK_DEBUT ='"+req.params.pkDebut+"' PK_FIN ='"+req.params.pkFin+"'"
-   }else if(req.params.searchAxe != "null" && req.params.pkDebut != "null"){
-    sql =  "SELECT * FROM projet WHERE _date= "+req.params.annee+"' AXE= '"+req.params.searchAxe+"' PK_DEBUT ='"+req.params.pkDebut+"'"
-   }else if(req.params.searchAxe != "null"){
-    sql =  "SELECT * FROM projet WHERE _date= '"+req.params.annee+" AXE= '"+req.params.searchAxe+"'"
-   }else if(req.params.searchAxe != "null" && req.params.pkFin != "null"){
-    sql =  "SELECT * FROM projet WHERE _date= '"+req.params.annee+"' AXE= '"+req.params.searchAxe+"' PK_FIN ='"+req.params.pkFin+"'"
-   }else if(req.params.pkDebut != "null"){
-    sql =  "SELECT * FROM projet WHERE _date= '"+req.params.annee+"' PK_DEBUT ='"+req.params.pkDebut+"'"
-   } else if(req.params.pkFin != "null"){
-    sql =  "SELECT * FROM projet WHERE _date= '"+req.params.annee+"' PK_FIN ='"+req.params.pkFin+"'"
-   }else if (req.params.pkDebut != "null" && req.params.pkFin != "null"){
-    sql =  "SELECT * FROM projet WHERE _date= '"+req.params.annee+"' PK_DEBUT ='"+req.params.pkDebut+"' PK_FIN ='"+req.params.pkFin+"'"
-   }else if(req.params.searchAxe != "null" && req.params.pkFin != "null"){
-    sql =  "SELECT * FROM projet WHERE _date= '"+req.params.annee+"' AXE= '"+req.params.searchAxe+"' PK_FIN ='"+req.params.pkFin+"'"
-   }
 
-    (sql, (err,result)=>{
-        if(err) return res.json({Message:err})
-        return res.json(result);
-    })
-})
+    
+//    if(req.params.searchAxe != "null" && req.params.pkDebut != "null" && req.params.pkFin != "null"){
+//     sql =  "SELECT * FROM localite WHERE _date= '"+req.params.annee+"' AXE= '"+req.params.searchAxe+"' PK_DEBUT ='"+req.params.pkDebut+"' PK_FIN ='"+req.params.pkFin+"'"
+//    }else if(req.params.searchAxe != "null" && req.params.pkDebut != "null"){
+//     sql =  "SELECT * FROM localite WHERE _date= "+req.params.annee+"' AXE= '"+req.params.searchAxe+"' PK_DEBUT ='"+req.params.pkDebut+"'"
+//    }else if(req.params.searchAxe != "null"){
+//     sql =  "SELECT * FROM localite WHERE _date= '"+req.params.annee+" AXE= '"+req.params.searchAxe+"'"
+//    }else if(req.params.searchAxe != "null" && req.params.pkFin != "null"){
+//     sql =  "SELECT * FROM localite WHERE _date= '"+req.params.annee+"' AXE= '"+req.params.searchAxe+"' PK_FIN ='"+req.params.pkFin+"'"
+//    }else if(req.params.pkDebut != "null"){
+//     sql =  "SELECT * FROM localite WHERE _date= '"+req.params.annee+"' PK_DEBUT ='"+req.params.pkDebut+"'"
+//    } else if(req.params.pkFin != "null"){
+//     sql =  "SELECT * FROM localite WHERE _date= '"+req.params.annee+"' PK_FIN ='"+req.params.pkFin+"'"
+//    }else if (req.params.pkDebut != "null" && req.params.pkFin != "null"){
+//     sql =  "SELECT * FROM localite WHERE _date= '"+req.params.annee+"' PK_DEBUT ='"+req.params.pkDebut+"' PK_FIN ='"+req.params.pkFin+"'"
+//    }else if(req.params.searchAxe != "null" && req.params.pkFin != "null"){
+//     sql =  "SELECT * FROM localite WHERE _date= '"+req.params.annee+"' AXE= '"+req.params.searchAxe+"' PK_FIN ='"+req.params.pkFin+"'"
+//    }
+
+    // (sql, (err,result)=>{
+    //     if(err) return res.json({Message:err})
+    //     return res.json(result);
+    // })
+
 
 // app.get('/projet2022', (req, res) =>{
 //     const sql = "SELECT * FROM donnee"

@@ -7,26 +7,16 @@ import TableRow from '@mui/material/TableRow';
 import { Box, MenuItem, TextField } from '@mui/material';
 import SearchBar from '../composants/Home/Drawer/BaseDeDonnee/SearchBar';
 import Projet from '../composants/Home/Drawer/BaseDeDonnee/Projets/Projet';
-import Ajouter from '../composants/Home/Drawer/BaseDeDonnee/CRUD/Ajouter';
 
 
 const ListeProjets = () => {
     const [dateSelectedIndex, setDateSelectedIndex] = useState(0);
+    const [regionSearch,setRegionSearch] = useState('')
     const [axeSearch,setAxeSearch] = useState('')
     const [pkDebutSearch,setpkDebutSearch] = useState('')
     const [pkFinSearch,setpkFinSearch] = useState('')
 
-    const handleAxeChange =(e)=>{
-      setAxeSearch(e.target.value)
-    }
-    const handleDebutChange =(e)=>{
-      setpkDebutSearch(e.target.value)
-    }
-    const handleFinChange =(e)=>{
-      setpkFinSearch(e.target.value)
-    }
-
-    const onItemClicked = (index) => {
+    const onDateClicked = (index) => {
         setDateSelectedIndex(index);
     };
 
@@ -55,7 +45,6 @@ const ListeProjets = () => {
 
   return (<>
 
-    <Ajouter/>
     <Box sx={{marginBottom:4}}>
         <Box sx={{display:'flex',justifyContent:'center',margin:'auto'}}>
             <TextField
@@ -67,7 +56,7 @@ const ListeProjets = () => {
             >
               {annees.map((option,index) => (
                 <MenuItem key={option.value} value={option.value} onClick={() =>{
-                  return onItemClicked(index)
+                  return onDateClicked(index)
                 }}>
                   {option.label}
                 </MenuItem>
@@ -75,13 +64,12 @@ const ListeProjets = () => {
             </TextField>
       <Box sx={{marginLeft:3}}>
 
-            {/* Barre de recherche */}
-            <Box sx={{display:'flex'}}>       
-                <TextField id="standard-search" label="Axes" type="search" variant="standard" onChange={handleAxeChange}/>
-                <TextField id="standard-search" sx={{marginX:4}} label="PK Début" type="search" variant="standard" onChange={handleDebutChange}/>
-                <TextField id="standard-search" label="PK Fin" type="search" variant="standard" onChange={handleFinChange}/>
-            </Box>
-
+            <SearchBar 
+                handleRegionChange={(e) => setRegionSearch(e.target.value)}
+                handleAxeChange={(e) => setAxeSearch(e.target.value)}
+                handleDebutChange={(e) => setpkDebutSearch(e.target.value)}
+                handleFinChange={(e) => setpkFinSearch(e.target.value)}
+            />
 
             </Box>
         </Box>
@@ -92,22 +80,26 @@ const ListeProjets = () => {
                         <TableHead>
                         <TableRow>
                             <TableCell>Année</TableCell>
-                            <TableCell>District</TableCell>
+                            <TableCell>Regions</TableCell>
                             <TableCell>Axes</TableCell>
                             <TableCell>PK Début</TableCell>
                             <TableCell>PK Fin</TableCell>
                             <TableCell>Localisation Début</TableCell>
                             <TableCell>Localisation Fin</TableCell>
                             <TableCell>Travaux</TableCell>
-                            <TableCell>Avancement</TableCell>
+                            {/* <TableCell>Avancement</TableCell>
                             <TableCell>Observation</TableCell>
-                            <TableCell align="right">Coût Estimatif (Ar)</TableCell>
+                            <TableCell align="right">Coût Estimatif (Ar)</TableCell> */}
                         </TableRow>
                         </TableHead>
                         <TableBody>
-                                {dateSelectedIndex === 0? <Projet date={"2020"} axeSearch={axeSearch} pkFinSearch={pkFinSearch} pkDebutSearch={pkDebutSearch} />:
-                                dateSelectedIndex === 1? <Projet date={"2021"} axeSearch={axeSearch} pkFinSearch={pkFinSearch} pkDebutSearch={pkDebutSearch}/>: 
-                                dateSelectedIndex === 2? <Projet date={"2022"} axeSearch={axeSearch} pkFinSearch={pkFinSearch} pkDebutSearch={pkDebutSearch}/>:null}
+                          <Projet
+                          date={"2022"}
+                          regionSearch={regionSearch}
+                          axeSearch={axeSearch} 
+                          pkFinSearch={pkFinSearch} 
+                          pkDebutSearch={pkDebutSearch} />
+
                         </TableBody>
                     </Table>
                     </React.Fragment>
