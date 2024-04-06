@@ -10,7 +10,7 @@ import Projet from '../composants/Home/Drawer/BaseDeDonnee/Projets/Projet';
 
 
 const ListeProjets = () => {
-    const [dateSelectedIndex, setDateSelectedIndex] = useState(0);
+    const [dateSelectedIndex, setDateSelectedIndex] = useState("2024");
     const [regionSearch,setRegionSearch] = useState('')
     const [axeSearch,setAxeSearch] = useState('')
     const [pkDebutSearch,setpkDebutSearch] = useState('')
@@ -56,7 +56,7 @@ const ListeProjets = () => {
             >
               {annees.map((option,index) => (
                 <MenuItem key={option.value} value={option.value} onClick={() =>{
-                  return onDateClicked(index)
+                  return onDateClicked(option.value)
                 }}>
                   {option.label}
                 </MenuItem>
@@ -84,9 +84,11 @@ const ListeProjets = () => {
                             <TableCell>Axes</TableCell>
                             <TableCell>PK Début</TableCell>
                             <TableCell>PK Fin</TableCell>
-                            <TableCell>Localisation Début</TableCell>
-                            <TableCell>Localisation Fin</TableCell>
+                            {/* <TableCell>Localisation Début</TableCell>
+                            <TableCell>Localisation Fin</TableCell> */}
                             <TableCell>Travaux</TableCell>
+                            <TableCell sx={{paddingRight:10}}></TableCell>
+                            
                             {/* <TableCell>Avancement</TableCell>
                             <TableCell>Observation</TableCell>
                             <TableCell align="right">Coût Estimatif (Ar)</TableCell> */}
@@ -94,7 +96,7 @@ const ListeProjets = () => {
                         </TableHead>
                         <TableBody>
                           <Projet
-                          date={"2022"}
+                          dateSelectedIndex={dateSelectedIndex}
                           regionSearch={regionSearch}
                           axeSearch={axeSearch} 
                           pkFinSearch={pkFinSearch} 
