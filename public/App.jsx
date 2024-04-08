@@ -7,6 +7,7 @@ import Loading from '../src/composants/Loading'
 import Demarrage from '../src/pages/Demarrage'
 import ListeProjets from '../src/pages/ListeProjets'
 import Listes from '../src/composants/Home/Drawer/Listes'
+import VoirPlusPage from '../src/pages/VoirPlusPage'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/listeLocalite" element={<Listes />} />
             <Route path="/listeProjet" element={<ListeProjets />} />
+            <Route path="/voirPlus" element={<VoirPlusPage />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>

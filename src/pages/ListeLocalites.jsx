@@ -123,7 +123,6 @@ function ListeLocalite() {
               <Table size="small">
                 <TableHead>
                   <TableRow>
-                    <TableCell></TableCell>
                     <TableCell sx={{paddingRight:11}}>Regions</TableCell>
                     <TableCell sx={{paddingRight:10}}>Axes</TableCell>
                     <TableCell>Section</TableCell>

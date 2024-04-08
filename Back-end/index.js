@@ -24,7 +24,7 @@ app.get('/localite_RN', (req, res) => {
     const pkDebut = req.query.pkDebut;
     const pkFin = req.query.pkFin;
 
-    console.log('Faritany:', faritany);
+    // console.log('Faritany:', faritany);
    
     let sql = 'SELECT * FROM localite WHERE 1=1';
 
@@ -55,25 +55,31 @@ app.get('/localite_RN', (req, res) => {
 });
 
 //REQUETE PROJET
-
 app.get('/projet',(req,res)=>{
 
+    const idRef = req.query.idRef;
     const date = req.query.date;
-    const regions = req.query.region ? req.query.region.split(',') : [];
-    const axes = req.query.axe ? req.query.axe.split(',') : [];
+    const regions = req.query.region;
+    const axes = req.query.axe;
     const pkDebut = req.query.pkDebut;
     const pkFin = req.query.pkFin;
+
+    console.log('id',idRef)
    
-    console.log(date)
     let sql = 'SELECT * FROM projet WHERE 1=1';
+
+    if(idRef){
+        sql+= ` AND idProjet = '${idRef}'`;
+    }
+
     if(date){
         sql+= ` AND _date = '${date}'`;
     }
-    if (regions.length > 0) {
-       sql += ` AND REGIONS_CONCERNEES IN (${regions.map(region => `'${region}'`).join(',')})`;
+    if (regions) {
+       sql += ` AND REGIONS_CONCERNEES = '${regions}'`;
     }
-    if (axes.length > 0) {
-       sql += ` AND AXE IN (${axes.map(axe => `'${axe}'`).join(',')})`;
+    if (axes) {
+       sql += ` AND AXE = '${axes}'`;
     }
     if (pkDebut) {
        sql += ` AND PK_DEBUT >= ${pkDebut}`;

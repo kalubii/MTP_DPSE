@@ -7,6 +7,7 @@ import TableRow from '@mui/material/TableRow';
 import { Box, MenuItem, TextField } from '@mui/material';
 import SearchBar from '../composants/Home/Drawer/BaseDeDonnee/SearchBar';
 import Projet from '../composants/Home/Drawer/BaseDeDonnee/Projets/Projet';
+import VoirPlusPage from './VoirPlusPage';
 
 
 const ListeProjets = () => {
@@ -15,6 +16,7 @@ const ListeProjets = () => {
     const [axeSearch,setAxeSearch] = useState('')
     const [pkDebutSearch,setpkDebutSearch] = useState('')
     const [pkFinSearch,setpkFinSearch] = useState('')
+    const [showTableHead,setShowTableHead] = useState(true)
 
     const onDateClicked = (index) => {
         setDateSelectedIndex(index);
@@ -74,28 +76,23 @@ const ListeProjets = () => {
             </Box>
         </Box>
     </Box>
-            <Box>
+            {showTableHead? 
+              <Box>
                 <React.Fragment>
                     <Table size="small">
                         <TableHead>
                         <TableRow>
-                            <TableCell>Année</TableCell>
+                            <TableCell>Travaux</TableCell>
                             <TableCell>Regions</TableCell>
                             <TableCell>Axes</TableCell>
                             <TableCell>PK Début</TableCell>
                             <TableCell>PK Fin</TableCell>
-                            {/* <TableCell>Localisation Début</TableCell>
-                            <TableCell>Localisation Fin</TableCell> */}
-                            <TableCell>Travaux</TableCell>
-                            <TableCell sx={{paddingRight:10}}></TableCell>
-                            
-                            {/* <TableCell>Avancement</TableCell>
-                            <TableCell>Observation</TableCell>
-                            <TableCell align="right">Coût Estimatif (Ar)</TableCell> */}
+                            <TableCell>Avancement</TableCell>
                         </TableRow>
                         </TableHead>
                         <TableBody>
                           <Projet
+                          SetShowTableHead={setShowTableHead}
                           dateSelectedIndex={dateSelectedIndex}
                           regionSearch={regionSearch}
                           axeSearch={axeSearch} 
@@ -105,7 +102,15 @@ const ListeProjets = () => {
                         </TableBody>
                     </Table>
                     </React.Fragment>
-            </Box>
+
+            </Box>: <><VoirPlusPage/><Box> <Projet
+                          SetShowTableHead={setShowTableHead}
+                          dateSelectedIndex={dateSelectedIndex}
+                          regionSearch={regionSearch}
+                          axeSearch={axeSearch} 
+                          pkFinSearch={pkFinSearch} 
+                          pkDebutSearch={pkDebutSearch} />
+                          </Box></>}
         </>
   )
 }

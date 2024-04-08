@@ -1,22 +1,22 @@
 import { Box, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import VoirPlus from '../composants/Home/Drawer/BaseDeDonnee/Projets/VoirPlus'
 
 const VoirPlusPage = () => {
+   
   return (
-    <Box>
+    <>
                 <React.Fragment>
                     <Table size="small">
                         <TableHead>
                         <TableRow>
-                        <TableCell></TableCell>
                             <TableCell>Programme_LF_</TableCell>
                             <TableCell>Convention_LF_</TableCell>
-                            <TableCell>Convention_Libell_e_LF_"</TableCell>
+                            <TableCell>Convention_Libell_e_LF_</TableCell>
                             <TableCell>Directions</TableCell>
                             <TableCell>ACTIVITES</TableCell>
                             <TableCell>Natures</TableCell>
-                            <TableCell>Financement"</TableCell>
+                            <TableCell>Financement</TableCell>
                             <TableCell>Bailleurs</TableCell>
                             <TableCell>Co_t_estimatif_Ar_</TableCell>
                             <TableCell>Responsable_du_Projet</TableCell>
@@ -65,18 +65,12 @@ const VoirPlusPage = () => {
                         </TableRow>
                         </TableHead>
                         <TableBody>
-                          {/* <Projet
-                          dateSelectedIndex={dateSelectedIndex}
-                          regionSearch={regionSearch}
-                          axeSearch={axeSearch} 
-                          pkFinSearch={pkFinSearch} 
-                          pkDebutSearch={pkDebutSearch} /> */}
                           <VoirPlus/>
 
                         </TableBody>
                     </Table>
                     </React.Fragment>
-    </Box>
+    </>
   )
 }
 

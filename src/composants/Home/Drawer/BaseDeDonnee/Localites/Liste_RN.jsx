@@ -61,27 +61,6 @@ const Liste_RN = ({faritanySelectedIndex, regionSearch, axeSearch, pkDebutSearch
             {data && data.length > 0 ? (
                     data.map((projet, index) => (
                         <TableRow key={index}>
-                            <TableCell>
-                                <Modifier index={index + 1} id={projet.ID} onEdit={() => handleEdit(index)} />
-                            </TableCell>
-
-                            {index === editingIndex ? (
-                                <>
-                                    <TableCell><TextField value={projet.REGION} /></TableCell>
-                                    <TableCell><TextField value={projet.AXES} /></TableCell>
-                                    <TableCell><TextField value={projet.SECTION} /></TableCell>
-                                    <TableCell><TextField value={projet.PK_DEBUT} /></TableCell>
-                                    <TableCell><TextField value={projet.LOC_DEBUT} /></TableCell>
-                                    <TableCell><TextField value={projet.PK_FIN} /></TableCell>
-                                    <TableCell><TextField value={projet.LOC_FIN} /></TableCell>
-                                    <TableCell><TextField value={projet.LONGUEUR} /></TableCell>
-                                    <TableCell><TextField value={projet.LONGUEUR_TRAITEE} /></TableCell>
-                                    <TableCell><TextField value={projet.NATURE_SURFACE} /></TableCell>
-                                    <TableCell><TextField value={projet.TRAFIC} /></TableCell>
-                                    <TableCell><TextField value={projet.DISTRICT} /></TableCell>
-                                </>
-                            ) : (
-                                <>
                                     <TableCell>{projet.REGION}</TableCell>
                                     <TableCell>{projet.AXES}</TableCell>
                                     <TableCell>{projet.PK_DEBUT}</TableCell>
@@ -93,10 +72,8 @@ const Liste_RN = ({faritanySelectedIndex, regionSearch, axeSearch, pkDebutSearch
                                     <TableCell>{projet.NATURE_SURFACE}</TableCell>
                                     <TableCell>{projet.TRAFIC}</TableCell>
                                     <TableCell>{projet.DISTRICT}</TableCell>
-                                </>
-                            )}
 
-            </TableRow>
+                        </TableRow>
         ))
                             ) : (
         <TableRow><TableCell>{loading?<Loading/> : <TableCell colSpan="11">Aucun résultat trouvé</TableCell>}</TableCell></TableRow>
