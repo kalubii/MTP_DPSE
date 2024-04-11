@@ -32,7 +32,7 @@ const Liste_RN = ({faritanySelectedIndex, regionSearch, axeSearch, pkDebutSearch
        useEffect(() => {
         const fetchSearchResults = async () => {
           try {
-            const response = await axios.get('http://localhost:8081/localite_RN', {
+            const response = await axios.get('http://localhost:8081/projet2022', {
               params: {
                 faritany : faritanySelectedIndex,
                 region: regionSearch || undefined,
@@ -42,7 +42,7 @@ const Liste_RN = ({faritanySelectedIndex, regionSearch, axeSearch, pkDebutSearch
               },
             });
             setLoading(false)
-            console.log(response.data)
+            // console.log(response.data)
             setData(response.data);
           } catch (error) {
             setLoading(false)
@@ -61,17 +61,14 @@ const Liste_RN = ({faritanySelectedIndex, regionSearch, axeSearch, pkDebutSearch
             {data && data.length > 0 ? (
                     data.map((projet, index) => (
                         <TableRow key={index}>
-                                    <TableCell>{projet.REGION}</TableCell>
-                                    <TableCell>{projet.AXES}</TableCell>
+                                    <TableCell>{projet.REGIONS_CONCERNEES}</TableCell>
+                                    <TableCell>{projet.AXE}</TableCell>
                                     <TableCell>{projet.PK_DEBUT}</TableCell>
-                                    <TableCell>{projet.LOC_DEBUT}</TableCell>
                                     <TableCell>{projet.PK_FIN}</TableCell>
-                                    <TableCell>{projet.LOC_FIN}</TableCell>
-                                    <TableCell>{projet.LONGUEUR}</TableCell>
-                                    <TableCell>{projet.LONGUEUR_TRAITEE}</TableCell>
-                                    <TableCell>{projet.NATURE_SURFACE}</TableCell>
+                                    <TableCell>{projet.Geo_r_f_rencement_D_but}</TableCell>
+                                    <TableCell>{projet.Geo_r_f_rencement_Fin}</TableCell>
                                     <TableCell>{projet.TRAFIC}</TableCell>
-                                    <TableCell>{projet.DISTRICT}</TableCell>
+                                    <TableCell>{projet.DISTRICTS}</TableCell>
 
                         </TableRow>
         ))

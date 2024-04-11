@@ -125,14 +125,10 @@ function ListeLocalite() {
                   <TableRow>
                     <TableCell sx={{paddingRight:11}}>Regions</TableCell>
                     <TableCell sx={{paddingRight:10}}>Axes</TableCell>
-                    <TableCell>Section</TableCell>
                     <TableCell>PK Début</TableCell>
-                    <TableCell>Localité Début</TableCell>
                     <TableCell>PK Fin</TableCell>
-                    <TableCell>Localité Fin</TableCell>
-                    <TableCell>Longueur (km)</TableCell>
-                    <TableCell>Longueur traitée (km)</TableCell>
-                    <TableCell>Nature Surface</TableCell>
+                    <TableCell>Géo_Refercement Début</TableCell>
+                    <TableCell>Géo_Refercement Fin</TableCell>
                     <TableCell>Trafic</TableCell>
                     <TableCell>District</TableCell>
                   </TableRow>
