@@ -17,6 +17,8 @@ const db = mysql2.createConnection({
 
 app.get('/projet2022', (req, res) => {
     // const faritany = req.query.faritany;
+    const idRef = req.query.idRef;
+    // const date = req.query.date;
     const regions = req.query.region ? req.query.region.split(',') : [];
     const axes = req.query.axe ? req.query.axe.split(',') : [];
     const pkDebut = req.query.pkDebut;
@@ -36,7 +38,12 @@ app.get('/projet2022', (req, res) => {
     // if (faritany) {
     //   sql += ` AND FARITANY = '${faritany}'`;
     // }
-  
+    if(idRef){
+      sql+= ` AND id_localisation = '${idRef}'`;
+    }
+    // if(date){
+    //   sql+= ` AND _date = '${date}'`;
+    // }
     if (regions.length > 0) {
       sql += ` AND REGIONS_CONCERNEES IN (${regions.map(region => `'${region}'`).join(',')})`;
     }
@@ -107,24 +114,24 @@ app.get('/projet2022', (req, res) => {
 // //REQUETE PROJET
 // app.get('/projet',(req,res)=>{
 
-//     const idRef = req.query.idRef;
-//     const date = req.query.date;
-//     const regions = req.query.region;
-//     const axes = req.query.axe;
-//     const pkDebut = req.query.pkDebut;
-//     const pkFin = req.query.pkFin;
+    // const idRef = req.query.idRef;
+    // const date = req.query.date;
+    // const regions = req.query.region;
+    // const axes = req.query.axe;
+    // const pkDebut = req.query.pkDebut;
+    // const pkFin = req.query.pkFin;
 
-//     console.log('id',idRef)
+    // console.log('id',idRef)
    
-//     let sql = 'SELECT * FROM projet WHERE 1=1';
+    // let sql = 'SELECT * FROM projet WHERE 1=1';
 
-//     if(idRef){
-//         sql+= ` AND idProjet = '${idRef}'`;
-//     }
+    // if(idRef){
+    //     sql+= ` AND idProjet = '${idRef}'`;
+    // }
 
-//     if(date){
-//         sql+= ` AND _date = '${date}'`;
-//     }
+    // if(date){
+    //     sql+= ` AND _date = '${date}'`;
+    // }
 //     if (regions) {
 //        sql += ` AND REGIONS_CONCERNEES = '${regions}'`;
 //     }

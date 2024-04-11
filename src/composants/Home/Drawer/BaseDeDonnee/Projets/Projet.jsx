@@ -27,13 +27,13 @@ const Projet = ({SetShowTableHead,dateSelectedIndex, regionSearch, axeSearch, pk
       setEditingIndex(index === editingIndex ? null : index);
     };
 
-    const getReference = (id,pkDebut,pkFin)=>{
-      console.log('id:',id,'pkDebut:',pkDebut,'pkFin:',pkFin)
-      setVoirPlusClicked(true)
+    const getReference = (id)=>{
+      console.log('id Selectionner:',id)
+      // setVoirPlusClicked(true)
       setId(id)
-      setpkDebutRef(pkDebut)
-      setpkFinRef(pkFin)
-      setShowVoirPlus(show=> !show)
+      // setpkDebutRef(pkDebut)
+      // setpkFinRef(pkFin)
+      // setShowVoirPlus(show=> !show)
       // SetShowTableHead(false)
       // navigate('/voirPlus')
     }
@@ -124,10 +124,11 @@ const Projet = ({SetShowTableHead,dateSelectedIndex, regionSearch, axeSearch, pk
                       />
                     </TableCell>
                     <TableCell>
-                      {/* <Button onClick={() => getReference(index, projet.PK_DEBUT, projet.PK_FIN)}>
-                        Voir plus
-                      </Button> */}
-                      <VoirPlus/>
+                      <VoirPlus onDetail={()=> getReference(index+1)}
+                      resetId={()=>setId()}
+                      indexSelectionner={id}
+                      data={data}
+                      />
                     </TableCell>
                   </TableRow>
                 </React.Fragment>
