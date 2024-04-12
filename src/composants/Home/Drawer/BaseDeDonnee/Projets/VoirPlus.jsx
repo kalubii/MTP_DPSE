@@ -19,13 +19,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-function VoirPlus({onDetail,resetId,data}) {
-  const [open, setOpen] = React.useState(false);
-  const handleClickOpen = () => {
-    onDetail()
-    setOpen(true);
-  };
-
+function VoirPlus({open, setOpen,resetId,data}) {
 
   const handleClose = () => {
     resetId();
@@ -34,9 +28,6 @@ function VoirPlus({onDetail,resetId,data}) {
 
   return (
     <React.Fragment>
-      <Button variant="text" onClick={handleClickOpen}>
-        Detail
-      </Button>
       <Dialog
         fullScreen
         open={open}
@@ -87,7 +78,7 @@ function VoirPlus({onDetail,resetId,data}) {
                   <ListItemText primary="Valeur_Cible_Unit_s_" secondary={projet.Valeur_Cible_Unit_s_}/>
                   <ListItemText primary="Indicateur_PEM_PTA" secondary={projet.Indicateur_PEM_PTA}/>
                   <ListItemText primary="Indicateur_ODD" secondary={projet.Indicateur_ODD}/>
-            </TableCell>
+          </TableCell>
             <TableCell>
               <ListItemText primary="Indicateur_de_Performance" secondary={projet.Indicateur_de_Performance}/>
               <ListItemText primary="Date_envoi_Primature" secondary={projet.Date_envoi_Primature}/>

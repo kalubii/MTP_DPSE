@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Box, TableCell, TableRow,TextField } from '@mui/material';
 import Modifier from '../CRUD/Modifier';
 import axios from 'axios';
@@ -32,6 +32,7 @@ const Liste_RN = ({faritanySelectedIndex, regionSearch, axeSearch, pkDebutSearch
        useEffect(() => {
         const fetchSearchResults = async () => {
           try {
+            if(faritanySelectedIndex || regionSearch || axeSearch || pkDebutSearch || pkFinSearch){
             const response = await axios.get('http://localhost:8081/projet2022', {
               params: {
                 faritany : faritanySelectedIndex,
@@ -44,22 +45,21 @@ const Liste_RN = ({faritanySelectedIndex, regionSearch, axeSearch, pkDebutSearch
             setLoading(false)
             // console.log(response.data)
             setData(response.data);
+          }
           } catch (error) {
             setLoading(false)
             console.error('', error);
           }
         };
-
-        if (faritanySelectedIndex || regionSearch || axeSearch || pkDebutSearch || pkFinSearch) {
-          fetchSearchResults();
-        }
-
+        fetchSearchResults();
      }, [faritanySelectedIndex,regionSearch, axeSearch, pkDebutSearch, pkFinSearch]);
+
+     const memoizedData = useMemo(() => data, [data]);
 
     return (
         <>
-            {data && data.length > 0 ? (
-                    data.map((projet, index) => (
+            {memoizedData && memoizedData.length > 0 ? (
+              memoizedData.map((projet, index) => (
                         <TableRow key={index}>
                                     <TableCell>{projet.REGIONS_CONCERNEES}</TableCell>
                                     <TableCell>{projet.AXE}</TableCell>
