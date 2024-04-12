@@ -7,10 +7,29 @@ import Paper from '@mui/material/Paper';
 import Chart from './Diagramme';
 import Deposits from './Deposits';
 import Classification from './Classification';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import axios from 'axios';
 
 
 
 function Dashboard() {
+  const [totalTravaux,setTotalTravaux] = useState([])
+  console.log(totalTravaux)
+  
+  useEffect(() => {
+    const fetchSearchResults = async () => {
+       try {
+         const response = await axios.get('http://localhost:8081/nbTravauxTermine');
+         const nbTermine = response.data[0].nbTermine;
+         setTotalTravaux(nbTermine);
+       } catch (error) {
+         console.error('', error);
+       }
+    };
+    fetchSearchResults();
+   }, []);
+
   return (<>
         <Box
           component="main"
@@ -39,7 +58,7 @@ function Dashboard() {
                     height: 300,
                   }}
                 >
-                  <Chart />
+                  <Chart totalTravaux={totalTravaux} />
                 </Paper>
               </Grid>
 
@@ -53,7 +72,7 @@ function Dashboard() {
                     height: 240,
                   }}
                 >
-                  <Deposits />
+                  <Deposits totalTravaux={totalTravaux}/>
                 </Paper>
               </Grid>
               {/* Classification */}

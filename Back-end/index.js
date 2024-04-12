@@ -71,6 +71,21 @@ app.get('/projet2022', (req, res) => {
     });
   });
 
+  app.get('/nbTravauxTermine',(req,res)=> {
+    let sql = `SELECT COUNT(*) as nbTermine
+    FROM avancement
+    WHERE SITUATION = 'TERMINE'`;
+
+    db.query(sql, (err, results) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        console.log(results)
+        res.json(results);
+      }
+    });
+  })
+
 // REQUETE LOCALITE
 
 // app.get('/localite_RN', (req, res) => {

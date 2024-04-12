@@ -81,7 +81,7 @@ function ListeLocalite() {
 
   return(<>  
   <Box sx={{marginBottom:4}}>      
-        <Box noValidate  autoComplete="off" sx={{'& .MuiTextField-root': { m: 1, width: '25ch' }, display:'flex', justifyContent:'center'}}>
+        {/* <Box noValidate  autoComplete="off" sx={{'& .MuiTextField-root': { m: 1, width: '25ch' }, display:'flex', justifyContent:'center'}}>
             <TextField select label="Faritany" id="outlined-select-currency" defaultValue="ANTANANARIVO">
 
                   {Regions.map((option) => (
@@ -92,7 +92,7 @@ function ListeLocalite() {
                     </MenuItem>
                   ))}
             </TextField>
-        </Box>
+        </Box> */}
         
         <Box sx={{display:'flex',justifyContent:'center',margin:'auto'}}>
 

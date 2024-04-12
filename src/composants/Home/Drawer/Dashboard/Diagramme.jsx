@@ -9,21 +9,21 @@ function createData(time, amount) {
   return { time, amount: amount ?? null };
 }
 
-const data = [
-  createData('2019', 200), //nb travaux par Année
-  createData('2020', 247),
-  createData('2021', 300),
-  createData('2022', 240),
-  createData('2023', 400),
-  createData('2024', 500),
-];
 
-function Chart() {
+function Chart({totalTravaux}) {
   const theme = useTheme();
-
+  const data = [
+    createData('2019', 0), //nb_travaux/Année
+    createData('2020', 0),
+    createData('2021', 0),
+    createData('2022', totalTravaux),
+    createData('2023', 0),
+    createData('2024', 0),
+  ];
+   
   return (<>
     <React.Fragment>
-      <Title>Statistique d'investissement</Title>
+      <Title>Statistique global des travaux achevée par an</Title>
       <div style={{ width: '100%', flexGrow: 1, overflow: 'hidden', backgroundColor:'white'}}>
         <LineChart
           dataset={data}
@@ -48,20 +48,20 @@ function Chart() {
           ]}
           yAxis={[
             {
-              label: 'Nombre de travaux',
+              label: 'nombre_travaux',
               labelStyle: {
                 ...theme.typography.body1,
                 fill: theme.palette.text.primary,
               },
               tickLabelStyle: theme.typography.body2,
-              max: 1000, 
+              max: 100, 
               tickNumber: 3,
             },
           ]}
           series={[
             {
               dataKey: 'amount',
-              showMark: false,
+              showMark: true,
               color: theme.palette.success.light,
             },
           ]}
