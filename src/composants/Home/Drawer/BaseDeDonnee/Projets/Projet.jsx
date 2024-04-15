@@ -19,7 +19,9 @@ const Projet = ({SetShowTableHead,dateSelectedIndex, regionSearch, axeSearch, pk
     const [pkFinRef, setpkFinRef] = useState();
     const [voirPlusClicked,setVoirPlusClicked] = useState(false)
     const [editingIndex, setEditingIndex] = useState(null);
+    const [avancementChange, setAvancementChange] = useState("")
     // const navigate = useNavigate();
+    console.log(avancementChange)
 
     const handleClickOpen = (id) => {
       console.log('id Selectionner:',id)
@@ -102,7 +104,7 @@ const Projet = ({SetShowTableHead,dateSelectedIndex, regionSearch, axeSearch, pk
                    <TableCell>{projet.PK_DEBUT}</TableCell>
                    <TableCell>{projet.PK_FIN}</TableCell>
                    <TableCell>
-                      <TextField value={projet.ETAT_D_AVANCEMENT} />
+                      <TextField onChange={(e)=> setAvancementChange(e.target.value)} value={projet.ETAT_D_AVANCEMENT} />
                    </TableCell>
                    <TableCell>
                       <Modifier

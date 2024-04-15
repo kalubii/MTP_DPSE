@@ -2,10 +2,6 @@ import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import Title from './SousTitle';
 
-function preventDefault(event) {
-  event.preventDefault();
-}
-
 function Deposits({totalTravaux}) {
   return (
     <React.Fragment>
