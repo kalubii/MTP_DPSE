@@ -24,6 +24,7 @@ const Projet = ({SetShowTableHead,dateSelectedIndex, regionSearch, axeSearch, pk
     console.log(avancementChange)
 
     const handleClickOpen = (id) => {
+      setLoading(true)
       console.log('id Selectionner:',id)
       setId(id)
       setVoirPlusClicked(true);
@@ -132,7 +133,9 @@ const Projet = ({SetShowTableHead,dateSelectedIndex, regionSearch, axeSearch, pk
                       </TableCell>
                       <TableCell>
                         <Button variant="text" onClick={() => handleClickOpen(index + 1)}>
-                          Détail
+                        {loading?(
+                          <span>Chargement...</span>
+                        ):(<span>Detail</span>)}
                         </Button>
                       </TableCell>
                    </TableRow>

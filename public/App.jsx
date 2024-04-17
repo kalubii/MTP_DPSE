@@ -8,7 +8,6 @@ import Demarrage from '../src/pages/Demarrage'
 import ListeProjets from '../src/pages/ListeProjets'
 import Listes from '../src/composants/Home/Drawer/Listes'
 import VoirPlusPage from '../src/pages/VoirPlusPage'
-import DataGridPremiumDemo from '../src/composants/Home/Drawer/BaseDeDonnee/Projets/DataGrid'
 
 function App() {
 
@@ -22,7 +21,6 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/listeLocalite" element={<Listes />} />
             <Route path="/listeProjet" element={<ListeProjets />} />
-            <Route path="/voirPlus" element={<DataGridPremiumDemo />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>

@@ -202,6 +202,8 @@ rows.forEach(row => {
  
 });
 
+
+
 app.get('/travauxRecents',(req,res) => {
   const sql = `
   SELECT id_localisation, REGIONS_CONCERNEES, PK_DEBUT, PK_FIN, ACTIVITES, SITUATION, Financement,Co_t_Ar_
@@ -218,16 +220,13 @@ app.get('/travauxRecents',(req,res) => {
     (SELECT id_avancement, NULL AS regions_concernees, NULL AS pk_debut, NULL AS pk_fin, NULL AS activites,NULL AS financement, SITUATION, NULL AS co_t_Ar_ FROM avancement
      ORDER BY id_avancement DESC LIMIT 7)
   ) AS subquery
-  ORDER BY id_localisation DESC
-  LIMIT 7`;
+  ORDER BY id_localisation DESC LIMIT 7`;
  
- 
-
       db.query(sql, (err, results) => {
         if (err) {
           res.status(500).send(err);
         } else {
-          console.log(results)
+          // console.log(results)
           res.json(results);
         }
       });
