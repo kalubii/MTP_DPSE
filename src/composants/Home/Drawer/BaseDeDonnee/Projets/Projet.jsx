@@ -19,11 +19,14 @@ const Projet = ({SetShowTableHead,dateSelectedIndex, regionSearch, axeSearch, pk
     const [pkFinRef, setpkFinRef] = useState();
     const [voirPlusClicked,setVoirPlusClicked] = useState(false)
     const [editingIndex, setEditingIndex] = useState(null);
-    const [avancementChange, setAvancementChange] = useState("")
+    const [etatAvancement, setEtatAvancement] = useState({ ID: null, ETAT_D_AVANCEMENT: '' });
+    const [avancementChange, setAvancementChange] = useState('');
+    const [stateBtnModifier,setStateBtnModifier] = useState(false);
     // const navigate = useNavigate();
     console.log(avancementChange)
 
     const handleClickOpen = (id) => {
+      console.log(id)
       setLoading(true)
       console.log('id Selectionner:',id)
       setId(id)
@@ -32,38 +35,27 @@ const Projet = ({SetShowTableHead,dateSelectedIndex, regionSearch, axeSearch, pk
 
 
     const handleEdit = (index) => {
+      setStateBtnModifier(true)
       setEditingIndex(index === editingIndex ? null : index);
     };
 
-    // const getReference = (id)=>{
-    //   console.log('id Selectionner:',id)
-    //   // setVoirPlusClicked(true)
-    //   setId(id)
-    //   // setpkDebutRef(pkDebut)
-    //   // setpkFinRef(pkFin)
-    //   // setShowVoirPlus(show=> !show)
-    //   // SetShowTableHead(false)
-    //   // navigate('/voirPlus')
-    // }
-
-    // useEffect(() => {
-    //   const fetchData = async () => {
-    //     try {
-    //       const response = await axios.get('http://localhost:8081/projet');
-    //       setData(response.data);
-    //       setLoading(false);
-    //     } catch (error) {
-    //       console.error('', error);
-    //     }
-    //   };
-    //   fetchData();
-    // }, [])
     console.log(dateSelectedIndex)
     console.log(regionSearch)
     console.log(voirPlusClicked)
 
     useEffect(() => {
+      setEtatAvancement({ ...etatAvancement, ETAT_D_AVANCEMENT: avancementChange });
+    }, [avancementChange]);
+
+    const handleChangeAvancement = (e, id) => {
+      setAvancementChange(e.target.value);
+      setEtatAvancement({ ID: id, ETAT_D_AVANCEMENT: e.target.value });
+    };
+    
+
+    useEffect(() => {
       const fetchSearchResults = async () => {
+        setLoading(true)
         try {
           if (dateSelectedIndex || regionSearch || axeSearch || pkDebutSearch || pkFinSearch) {
             const response = await axios.get('http://localhost:8081/projet2022', {
@@ -99,16 +91,19 @@ const Projet = ({SetShowTableHead,dateSelectedIndex, regionSearch, axeSearch, pk
               <React.Fragment key={index}>
                 {index === editingIndex ? (
                   <TableRow>
+                   <TableCell>{projet.Annee}</TableCell>
                    <TableCell>{projet.ACTIVITES}</TableCell>
                    <TableCell>{projet.REGIONS_CONCERNEES}</TableCell>
                    <TableCell>{projet.AXE}</TableCell>
                    <TableCell>{projet.PK_DEBUT}</TableCell>
                    <TableCell>{projet.PK_FIN}</TableCell>
                    <TableCell>
-                      <TextField onChange={(e)=> setAvancementChange(e.target.value)} value={projet.ETAT_D_AVANCEMENT} />
+                      <TextField onChange={(e) => handleChangeAvancement(e, projet.id_avancement)} value={etatAvancement.ID === projet.id_avancement ? etatAvancement.ETAT_D_AVANCEMENT : projet.ETAT_D_AVANCEMENT} />
                    </TableCell>
                    <TableCell>
                       <Modifier
+                        stateBtnModifier={stateBtnModifier}
+                        setStateBtnModifier={setStateBtnModifier}
                         index={index + 1}
                         id={projet.ID}
                         onEdit={() => handleEdit(index)}
@@ -116,8 +111,8 @@ const Projet = ({SetShowTableHead,dateSelectedIndex, regionSearch, axeSearch, pk
                    </TableCell>
                   </TableRow>
                 ) : (
-                  <React.Fragment>
                    <TableRow key={index}>
+                      <TableCell>{projet.Annee}</TableCell>
                       <TableCell>{projet.ACTIVITES}</TableCell>
                       <TableCell>{projet.REGIONS_CONCERNEES}</TableCell>
                       <TableCell>{projet.AXE}</TableCell>
@@ -132,14 +127,14 @@ const Projet = ({SetShowTableHead,dateSelectedIndex, regionSearch, axeSearch, pk
                         />
                       </TableCell>
                       <TableCell>
-                        <Button variant="text" onClick={() => handleClickOpen(index + 1)}>
+                        <Button variant="text" onClick={() => handleClickOpen(projet.id_avancement)}>
                         {loading?(
                           <span>Chargement...</span>
                         ):(<span>Detail</span>)}
                         </Button>
                       </TableCell>
                    </TableRow>
-                  </React.Fragment>
+               
                 )}
               </React.Fragment>
             );

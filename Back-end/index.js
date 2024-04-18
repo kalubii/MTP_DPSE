@@ -20,11 +20,13 @@ const db = mysql2.createConnection({
 app.get('/projet2022', (req, res) => {
     // const faritany = req.query.faritany;
     const idRef = req.query.idRef;
-    // const date = req.query.date;
+    const date = req.query.date;
     const regions = req.query.region ? req.query.region.split(',') : [];
     const axes = req.query.axe ? req.query.axe.split(',') : [];
     const pkDebut = req.query.pkDebut;
     const pkFin = req.query.pkFin;
+
+    console.log(pkFin)
   
     let sql = `
     SELECT *
@@ -39,9 +41,9 @@ app.get('/projet2022', (req, res) => {
     if(idRef){
       sql+= ` AND id_avancement = '${idRef}'`;
     }
-    // if(date){
-    //   sql+= ` AND _date = '${date}'`;
-    // }
+    if(date){
+      sql+= ` AND Annee = '${date}'`;
+    }
     if (regions.length > 0) {
       sql += ` AND REGIONS_CONCERNEES IN (${regions.map(region => `'${region}'`).join(',')})`;
     }
@@ -49,14 +51,14 @@ app.get('/projet2022', (req, res) => {
       sql += ` AND AXE IN (${axes.map(axe => `'${axe}'`).join(',')})`;
     }
     if (pkDebut) {
-      sql += ` AND PK_DEBUT >= ${pkDebut}`;
+      sql += ` AND PK_DEBUT = ${pkDebut}`;
     }
     if (pkFin) {
-      sql += ` AND PK_FIN <= ${pkFin}`;
+      sql += ` AND PK_FIN = ${pkFin}`;
     }
 
-    if (regions.length === 0 && !axes.length && !pkDebut && !pkFin) {
-        sql += ` LIMIT 50`; // limit to 10 results if no conditions are met
+    if (date && regions.length === 0 && !axes.length && !pkDebut && !pkFin) {
+        sql += ` LIMIT 25`; // limiter à 50 si aucun condition passer au params apart la date
     } 
   
     db.query(sql, (err, results) => {
@@ -83,23 +85,6 @@ app.get('/projet2022', (req, res) => {
       }
     });
   })
-
-
-  // const storage = multer.diskStorage({
-  //   destination: function(req,file,cb){
-  //     return cb(null, "")
-  //   },
-  //   filename: function (req,file,cb){
-  //     return cb(null, `${Date.now()}_${file.originalname}`) //nom du fichier
-  //   }
-  // })
-
-  // const upload = multer({storage})
-  // app.post('/upload', upload.single('file'),(req,res) => {
-  //   console.log(req.body)
-  //   console.log(req.file)
-  // })
-
 
 
 // Configuration de Multer pour gérer les fichiers uploadés
@@ -129,13 +114,13 @@ app.post('/upload', upload.single('file'), (req, res) => {
 // Itérer sur le tableau d'objets et insérer les données dans les tables correspondantes
 rows.forEach(row => {
   // Vérifier la correspondance entre les noms de colonnes et les noms de colonnes des tables
-  if (row.hasOwnProperty('AXE') && row.hasOwnProperty('Geo_r_f_rencement_D_but') && row.hasOwnProperty('Geo_r_f_rencement_Fin') && row.hasOwnProperty('PK_DEBUT') && row.hasOwnProperty('PK_FIN') && row.hasOwnProperty('REGIONS_CONCERNEES') && row.hasOwnProperty('DISTRICTS') && row.hasOwnProperty('Communes') && row.hasOwnProperty('Population_touch_e') && row.hasOwnProperty('Nbre_d_emploi_cr_e') && row.hasOwnProperty('Localite_debut') && row.hasOwnProperty('Localite_fin') && row.hasOwnProperty('Trafic')) 
+  if (row.hasOwnProperty('Annee') && row.hasOwnProperty('AXE') && row.hasOwnProperty('Geo_r_f_rencement_D_but') && row.hasOwnProperty('Geo_r_f_rencement_Fin') && row.hasOwnProperty('PK_DEBUT') && row.hasOwnProperty('PK_FIN') && row.hasOwnProperty('REGIONS_CONCERNEES') && row.hasOwnProperty('DISTRICTS') && row.hasOwnProperty('Communes') && row.hasOwnProperty('Population_touch_e') && row.hasOwnProperty('Nbre_d_emploi_cr_e') && row.hasOwnProperty('Localite_debut') && row.hasOwnProperty('Localite_fin') && row.hasOwnProperty('Trafic')) 
   {
      // Exemple de requête SQL pour insérer des données dans la table1
-     const sql1 = `INSERT INTO localisation (AXE,Geo_r_f_rencement_D_but,Geo_r_f_rencement_Fin,PK_DEBUT,PK_FIN,REGIONS_CONCERNEES,DISTRICTS,Communes,Population_touch_e,Nbre_d_emploi_cr_e,Localite_debut,Localite_fin,Trafic) 
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+     const sql1 = `INSERT INTO localisation (Annee,AXE,Geo_r_f_rencement_D_but,Geo_r_f_rencement_Fin,PK_DEBUT,PK_FIN,REGIONS_CONCERNEES,DISTRICTS,Communes,Population_touch_e,Nbre_d_emploi_cr_e,Localite_debut,Localite_fin,Trafic) 
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
  
-     db.query(sql1, [row.AXE, row.Geo_r_f_rencement_D_but, row.Geo_r_f_rencement_Fin,row.PK_DEBUT,row.PK_FIN,row.REGIONS_CONCERNEES,row.DISTRICTS,row.Communes,row.Population_touch_e,row.Nbre_d_emploi_cr_e,row.Localite_debut,row.Localite_fin,row.Trafic], (err, result) => {
+     db.query(sql1, [row.Annee,row.AXE, row.Geo_r_f_rencement_D_but, row.Geo_r_f_rencement_Fin,row.PK_DEBUT,row.PK_FIN,row.REGIONS_CONCERNEES,row.DISTRICTS,row.Communes,row.Population_touch_e,row.Nbre_d_emploi_cr_e,row.Localite_debut,row.Localite_fin,row.Trafic], (err, result) => {
        if (err) throw err;
        const localisationId = result.insertId;
        console.log('Ligne insérée à la table LOCALISATION :', result);

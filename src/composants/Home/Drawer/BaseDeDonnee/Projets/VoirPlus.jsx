@@ -16,6 +16,7 @@ import { useState, useRef } from 'react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { useReactToPrint } from 'react-to-print';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -26,18 +27,6 @@ function VoirPlus({open, setOpen,resetId,data}) {
 
   const [loader, setLoader] = useState(false)
   const componentPDF = useRef() 
-
-  // const downloadPDF = () => {
-  //   const capture = document.querySelector('.actual-receipt');
-  //   setLoader(true)
-  //   html2canvas(capture).then((canvas)=>{
-  //     const doc = new jsPDF('p','mm','a4');
-  //     const componentWidth = doc.internal.pageSize.getWidth();
-  //     const componentHeight = doc.internal.pageSize.getHeight();
-  //     setLoader(false);
-  //     doc.save('rapport.pdf');
-  //   }) //convertion de jsx to canva
-  // }
 
   const downloadPDF = useReactToPrint({
     content: () => componentPDF.current,
@@ -70,13 +59,13 @@ function VoirPlus({open, setOpen,resetId,data}) {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Detail
+              Détail sur le projet
             </Typography>
-            <Button autoFocus color="inherit" onClick={downloadPDF}
+            <Button autoFocus color="inherit" onClick={downloadPDF} startIcon={<PictureAsPdfIcon />}
             disabled={!(loader===false)}>
               {loader?(
-                <span>Downloading</span>
-              ):(<span>Download</span>)}
+                <span>Exportation...</span>
+              ):(<span>Exporter</span>)}
             </Button>
           </Toolbar>
         </AppBar>

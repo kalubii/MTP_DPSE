@@ -1,16 +1,15 @@
 import { Box, Button } from '@mui/material'
 import React, { useState } from 'react'
 
-const Modifier = ({onEdit}) => {
-  const [showInput, setShowInput] = useState(false);
+const Modifier = ({stateBtnModifier,setStateBtnModifier,onEdit}) => {
 
   const handleClick = () => {
-      setShowInput(!showInput);
       onEdit()
+      setStateBtnModifier(!stateBtnModifier);
   };
 
   return (
-      <Box><Button onClick={handleClick}>{showInput ? "Annuler" : "Modifier"}</Button></Box>
+      <Box><Button onClick={handleClick}>{stateBtnModifier?"Annuler":"Modifier"}</Button></Box>
   );
 };
 

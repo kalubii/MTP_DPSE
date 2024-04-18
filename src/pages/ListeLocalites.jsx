@@ -96,7 +96,7 @@ function ListeLocalite() {
         
         <Box sx={{display:'flex',justifyContent:'center',margin:'auto'}}>
 
-          <TextField label="Année" id="standard-select-currency" select defaultValue="2024" variant="standard">
+          {/* <TextField label="Année" id="standard-select-currency" select defaultValue="2024" variant="standard">
                 {annees.map((option,index) => (
                   <MenuItem key={option.value} value={option.value} onClick={() =>{
                     return onItemClicked(index)
@@ -104,7 +104,7 @@ function ListeLocalite() {
                     {option.label}
                   </MenuItem>
                 ))}
-          </TextField>
+          </TextField> */}
             
           <Box sx={{marginLeft:3}}>
                 <SearchBar  

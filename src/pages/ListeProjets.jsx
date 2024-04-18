@@ -82,6 +82,7 @@ const ListeProjets = () => {
                     <Table size="small">
                         <TableHead>
                         <TableRow>
+                            <TableCell>Année</TableCell>
                             <TableCell>Travaux</TableCell>
                             <TableCell>Regions</TableCell>
                             <TableCell>Axes</TableCell>

@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Box, Button} from '@mui/material'
 import ListeLocalite from '../../../pages/ListeLocalites'
 import ListeProjets from '../../../pages/ListeProjets'
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import ListAltIcon from '@mui/icons-material/ListAlt';
 
 const Listes = () => {
 
@@ -20,8 +22,8 @@ const Listes = () => {
 
   return (<>
     <Box sx={{ marginY:4}}>
-        <Button onClick={onLocalite}>Voir liste Localités</Button>
-        <Button onClick={onProjet}>Voir liste des projets</Button>
+        <Button startIcon={<LocationOnOutlinedIcon/>} onClick={onLocalite}>Voir liste Localités</Button>
+        <Button startIcon={<ListAltIcon/>} onClick={onProjet}>Voir liste des projets</Button>
     </Box>
 
 
