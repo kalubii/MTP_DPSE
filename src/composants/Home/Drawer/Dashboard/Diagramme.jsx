@@ -10,13 +10,13 @@ function createData(time, amount) {
 }
 
 
-function Chart({totalTravaux}) {
+function Chart({getTotalTravauxTermine2022}) {
   const theme = useTheme();
   const data = [
     createData('2019', 0), //nb_travaux/Année
     createData('2020', 0),
     createData('2021', 0),
-    createData('2022', totalTravaux),
+    createData('2022', Number(getTotalTravauxTermine2022)),
     createData('2023', 0),
     createData('2024', 0),
   ];

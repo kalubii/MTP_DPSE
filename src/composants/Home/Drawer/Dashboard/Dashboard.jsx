@@ -14,15 +14,17 @@ import axios from 'axios';
 
 
 function Dashboard() {
-  const [totalTravaux,setTotalTravaux] = useState([])
-  console.log(totalTravaux)
+  const [getAnnee2022,setGetAnnee2022] = useState([])
+  const [getTotalTravaux2022,setGetTotalTravaux2022] = useState([])
+  const [getTotalTravauxTermine2022,setGetTotalTravauxTermine2022] = useState([])
   
   useEffect(() => {
     const fetchSearchResults = async () => {
        try {
          const response = await axios.get('http://localhost:8081/nbTravauxTermine');
-         const nbTermine = response.data[0].nbTermine;
-         setTotalTravaux(nbTermine);
+         setGetAnnee2022(response.data[0].Annee);
+         setGetTotalTravauxTermine2022(response.data[0].nbTravauxTermine);
+         setGetTotalTravaux2022(response.data[0].nbTotalTravaux);
        } catch (error) {
          console.error('', error);
        }
@@ -58,7 +60,10 @@ function Dashboard() {
                     height: 300,
                   }}
                 >
-                  <Chart totalTravaux={totalTravaux} />
+                  <Chart 
+                  getAnnee2022={getAnnee2022}
+                  getTotalTravaux2022={getTotalTravaux2022}
+                  getTotalTravauxTermine2022={getTotalTravauxTermine2022} />
                 </Paper>
               </Grid>
 
@@ -72,7 +77,11 @@ function Dashboard() {
                     height: 240,
                   }}
                 >
-                  <Deposits totalTravaux={totalTravaux}/>
+                  <Deposits                   
+                  getAnnee2022={getAnnee2022}
+                  getTotalTravaux2022={getTotalTravaux2022}
+                  getTotalTravauxTermine2022={getTotalTravauxTermine2022}/>
+
                 </Paper>
               </Grid>
               {/* Classification */}

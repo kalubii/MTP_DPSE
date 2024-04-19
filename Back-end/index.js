@@ -58,7 +58,7 @@ app.get('/projet2022', (req, res) => {
     }
 
     if (date && regions.length === 0 && !axes.length && !pkDebut && !pkFin) {
-        sql += ` LIMIT 25`; // limiter à 50 si aucun condition passer au params apart la date
+        sql += ` LIMIT 25`;
     } 
   
     db.query(sql, (err, results) => {
@@ -72,10 +72,26 @@ app.get('/projet2022', (req, res) => {
   });
 
   app.get('/nbTravauxTermine',(req,res)=> {
-    let sql = `SELECT COUNT(*) as nbTermine
-    FROM avancement
-    WHERE SITUATION = 'TERMINE'`;
+    // let sql = `SELECT COUNT(*) as nbTermine
+    // FROM avancement
+    // WHERE SITUATION = 'TERMINE'`;
 
+    let sql = `
+    SELECT 
+      l.Annee,
+      COUNT(CASE WHEN a.SITUATION = 'TERMINE' THEN 1 END) as nbTravauxTermine,
+      COUNT(*) as nbTotalTravaux
+    FROM 
+      localisation l
+    JOIN 
+      identification i ON l.id_localisation = i.id_localisation
+    JOIN 
+      avancement a ON i.id_identification = a.id_identification
+    WHERE 
+      l.Annee IS NOT NULL
+    GROUP BY 
+      l.Annee`;
+      
     db.query(sql, (err, results) => {
       if (err) {
         res.status(500).send(err);
@@ -116,7 +132,6 @@ rows.forEach(row => {
   // Vérifier la correspondance entre les noms de colonnes et les noms de colonnes des tables
   if (row.hasOwnProperty('Annee') && row.hasOwnProperty('AXE') && row.hasOwnProperty('Geo_r_f_rencement_D_but') && row.hasOwnProperty('Geo_r_f_rencement_Fin') && row.hasOwnProperty('PK_DEBUT') && row.hasOwnProperty('PK_FIN') && row.hasOwnProperty('REGIONS_CONCERNEES') && row.hasOwnProperty('DISTRICTS') && row.hasOwnProperty('Communes') && row.hasOwnProperty('Population_touch_e') && row.hasOwnProperty('Nbre_d_emploi_cr_e') && row.hasOwnProperty('Localite_debut') && row.hasOwnProperty('Localite_fin') && row.hasOwnProperty('Trafic')) 
   {
-     // Exemple de requête SQL pour insérer des données dans la table1
      const sql1 = `INSERT INTO localisation (Annee,AXE,Geo_r_f_rencement_D_but,Geo_r_f_rencement_Fin,PK_DEBUT,PK_FIN,REGIONS_CONCERNEES,DISTRICTS,Communes,Population_touch_e,Nbre_d_emploi_cr_e,Localite_debut,Localite_fin,Trafic) 
      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
  
@@ -125,10 +140,8 @@ rows.forEach(row => {
        const localisationId = result.insertId;
        console.log('Ligne insérée à la table LOCALISATION :', result);
  
-       // Vérifier si la ligne a des propriétés pour la table identification
        if (row.hasOwnProperty('N_') && row.hasOwnProperty('Programme_LF_') && row.hasOwnProperty('Convention_LF_') && row.hasOwnProperty('Convention_Libell_e_LF_') && row.hasOwnProperty('Directions') && row.hasOwnProperty('ACTIVITES') && row.hasOwnProperty('Natures') && row.hasOwnProperty('Financement') && row.hasOwnProperty('Bailleurs') && row.hasOwnProperty('Co_t_estimatif_Ar_') && row.hasOwnProperty('Responsable_du_Projet') && row.hasOwnProperty('Valeur_Cible_Unit_s_') && row.hasOwnProperty('Indicateur_PEM_PTA') && row.hasOwnProperty('Indicateur_ODD') && row.hasOwnProperty('Indicateur_de_Performance')) 
        {
-         // Exemple de requête SQL pour insérer des données dans la table2
          const sql2 = `INSERT INTO identification (id_localisation, N_, Programme_LF_, Convention_LF_, Convention_Libell_e_LF_, Directions, ACTIVITES, Natures, Financement, Bailleurs, Co_t_estimatif_Ar_, Responsable_du_Projet, Valeur_Cible_Unit_s_, Indicateur_PEM_PTA, Indicateur_ODD, Indicateur_de_Performance) 
          VALUES (? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
@@ -137,10 +150,8 @@ rows.forEach(row => {
            const identificationId = result.insertId;
            console.log('Ligne insérée à la table IDENTIFICATION :', result);
            
-           // Vérifier si la ligne a des propriétés pour la table caracteristique
            if (row.hasOwnProperty('R_f_March_Conv_') && row.hasOwnProperty('D_signations') && row.hasOwnProperty('Co_t_Ar_') && row.hasOwnProperty('Date_PPM') && row.hasOwnProperty('Date_TEF') && row.hasOwnProperty('Montant_engag_') && row.hasOwnProperty('Date_OS') && row.hasOwnProperty('D_lai_d_ex_cution_jours_') && row.hasOwnProperty('Titulaire') && row.hasOwnProperty('Temporel') && row.hasOwnProperty('Financi_re') && row.hasOwnProperty('Date_lancement_AO') && row.hasOwnProperty('Date_Remise_AO') && row.hasOwnProperty('Unit_s')) 
            {
-             // Exemple de requête SQL pour insérer des données dans la table2
              const sql3 = `INSERT INTO caracteristique (id_localisation,id_identification, R_f_March_Conv_, D_signations, Co_t_Ar_, Date_PPM, Date_TEF, Montant_engag_, Date_OS, D_lai_d_ex_cution_jours_, Titulaire, Temporel, Financi_re, Date_lancement_AO, Date_Remise_AO, Unit_s) 
              VALUES (? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     
@@ -150,10 +161,9 @@ rows.forEach(row => {
     
              });
            }
-           // Vérifier si la ligne a des propriétés pour la table avancement
+  
            if (row.hasOwnProperty('Physique') && row.hasOwnProperty('SITUATION') && row.hasOwnProperty('ETAT_D_AVANCEMENT') && row.hasOwnProperty('Observations')) 
            {
-             // Exemple de requête SQL pour insérer des données dans la table2
              const sql4 = `INSERT INTO avancement (id_identification, Physique, SITUATION, ETAT_D_AVANCEMENT, Observations) 
              VALUES (?, ?, ?, ?, ?)`;
     
@@ -163,10 +173,8 @@ rows.forEach(row => {
     
              });
            }
-                    // Vérifier si la ligne a des propriétés pour la table SUIVIDAE
            if (row.hasOwnProperty('Date_envoi_Primature') && row.hasOwnProperty('Date_retour_Primature') && row.hasOwnProperty('Date_envoi_PRM') && row.hasOwnProperty('Date_Retour_PRM')) 
            {
-             // Exemple de requête SQL pour insérer des données dans la table2
              const sql4 = `INSERT INTO suividae (id_identification, Date_envoi_Primature, Date_retour_Primature, Date_envoi_PRM, Date_Retour_PRM) 
              VALUES (?, ?, ?, ?, ?)`;
     
@@ -181,8 +189,6 @@ rows.forEach(row => {
   }
 
  });
- 
- // Envoyer une réponse à l'utilisateur
  res.send('Fichier importé et données insérées dans la base de données !');
  
 });
@@ -191,21 +197,14 @@ rows.forEach(row => {
 
 app.get('/travauxRecents',(req,res) => {
   const sql = `
-  SELECT id_localisation, REGIONS_CONCERNEES, PK_DEBUT, PK_FIN, ACTIVITES, SITUATION, Financement,Co_t_Ar_
-  FROM (
-    (SELECT id_localisation, REGIONS_CONCERNEES, PK_DEBUT, PK_FIN, NULL AS activites, NULL AS financement, NULL AS situation, NULL AS co_t_Ar_ FROM localisation
-    ORDER BY id_localisation DESC LIMIT 7)
-    UNION ALL
-    (SELECT id_identification, NULL AS regions_concernees, NULL AS pk_debut, NULL AS pk_fin, ACTIVITES, Financement, NULL AS situation, NULL AS co_t_Ar_ FROM identification
-    ORDER BY id_identification DESC LIMIT 7)
-    UNION ALL
-    (SELECT id_caracteristique, NULL AS regions_concernees, NULL AS pk_debut, NULL AS pk_fin, NULL AS activites,NULL AS financement, NULL AS situation, Co_t_Ar_ FROM caracteristique
-     ORDER BY id_caracteristique DESC LIMIT 7)
-    UNION ALL
-    (SELECT id_avancement, NULL AS regions_concernees, NULL AS pk_debut, NULL AS pk_fin, NULL AS activites,NULL AS financement, SITUATION, NULL AS co_t_Ar_ FROM avancement
-     ORDER BY id_avancement DESC LIMIT 7)
-  ) AS subquery
-  ORDER BY id_localisation DESC LIMIT 7`;
+  SELECT l.REGIONS_CONCERNEES,l.PK_DEBUT,l.PK_FIN,i.ACTIVITES,i.Financement,a.SITUATION, c.Co_t_Ar_
+    FROM localisation l
+    JOIN identification i ON l.id_localisation = i.id_localisation
+    JOIN caracteristique c ON i.id_localisation = c.id_localisation
+    JOIN avancement a ON c.id_identification = a.id_identification
+    ORDER BY l.id_localisation DESC
+    LIMIT 7
+    `;
  
       db.query(sql, (err, results) => {
         if (err) {

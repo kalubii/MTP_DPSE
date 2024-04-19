@@ -109,15 +109,15 @@ function Orders() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {travauxRecent.map((row,index) => (
+          {travauxRecent.map((travail,index) => (
             <TableRow key={index}>
-              <TableCell>{row.REGIONS_CONCERNEES}</TableCell>
-              <TableCell>{row.PK_DEBUT}</TableCell>
-              <TableCell>{row.PK_FIN}</TableCell>
-              <TableCell>{row.ACTIVITES}</TableCell>
-              <TableCell>{row.Financement}</TableCell>
-              <TableCell>{row.SITUATION}</TableCell>
-              <TableCell align="right">{`${row.Co_t_Ar_}`}</TableCell>
+              <TableCell>{travail.REGIONS_CONCERNEES}</TableCell>
+              <TableCell>{travail.PK_DEBUT}</TableCell>
+              <TableCell>{travail.PK_FIN}</TableCell>
+              <TableCell>{travail.ACTIVITES}</TableCell>
+              <TableCell>{travail.Financement}</TableCell>
+              <TableCell>{travail.SITUATION}</TableCell>
+              <TableCell align="right">{`${travail.Co_t_Ar_}`}</TableCell>
             </TableRow>
           ))}
         </TableBody>
