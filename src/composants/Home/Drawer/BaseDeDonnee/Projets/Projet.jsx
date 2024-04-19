@@ -9,6 +9,7 @@ import VoirPlusPage from '../../../../../pages/VoirPlusPage';
 import Modifier from '../CRUD/Modifier';
 import { Button, TextField } from '@mui/material';
 import VoirPlus from './VoirPlus';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 
 
 const Projet = ({SetShowTableHead,dateSelectedIndex, regionSearch, axeSearch, pkDebutSearch, pkFinSearch}) => {
@@ -127,7 +128,7 @@ const Projet = ({SetShowTableHead,dateSelectedIndex, regionSearch, axeSearch, pk
                         />
                       </TableCell>
                       <TableCell>
-                        <Button variant="text" onClick={() => handleClickOpen(projet.id_avancement)}>
+                        <Button startIcon={<VisibilityOutlinedIcon/>} variant="text" onClick={() => handleClickOpen(projet.id_avancement)} disabled={!(loading===false)}>
                         {loading?(
                           <span>Chargement...</span>
                         ):(<span>Detail</span>)}
