@@ -71,7 +71,7 @@ function VoirPlus({open, setOpen,resetId,data}) {
         </AppBar>
         
         <div ref={componentPDF} style={{width:'100%'}}>
-          <table className='table table-bordered' style={{width:'min-content'}}>
+          <table className='table table-bordered' style={{width:'min-content', margin:'auto',justifyContent:'center'}}>
               <thead className='thead-light'>
                 <tr>
                   <th>REGIONS_CONCERNEES</th>
