@@ -102,6 +102,25 @@ app.get('/projet2022', (req, res) => {
     });
   })
 
+  app.get('/travauxTermine',(req,res)=>{
+    let sql = `
+    SELECT l.REGIONS_CONCERNEES, l.Annee, COUNT(*) as nbTravauxTermine
+    FROM localisation l
+    JOIN identification i ON l.id_localisation = i.id_localisation
+    JOIN avancement a ON i.id_identification = a.id_identification
+    WHERE a.SITUATION = 'TERMINE'
+    GROUP BY l.REGIONS_CONCERNEES
+  `;
+
+    db.query(sql, (err, results) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        // console.log(results)
+        res.json(results);
+      }
+    });
+  })
 
 // Configuration de Multer pour gérer les fichiers uploadés
 const upload = multer({ dest: 'uploads/' });

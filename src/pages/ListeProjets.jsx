@@ -8,15 +8,17 @@ import { Box, MenuItem, TextField } from '@mui/material';
 import SearchBar from '../composants/Home/Drawer/BaseDeDonnee/SearchBar';
 import Projet from '../composants/Home/Drawer/BaseDeDonnee/Projets/Projet';
 import VoirPlusPage from './VoirPlusPage';
+import Carte from '../composants/Map/Carte';
 
 
-const ListeProjets = () => {
+const ListeProjets = ({regionName,anneeTravaux}) => {
     const [dateSelectedIndex, setDateSelectedIndex] = useState("2024");
     const [regionSearch,setRegionSearch] = useState('')
     const [axeSearch,setAxeSearch] = useState('')
     const [pkDebutSearch,setpkDebutSearch] = useState('')
     const [pkFinSearch,setpkFinSearch] = useState('')
     const [showTableHead,setShowTableHead] = useState(true)
+    const [alaotraMangoroClicked,setAlaotraMangoroClicked] = useState(false)
 
     const onDateClicked = (index) => {
         setDateSelectedIndex(index);
@@ -47,13 +49,17 @@ const ListeProjets = () => {
 
   return (<>
 
+    <Carte setDateSelectedIndex={setDateSelectedIndex} setAlaotraMangoroClicked={setAlaotraMangoroClicked} setRegionSearch={setRegionSearch}/>
+  
+  {alaotraMangoroClicked?
+  <Box>
     <Box sx={{marginBottom:4}}>
         <Box sx={{display:'flex',justifyContent:'center',margin:'auto'}}>
             <TextField
             id="standard-select-currency"
             select
             label="Année"
-            defaultValue="2024"
+            // defaultValue="2024"
               variant="standard"
             >
               {annees.map((option,index) => (
@@ -111,7 +117,9 @@ const ListeProjets = () => {
                           axeSearch={axeSearch} 
                           pkFinSearch={pkFinSearch} 
                           pkDebutSearch={pkDebutSearch} />
-                          </Box></>}
+            </Box></>}
+
+  </Box>:null}
         </>
   )
 }
