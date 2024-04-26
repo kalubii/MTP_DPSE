@@ -5,7 +5,7 @@ import betsiboka from '../../assets/imgMap/betsiboka.png'
 import axios from 'axios'
 
 
-const Betsiboka = ({setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
+const Betsiboka = ({setShowCarte,setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])

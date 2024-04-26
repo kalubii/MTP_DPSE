@@ -5,7 +5,7 @@ import atsimoAndrefana from '../../assets/imgMap/atsimo_andrefana.png'
 import axios from 'axios'
 
 
-const AtsimoAndrefana = ({setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
+const AtsimoAndrefana = ({setShowCarte,setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])

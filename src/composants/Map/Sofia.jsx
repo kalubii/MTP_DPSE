@@ -5,7 +5,7 @@ import sofia from '../../assets/imgMap/sofia.png'
 import axios from 'axios'
 
 
-const Sofia = ({setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
+const Sofia = ({setShowCarte,setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])

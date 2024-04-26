@@ -5,7 +5,7 @@ import vakinankaratra from '../../assets/imgMap/vakinankaratra.png'
 import axios from 'axios'
 
 
-const Vakinankaratra = ({setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
+const Vakinankaratra = ({setShowCarte,setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])

@@ -5,7 +5,7 @@ import hauteMatsiatra from '../../assets/imgMap/haute_matsiatra.png'
 import axios from 'axios'
 
 
-const HauteMatsiatra = ({setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
+const HauteMatsiatra = ({setShowCarte,setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])

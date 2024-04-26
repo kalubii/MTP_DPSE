@@ -7,28 +7,28 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 
 const Listes = () => {
 
-  const [viewLocalite,setViewLocalite] = useState(true)
+  const [Map,setMap] = useState(true)
   const [viewProjet,setViewProjet] = useState(false)
 
-  const onLocalite = () =>{
-    setViewLocalite(true)
+  const onMap = () =>{
+    setMap(true)
     setViewProjet(false)
   }
   const onProjet = () =>{
-    setViewLocalite(false)
+    setMap(false)
     setViewProjet(true)
   }
 
 
   return (<>
     <Box sx={{ marginY:4}}>
-        <Button startIcon={<LocationOnOutlinedIcon/>} onClick={onLocalite}>Voir liste Localités</Button>
-        <Button startIcon={<ListAltIcon/>} onClick={onProjet}>Voir liste des projets</Button>
+        {/* <Button startIcon={<LocationOnOutlinedIcon/>} onClick={onMap}>Carte</Button> */}
+        {/* <Button startIcon={<ListAltIcon/>} onClick={onProjet}>projets</Button> */}
     </Box>
 
 
         <Box sx={{ marginTop:3}}>
-            {viewLocalite && <ListeLocalite/>}
+            {Map && <ListeLocalite/>}
             {viewProjet && <ListeProjets/>}
         </Box>
   

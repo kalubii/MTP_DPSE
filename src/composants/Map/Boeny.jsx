@@ -5,7 +5,7 @@ import boeny from '../../assets/imgMap/Boeny.png'
 import axios from 'axios'
 
 
-const Boeny = ({setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
+const Boeny = ({setShowCarte,setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])

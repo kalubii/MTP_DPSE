@@ -5,7 +5,7 @@ import itasy from '../../assets/imgMap/itasy.png'
 import axios from 'axios'
 
 
-const Itasy = ({setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
+const Itasy = ({setShowCarte,setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])

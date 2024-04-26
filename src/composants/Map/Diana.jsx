@@ -5,7 +5,7 @@ import diana from '../../assets/imgMap/diana.png'
 import axios from 'axios'
 
 
-const Diana = ({setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
+const Diana = ({setShowCarte,setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])

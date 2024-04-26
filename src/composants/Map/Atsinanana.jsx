@@ -5,7 +5,7 @@ import atsinanana from '../../assets/imgMap/atsinanana.png'
 import axios from 'axios'
 
 
-const Atsinanana = ({setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
+const Atsinanana = ({setShowCarte,setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])

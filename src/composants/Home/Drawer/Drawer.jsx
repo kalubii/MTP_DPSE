@@ -18,6 +18,11 @@ import { useTheme } from '@mui/material/styles';
 import Dashboard from './Dashboard/Dashboard';
 import Title from './Dashboard/Title';
 import Formulaire from './Formulaire_insertion/Formulaire';
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import ListeLocalite from '../../../pages/ListeLocalites';
+import ListeProjets from '../../../pages/ListeProjets';
+import ShareLocationOutlinedIcon from '@mui/icons-material/ShareLocationOutlined';
+import LocationSearchingOutlinedIcon from '@mui/icons-material/LocationSearchingOutlined';
 
 export default function TemporaryDrawer() {
   const [open, setOpen] = React.useState(false);
@@ -50,13 +55,13 @@ const DrawerList = (
         </Box>
 
     <List >
-      {['Tableau de Bord', 'Formulaire d`ajout ', 'Viabilité des Routes'].map((text, index) => (
+      {['Tableau de Bord', 'Formulaire d`ajout ', 'Viabilité des Routes','Liste Localité'].map((text, index) => (
         <ListItem key={text} disablePadding onClick={function () {
           return onItemClicked(index);
         }}> 
           <ListItemButton>
             <ListItemIcon >
-              {index === 0 ? <Timeline/> : index === 1 ? <NoteAddOutlined/> : index === 2 ? <DirectionsCar /> : null }
+              {index === 0 ? <Timeline/> : index === 1 ? <NoteAddOutlined/> : index === 2 ? <ShareLocationOutlinedIcon /> : index === 3 ? <LocationSearchingOutlinedIcon /> : null }
             </ListItemIcon>
             <ListItemText primary={text} />
           </ListItemButton>
@@ -91,7 +96,8 @@ return (
     <div className='container'>
       {selectedIndex === 0 && <><Title> <Timeline fontSize='large' sx={{marginRight:1, [theme.breakpoints.down('md')]:{fontSize:"1.7rem"}}}/>Tableau de Bord</Title> <Dashboard/></>}
       {selectedIndex === 1 && <><Title> <NoteAddOutlined fontSize='large' sx={{marginRight:1, [theme.breakpoints.down('md')]:{fontSize:"1.7rem"}}}/>Formulaire de saisie</Title> <Formulaire/></>}
-      {selectedIndex === 2 && <><Title> <ListAlt fontSize='large' sx={{marginRight:1, [theme.breakpoints.down('md')]:{fontSize:"1.7rem"}}}/>Viabilité des Routes</Title> <Listes/></>}
+      {selectedIndex === 2 && <><Title> <ShareLocationOutlinedIcon fontSize='large' sx={{marginRight:1, [theme.breakpoints.down('md')]:{fontSize:"1.7rem"}}}/>Viabilité des Routes</Title> <ListeProjets/></>}
+      {selectedIndex === 3 && <><Title> <LocationSearchingOutlinedIcon fontSize='large' sx={{marginRight:1, [theme.breakpoints.down('md')]:{fontSize:"1.7rem"}}}/>Liste Localité</Title> <ListeLocalite/></>}
     </div>
     
  </div>

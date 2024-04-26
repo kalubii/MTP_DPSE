@@ -5,7 +5,7 @@ import melaky from '../../assets/imgMap/melaky.png'
 import axios from 'axios'
 
 
-const Melaky = ({setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
+const Melaky = ({setShowCarte,setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])

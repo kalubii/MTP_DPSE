@@ -5,7 +5,7 @@ import analamanga from '../../assets/imgMap/analamanga.png'
 import axios from 'axios'
 
 
-const Analamanga = ({setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
+const Analamanga = ({setShowCarte,setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])
@@ -18,6 +18,7 @@ const Analamanga = ({setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSear
     anneeTravaux = annee
     setDateSelectedIndex(anneeTravaux)
     setRegionSearch(regionName)
+    setShowCarte(false)
     setAlaotraMangoroClicked(true)
     console.log(regionName,anneeTravaux)
   }

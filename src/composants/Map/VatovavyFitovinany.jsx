@@ -5,7 +5,7 @@ import fitovinany from '../../assets/imgMap/vatovavy_fitovinany.png'
 import axios from 'axios'
 
 
-const VatovavyFitovinany = ({setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
+const VatovavyFitovinany = ({setShowCarte,setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])

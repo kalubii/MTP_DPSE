@@ -5,7 +5,7 @@ import androy from '../../assets/imgMap/androy.png'
 import axios from 'axios'
 
 
-const Androy = ({setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
+const Androy = ({setShowCarte,setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])

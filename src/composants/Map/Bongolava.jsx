@@ -5,7 +5,7 @@ import bongolava from '../../assets/imgMap/bongolava.png'
 import axios from 'axios'
 
 
-const Bongolava = ({setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
+const Bongolava = ({setShowCarte,setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])

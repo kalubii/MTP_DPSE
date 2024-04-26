@@ -5,7 +5,7 @@ import sava from '../../assets/imgMap/sava.png'
 import axios from 'axios'
 
 
-const Sava = ({setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
+const Sava = ({setShowCarte,setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])

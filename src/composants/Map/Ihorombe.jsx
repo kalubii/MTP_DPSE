@@ -5,7 +5,7 @@ import ihorombe from '../../assets/imgMap/ihorombe.png'
 import axios from 'axios'
 
 
-const Ihorombe = ({setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
+const Ihorombe = ({setShowCarte,setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])

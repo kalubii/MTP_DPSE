@@ -11,7 +11,7 @@ import VoirPlusPage from '../src/pages/VoirPlusPage'
 import Carte from '../src/composants/Map/Carte'
 import googleMapReact from '../src/pages/SimpleMap'
 import SimpleMap from '../src/pages/SimpleMap'
-
+import MapGoogle from '../src/pages/MapGoogle'
 function App() {
 
   return (
@@ -26,6 +26,7 @@ function App() {
             <Route path="/listeProjet" element={<ListeProjets />} />
             <Route path="/map" element={<Carte />} />
             <Route path="/simpleMap" element={<SimpleMap />} />
+            <Route path="/mapGoogle" element={<MapGoogle />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>

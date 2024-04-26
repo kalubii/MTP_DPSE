@@ -5,7 +5,7 @@ import analanjirofo from '../../assets/imgMap/analanjirofo.png'
 import axios from 'axios'
 
 
-const Analanjirofo = ({setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
+const Analanjirofo = ({setShowCarte,setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])

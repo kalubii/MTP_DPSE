@@ -5,7 +5,7 @@ import { useState } from 'react'
 import amoronIMania from '../../assets/imgMap/amoron_i_mania.png'
 
 
-const AmoronIMania = ({setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
+const AmoronIMania = ({setShowCarte,setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])
