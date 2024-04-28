@@ -21,6 +21,7 @@ const ListeProjets = ({regionName,anneeTravaux}) => {
     const [pkFinSearch,setpkFinSearch] = useState('')
     const [showTableHead,setShowTableHead] = useState(true)
     const [showCarte, setShowCarte] = useState(true)
+    const [showProjet,setShowProjet] = useState(false)
 
     const [alaotraMangoroClicked,setAlaotraMangoroClicked] = useState(false)
     const [amoronIManiaClicked,setAmoronIManiaClicked] = useState(false)
@@ -28,6 +29,7 @@ const ListeProjets = ({regionName,anneeTravaux}) => {
     const [analanjirofoClicked,setAnalanjirofoClicked] = useState(false)
     const [androyClicked,setAndroyClicked] = useState(false)
     const [anosyClicked,setAnosyClicked] = useState(false)
+    const [atsimoAtsinananaClicked,setAtsimoAtsinananaClicked] = useState(false)
     const [atsimoAndrefanaClicked,setAtsimoAndrefanaClicked] = useState(false)
     const [atsinananaClicked,setAtsinananaClicked] = useState(false)
     const [betsibokaClicked,setBetsibokaClicked] = useState(false)
@@ -56,6 +58,7 @@ const ListeProjets = ({regionName,anneeTravaux}) => {
       setAnalanjirofoClicked(false)
       setAndroyClicked(false)
       setAnosyClicked(false)
+      setAtsimoAtsinananaClicked(false)
       setAtsimoAndrefanaClicked(false)
       setAtsinananaClicked(false)
       setBetsibokaClicked(false)
@@ -103,11 +106,35 @@ const ListeProjets = ({regionName,anneeTravaux}) => {
   {showCarte?<Carte
       showCarte={showCarte}
       setShowCarte={setShowCarte}
-      setDateSelectedIndex={setDateSelectedIndex} 
+      showProjet={showProjet}
+      setShowProjet={setShowProjet}
+      setAtsimoAtsinananaClicked={setAtsimoAtsinananaClicked}
+      setDateSelectedIndex={setDateSelectedIndex}
+      setAmoronIManiaClicked={setAmoronIManiaClicked}
+      setAnalanjirofoClicked={setAnalanjirofoClicked}
+      setAnalamangaClicked={setAnalamangaClicked} 
+      setAndroyClicked={setAndroyClicked}
+      setAnosyClicked={setAnosyClicked}
       setAlaotraMangoroClicked={setAlaotraMangoroClicked} 
+      alaotraMangoroClicked={alaotraMangoroClicked}
+      setAtsimoAndrefanaClicked={setAtsimoAndrefanaClicked}
+      setAtsinananaClicked={setAtsinananaClicked}
+      setBetsibokaClicked={setBetsibokaClicked}
+      setBoenyClicked={setBoenyClicked}
+      setBongolavaClicked={setBongolavaClicked}
+      setDianaClicked={setDianaClicked}
+      setHauteMatsiatraClicked={setHauteMatsiatraClicked}
+      setIhorombeClicked={setIhorombeClicked}
+      setItasyClicked={setItasyClicked}
+      setMelakyClicked={setMelakyClicked}
+      setMenabeClicked={setMenabeClicked}
+      setSavaClicked={setSavaClicked}
+      setSofiaClicked={setSofiaClicked}
+      setVakinankaratraClicked={setVakinankaratraClicked}
+      setVatovavyFitovinanyClicked={setVatovavyFitovinanyClicked}
       setRegionSearch={setRegionSearch}/>:null}
   
-  {alaotraMangoroClicked?
+  {alaotraMangoroClicked ||amoronIManiaClicked ||analamangaClicked ||atsimoAtsinananaClicked|| analanjirofoClicked ||androyClicked ||anosyClicked ||atsimoAndrefanaClicked ||atsinananaClicked ||betsibokaClicked ||boenyClicked || bongolavaClicked||dianaClicked ||hauteMatsiatraClicked ||ihorombeClicked ||itasyClicked ||melakyClicked ||MenabeClicked ||savaClicked ||sofiaClicked ||vakinankaratraClicked ||vatovavyFitovinanyClicked ?
     <Box>
           <AlaotraMangoro/>
             <Box sx={{marginBottom:4}}>

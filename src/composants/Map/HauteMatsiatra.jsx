@@ -3,22 +3,34 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import hauteMatsiatra from '../../assets/imgMap/haute_matsiatra.png'
 import axios from 'axios'
+import { MapContainer, TileLayer, Polygon, Tooltip } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 
 
-const HauteMatsiatra = ({setShowCarte,setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
+const HauteMatsiatra = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedIndex,setRegionSearch,setAlaotraMangoroClicked,setAmoronIManiaClicked,setAnalanjirofoClicked,setAnalamangaClicked,setAndroyClicked,setAnosyClicked,setAtsimoAndrefanaClicked,setAtsinananaClicked,setBetsibokaClicked,setBoenyClicked,setBongolavaClicked,setDianaClicked,setHauteMatsiatraClicked,setIhorombeClicked,setItasyClicked,setMelakyClicked,setMenabeClicked,setSavaClicked,setSofiaClicked,setVakinankaratraClicked,setVatovavyFitovinanyClicked}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])
   const [annee,setAnnee] =useState([])
 
+  const matsiatraambonyCoordinates = [
+    [-21.9000, 46.0000], // Point supérieur
+    [-21.9000, 47.0000], // Point droit
+    [-21.0000, 47.0000], // Point inférieur
+    [-21.0000, 46.0000]  // Point gauche
+];
+
   let regionName, anneeTravaux
   
   const handleClick = () => {
+    console.log("Alaotra Mangoro Cliquer!")
     regionName = region
     anneeTravaux = annee
+    setShowMapGoogle(false)
     setDateSelectedIndex(anneeTravaux)
     setRegionSearch(regionName)
-    setAlaotraMangoroClicked(true)
+    setShowCarte(false)
+    setHauteMatsiatraClicked(true)
     console.log(regionName,anneeTravaux)
   }
 
@@ -40,13 +52,27 @@ const HauteMatsiatra = ({setShowCarte,setDateSelectedIndex,setAlaotraMangoroClic
   console.log(region,nbTravaux)
 
   return (<>
-    <div style={{border:'solid 1px',width:'fit-content'}}
-    title={`REGION: ${region}\nTRAVAUX TERMINE: ${nbTravaux}`}
-    >
-      <img src={hauteMatsiatra} onClick={handleClick}/>
-    </div>
-    </>
-    )
+
+    {showCarte?
+         <Polygon positions={matsiatraambonyCoordinates} pathOptions={{ color: 'transparent' }} 
+               eventHandlers={{
+                 click: (event) => {
+                        handleClick();
+                 }
+              }}
+           >
+                 <Tooltip>
+                   {`REGION: ${region}`}<br/>
+                   {`TRAVAUX TERMINE: ${nbTravaux}`}
+                 </Tooltip>
+           </Polygon> : <div style={{border:'solid 1px',width:'fit-content'}}
+         title={`REGION: ${region}\nTRAVAUX TERMINE: ${nbTravaux}`}
+         >
+           <img src={hauteMatsiatra} onClick={handleClick}/>
+         </div> }
+           
+     </>
+   )
 }
 
 export default HauteMatsiatra

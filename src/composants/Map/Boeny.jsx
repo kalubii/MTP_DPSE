@@ -3,24 +3,35 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import boeny from '../../assets/imgMap/Boeny.png'
 import axios from 'axios'
+import { MapContainer, TileLayer, Polygon, Tooltip } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 
 
-const Boeny = ({setShowCarte,setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
+const Boeny = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedIndex,setRegionSearch,setAlaotraMangoroClicked,setAmoronIManiaClicked,setAnalanjirofoClicked,setAnalamangaClicked,setAndroyClicked,setAnosyClicked,setAtsimoAndrefanaClicked,setAtsinananaClicked,setBetsibokaClicked,setBoenyClicked,setBongolavaClicked,setDianaClicked,setHauteMatsiatraClicked,setIhorombeClicked,setItasyClicked,setMelakyClicked,setMenabeClicked,setSavaClicked,setSofiaClicked,setVakinankaratraClicked,setVatovavyFitovinanyClicked}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])
   const [annee,setAnnee] =useState([])
 
+  const boenyCoordinates = [
+    [-17.1000, 45.5000], // Point supérieur
+    [-17.0000, 46.6000], // Point droit
+    [-15.7000, 47.0000], // Point inférieur
+    [-16.0000, 44.5000]  // Point gauche
+];
   let regionName, anneeTravaux
   
-  // const handleClick = () => {
-  //   regionName = region
-  //   anneeTravaux = annee
-  //   setDateSelectedIndex(anneeTravaux)
-  //   setRegionSearch(regionName)
-  //   setAlaotraMangoroClicked(true)
-  //   console.log(regionName,anneeTravaux)
-  // }
+  const handleClick = () => {
+    console.log("Alaotra Mangoro Cliquer!")
+    regionName = region
+    anneeTravaux = annee
+    setShowMapGoogle(false)
+    setDateSelectedIndex(anneeTravaux)
+    setRegionSearch(regionName)
+    setShowCarte(false)
+    setBoenyClicked(true)
+    console.log(regionName,anneeTravaux)
+  }
 
   // useEffect(() => {
   //     const fetchSearchResults = async () => {
@@ -40,14 +51,27 @@ const Boeny = ({setShowCarte,setDateSelectedIndex,setAlaotraMangoroClicked,setRe
   // console.log(region,nbTravaux)
 
   return (<>
-    {/* <div style={{border:'solid 1px',width:'fit-content'}}
-    title={`REGION: ${region}\nTRAVAUX TERMINE: ${nbTravaux}`}
-    > */}
-    <div >
-      <img src={boeny}/>
-    </div>
-    </>
-    )
+
+    {showCarte?
+         <Polygon positions={boenyCoordinates} pathOptions={{ color: 'transparent' }} 
+               eventHandlers={{
+                 click: (event) => {
+                        handleClick();
+                 }
+              }}
+           >
+                 <Tooltip>
+                   {`REGION: ${region}`}<br/>
+                   {`TRAVAUX TERMINE: ${nbTravaux}`}
+                 </Tooltip>
+           </Polygon> : <div style={{border:'solid 1px',width:'fit-content'}}
+         title={`REGION: ${region}\nTRAVAUX TERMINE: ${nbTravaux}`}
+         >
+           <img src={boeny} onClick={handleClick}/>
+         </div> }
+           
+     </>
+   )
 }
 
 

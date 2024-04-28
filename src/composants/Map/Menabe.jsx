@@ -3,24 +3,37 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import menabe from '../../assets/imgMap/menabe.png'
 import axios from 'axios'
+import { MapContainer, TileLayer, Polygon, Tooltip } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 
 
-const Menabe = ({setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
+const Menabe = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedIndex,setRegionSearch,setAlaotraMangoroClicked,setAmoronIManiaClicked,setAnalanjirofoClicked,setAnalamangaClicked,setAndroyClicked,setAnosyClicked,setAtsimoAndrefanaClicked,setAtsinananaClicked,setBetsibokaClicked,setBoenyClicked,setBongolavaClicked,setDianaClicked,setHauteMatsiatraClicked,setIhorombeClicked,setItasyClicked,setMelakyClicked,setMenabeClicked,setSavaClicked,setSofiaClicked,setVakinankaratraClicked,setVatovavyFitovinanyClicked}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])
   const [annee,setAnnee] =useState([])
 
+  const menabeCoordinates = [
+    [-20.9000, 44.5000], // Point supérieur
+    [-20.9000, 45.7000], // Point droit
+    [-19.3000, 45.7000], // Point inférieur
+    [-19.3000, 44.5000]  // Point gauche
+  ];
+
+
   let regionName, anneeTravaux
   
-  // const handleClick = () => {
-  //   regionName = region
-  //   anneeTravaux = annee
-  //   setDateSelectedIndex(anneeTravaux)
-  //   setRegionSearch(regionName)
-  //   setAlaotraMangoroClicked(true)
-  //   console.log(regionName,anneeTravaux)
-  // }
+  const handleClick = () => {
+    console.log("Alaotra Mangoro Cliquer!")
+    regionName = region
+    anneeTravaux = annee
+    setShowMapGoogle(false)
+    setDateSelectedIndex(anneeTravaux)
+    setRegionSearch(regionName)
+    setShowCarte(false)
+    setMenabeClicked(true)
+    console.log(regionName,anneeTravaux)
+  }
 
   // useEffect(() => {
   //     const fetchSearchResults = async () => {
@@ -40,14 +53,27 @@ const Menabe = ({setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch})
   // console.log(region,nbTravaux)
 
   return (<>
-    {/* <div style={{border:'solid 1px',width:'fit-content'}}
-    title={`REGION: ${region}\nTRAVAUX TERMINE: ${nbTravaux}`}
-    > */}
-    <div >
-      <img src={menabe}/>
-    </div>
-    </>
-    )
+
+    {showCarte?
+         <Polygon positions={menabeCoordinates} pathOptions={{ color: 'transparent' }} 
+               eventHandlers={{
+                 click: (event) => {
+                        // handleClick();
+                 }
+              }}
+           >
+                 <Tooltip>
+                   {`REGION: ${region}`}<br/>
+                   {`TRAVAUX TERMINE: ${nbTravaux}`}
+                 </Tooltip>
+           </Polygon> : <div style={{border:'solid 1px',width:'fit-content'}}
+         title={`REGION: ${region}\nTRAVAUX TERMINE: ${nbTravaux}`}
+         >
+           <img src={menabe} onClick={handleClick}/>
+         </div> }
+           
+     </>
+   )
 }
 
 export default Menabe

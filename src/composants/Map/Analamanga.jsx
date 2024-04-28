@@ -3,23 +3,34 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import analamanga from '../../assets/imgMap/analamanga.png'
 import axios from 'axios'
+import { MapContainer, TileLayer, Polygon, Tooltip } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 
 
-const Analamanga = ({setShowCarte,setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
+const Analamanga = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedIndex,setRegionSearch,setAlaotraMangoroClicked,setAmoronIManiaClicked,setAnalanjirofoClicked,setAnalamangaClicked,setAndroyClicked,setAnosyClicked,setAtsimoAndrefanaClicked,setAtsinananaClicked,setBetsibokaClicked,setBoenyClicked,setBongolavaClicked,setDianaClicked,setHauteMatsiatraClicked,setIhorombeClicked,setItasyClicked,setMelakyClicked,setMenabeClicked,setSavaClicked,setSofiaClicked,setVakinankaratraClicked,setVatovavyFitovinanyClicked}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])
   const [annee,setAnnee] =useState([])
 
+  const analamangaCoordinates = [
+    [-17.9100, 47.2000],
+    [-18.6000, 47.2000],
+    [-18.8000, 47.4000],
+    [-18.9000, 47.9100],
+    [-18.8000, 47.9000]
+];
   let regionName, anneeTravaux
   
   const handleClick = () => {
+    console.log("Alaotra Mangoro Cliquer!")
     regionName = region
     anneeTravaux = annee
+    setShowMapGoogle(false)
     setDateSelectedIndex(anneeTravaux)
     setRegionSearch(regionName)
     setShowCarte(false)
-    setAlaotraMangoroClicked(true)
+    setAnalamangaClicked(true)
     console.log(regionName,anneeTravaux)
   }
 
@@ -41,13 +52,27 @@ const Analamanga = ({setShowCarte,setDateSelectedIndex,setAlaotraMangoroClicked,
   console.log(region,nbTravaux)
 
   return (<>
-    <div style={{border:'solid 1px',width:'fit-content'}}
-    title={`REGION: ${region}\nTRAVAUX TERMINE: ${nbTravaux}`}
-    >
-      <img src={analamanga} onClick={handleClick}/>
-    </div>
-    </>
-    )
+
+    {showCarte?
+         <Polygon positions={analamangaCoordinates} pathOptions={{ color: 'transparent' }} 
+               eventHandlers={{
+                 click: (event) => {
+                        handleClick();
+                 }
+              }}
+           >
+                 <Tooltip>
+                   {`REGION: ${region}`}<br/>
+                   {`TRAVAUX TERMINE: ${nbTravaux}`}
+                 </Tooltip>
+           </Polygon> : <div style={{border:'solid 1px',width:'fit-content'}}
+         title={`REGION: ${region}\nTRAVAUX TERMINE: ${nbTravaux}`}
+         >
+           <img src={analamanga} onClick={handleClick}/>
+         </div> }
+           
+     </>
+   )
 }
 
 export default Analamanga

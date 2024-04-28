@@ -6,7 +6,7 @@ import alaotraMangoro from '../../assets/imgMap/alaotra-mangoro.png'
 import { MapContainer, TileLayer, Polygon, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
-const AlaotraMangoro = ({showCarte,showMapGoogle,setShowMapGoogle,setShowCarte,setDateSelectedIndex,setAlaotraMangoroClicked,setRegionSearch}) => {
+const AlaotraMangoro = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedIndex,setRegionSearch,setAlaotraMangoroClicked,setAmoronIManiaClicked,setAnalanjirofoClicked,setAnalamangaClicked,setAndroyClicked,setAnosyClicked,setAtsimoAndrefanaClicked,setAtsinananaClicked,setBetsibokaClicked,setBoenyClicked,setBongolavaClicked,setDianaClicked,setHauteMatsiatraClicked,setIhorombeClicked,setItasyClicked,setMelakyClicked,setMenabeClicked,setSavaClicked,setSofiaClicked,setVakinankaratraClicked,setVatovavyFitovinanyClicked}) => {
 
     const [region,setRegion] = useState([])
     const [nbTravaux,setNbTravaux] = useState([])
@@ -64,13 +64,12 @@ const AlaotraMangoro = ({showCarte,showMapGoogle,setShowMapGoogle,setShowCarte,s
                   {`REGION: ${region}`}<br/>
                   {`TRAVAUX TERMINE: ${nbTravaux}`}
                 </Tooltip>
-          </Polygon> :null  }
-          
-    { <div style={{border:'solid 1px',width:'fit-content'}}
+          </Polygon> : null }
+          {/* <div style={{border:'solid 1px',width:'fit-content'}}
         title={`REGION: ${region}\nTRAVAUX TERMINE: ${nbTravaux}`}
         >
           <img src={alaotraMangoro} onClick={handleClick}/>
-        </div>}
+        </div> */}
     </>
   )
 }
