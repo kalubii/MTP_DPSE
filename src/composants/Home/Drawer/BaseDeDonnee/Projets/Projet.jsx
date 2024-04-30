@@ -61,6 +61,13 @@ boenyClicked,
       setEditingIndex(index === editingIndex ? null : index);
     };
 
+    const handleUp = (e) => {
+      if(e.key == "Enter"){
+        console.log('ENTRER')
+      }
+      
+  }
+
     console.log(dateSelectedIndex)
     console.log(regionSearch)
     console.log(voirPlusClicked)
@@ -120,7 +127,7 @@ boenyClicked,
                    <TableCell>{projet.PK_DEBUT}</TableCell>
                    <TableCell>{projet.PK_FIN}</TableCell>
                    <TableCell>
-                      <TextField onChange={(e) => handleChangeAvancement(e, projet.id_avancement)} value={etatAvancement.ID === projet.id_avancement ? etatAvancement.ETAT_D_AVANCEMENT : projet.ETAT_D_AVANCEMENT} />
+                      <TextField onKeyUp={handleUp} onChange={(e) => handleChangeAvancement(e, projet.id_avancement)} value={etatAvancement.ID === projet.id_avancement ? etatAvancement.ETAT_D_AVANCEMENT : projet.ETAT_D_AVANCEMENT} />
                    </TableCell>
                    <TableCell>
                       <Modifier
