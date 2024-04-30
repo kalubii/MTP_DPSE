@@ -3,6 +3,7 @@ import { Box, TableCell, TableRow,TextField } from '@mui/material';
 import Modifier from '../CRUD/Modifier';
 import axios from 'axios';
 import Loading from '../../../../../composants/Loading'
+import PaginationOutlined from './Pagination';
 
 const Liste_RN = ({faritanySelectedIndex, regionSearch, axeSearch, pkDebutSearch, pkFinSearch}) => {
 
@@ -76,6 +77,7 @@ const Liste_RN = ({faritanySelectedIndex, regionSearch, axeSearch, pkDebutSearch
         <TableRow><TableCell>{loading?<Loading/> : <TableCell colSpan="11">Aucun résultat trouvé</TableCell>}</TableCell></TableRow>
         
     )}
+            <PaginationOutlined/>
         </>
     );
 };

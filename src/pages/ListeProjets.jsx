@@ -68,6 +68,94 @@ const ListeProjets = ({regionName,anneeTravaux}) => {
     const [vakinankaratraClicked,setVakinankaratraClicked] = useState(false)
     const [vatovavyFitovinanyClicked,setVatovavyFitovinanyClicked] = useState(false)
 
+    const handleDianaClick = () =>{
+      setDianaClicked(true)
+    }
+
+    const handleAmoronIManiaClick = () =>{
+      setAmoronIManiaClicked(true)
+    }
+
+    const handleAlaotraMangoroClick = () =>{
+      setAlaotraMangoroClicked(true)
+    }
+
+    const handleAnalamangaClick = () =>{
+      setAnalamangaClicked(true)
+    }
+
+    const handleAnalanjirofoClick = () =>{
+      setAnalanjirofoClicked(true)
+    }
+
+    const handleAndroyClick = () =>{
+      setAndroyClicked(true)
+    }
+
+    const handleAnosyClick = () =>{
+      setAnosyClicked(true)
+    }
+
+    const handleAtsimoAtsinananaClick = () =>{
+      setAtsimoAtsinananaClicked(true)
+    }
+
+    const handleAtsimoAndrefanaClick = () =>{
+      setAtsimoAndrefanaClicked(true)
+    }
+
+    const handleAtsinananaClick = () =>{
+      setAtsinananaClicked(true)
+    }
+
+    const handleBetsibokaClick = () =>{
+      setBetsibokaClicked(true)
+    }
+
+    const handleBoenyClick = () =>{
+      setBoenyClicked(true)
+    }
+
+    const handleBongolavaClick = () =>{
+      setBongolavaClicked(true)
+    }
+
+    const handleHauteMatsiatraClick = () =>{
+      setHauteMatsiatraClicked(true)
+    }
+
+    const handleIhorombeClick = () =>{
+      setIhorombeClicked(true)
+    }
+
+    const handleItasyClick = () =>{
+      setItasyClicked(true)
+    }
+
+    const handleMelakyClick = () =>{
+      setMelakyClicked(true)
+    }
+
+    const handleMenabeClick = () =>{
+      setMenabeClicked(true)
+    }
+
+    const handleSavaClick = () =>{
+      setSavaClicked(true)
+    }
+
+    const handleSofiaClick = () =>{
+      setSofiaClicked(true)
+    }
+
+    const handleVakinankaratraClick = () =>{
+      setVakinankaratraClicked(true)
+    }
+
+    const handleVatovavyFitovinanyClick = () =>{
+      setVatovavyFitovinanyClicked(true)
+    }
+
     const onDateClicked = (index) => {
         setDateSelectedIndex(index);
     };
@@ -126,6 +214,28 @@ const ListeProjets = ({regionName,anneeTravaux}) => {
   <Button startIcon={<LocationOnOutlinedIcon/>} sx={{marginY:3}} onClick={onCarte}> afficher la Carte</Button>
 
   {showCarte?<Carte
+      handleDianaClick={()=>{handleDianaClick}}
+      handleAmoronIManiaClick={()=>{handleAmoronIManiaClick}}
+      handleAlaotraMangoroClick={()=>{handleAlaotraMangoroClick}}
+      handleAnalamangaClick={()=>{handleAnalamangaClick}}
+      handleAnalanjirofoClick={()=>{handleAnalanjirofoClick}}
+      handleAndroyClick={()=>{handleAndroyClick}}
+      handleVatovavyFitovinanyClick={()=>{handleVatovavyFitovinanyClick}}
+      handleVakinankaratraClick={()=>{handleVakinankaratraClick}}
+      handleSofiaClick={()=>{handleSofiaClick}}
+      handleSavaClick={()=>{handleSavaClick}}
+      handleMenabeClick={()=>{handleMenabeClick}}
+      handleMelakyClick={()=>{handleMelakyClick}}
+      handleItasyClick={()=>{handleItasyClick}}
+      handleIhorombeClick={()=>{handleIhorombeClick}}
+      handleHauteMatsiatraClick={()=>{handleHauteMatsiatraClick}}
+      handleBongolavaClick={()=>{handleBongolavaClick}}
+      handleBoenyClick={()=>{handleBoenyClick}}
+      handleBetsibokaClick={()=>{handleBetsibokaClick}}
+      handleAtsinananaClick={()=>{handleAtsinananaClick}}
+      handleAtsimoAndrefanaClick={()=>{handleAtsimoAndrefanaClick}}
+      handleAtsimoAtsinananaClick={()=>{handleAtsimoAtsinananaClick}}
+      handleAnosyClick={()=>{handleAnosyClick}}
       showCarte={showCarte}
       setShowCarte={setShowCarte}
       showProjet={showProjet}
@@ -210,6 +320,28 @@ const ListeProjets = ({regionName,anneeTravaux}) => {
                                 </TableHead>
                                 <TableBody>
                                   <Projet
+                                  alaotraMangoroClicked={alaotraMangoroClicked}
+                                  amoronIManiaClicked={amoronIManiaClicked}
+                                  analamangaClicked={analamangaClicked}
+                                  atsimoAtsinananaClicked={atsimoAtsinananaClicked}
+                                  analanjirofoClicked={analanjirofoClicked}
+                                  androyClicked={androyClicked}
+                                  anosyClicked={anosyClicked}
+                                  atsimoAndrefanaClicked={atsimoAndrefanaClicked}
+                                  atsinananaClicked={atsinananaClicked}
+                                  betsibokaClicked ={betsibokaClicked}
+                                  boenyClicked ={boenyClicked}
+                                  bongolavaClicked ={bongolavaClicked}
+                                  hauteMatsiatraClicked={hauteMatsiatraClicked} 
+                                  ihorombeClicked ={ihorombeClicked}
+                                  itasyClicked ={itasyClicked}
+                                  melakyClicked ={melakyClicked}
+                                  MenabeClicked ={MenabeClicked}
+                                  savaClicked ={savaClicked}
+                                  sofiaClicked ={sofiaClicked}
+                                  vakinankaratraClicked ={vakinankaratraClicked}
+                                  vatovavyFitovinanyClicked={vatovavyFitovinanyClicked}
+                                  dianaClicked={dianaClicked}
                                   SetShowTableHead={setShowTableHead}
                                   dateSelectedIndex={dateSelectedIndex}
                                   regionSearch={regionSearch}

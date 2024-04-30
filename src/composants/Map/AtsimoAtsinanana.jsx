@@ -7,7 +7,7 @@ import { MapContainer, TileLayer, Polygon, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import PieActiveArc from '../Home/Drawer/BaseDeDonnee/Projets/PieActiveArc';
 
-const AtsimoAtsinanana = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedIndex,setRegionSearch,setAtsimoAtsinananaClicked,setAlaotraMangoroClicked,setAmoronIManiaClicked,setAnalanjirofoClicked,setAnalamangaClicked,setAndroyClicked,setAnosyClicked,setAtsimoAndrefanaClicked,setAtsinananaClicked,setBetsibokaClicked,setBoenyClicked,setBongolavaClicked,setDianaClicked,setHauteMatsiatraClicked,setIhorombeClicked,setItasyClicked,setMelakyClicked,setMenabeClicked,setSavaClicked,setSofiaClicked,setVakinankaratraClicked,setVatovavyFitovinanyClicked}) => {
+const AtsimoAtsinanana = ({handleAtsimoAtsinananaClick,setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedIndex,setRegionSearch,setAtsimoAtsinananaClicked,setAlaotraMangoroClicked,setAmoronIManiaClicked,setAnalanjirofoClicked,setAnalamangaClicked,setAndroyClicked,setAnosyClicked,setAtsimoAndrefanaClicked,setAtsinananaClicked,setBetsibokaClicked,setBoenyClicked,setBongolavaClicked,setDianaClicked,setHauteMatsiatraClicked,setIhorombeClicked,setItasyClicked,setMelakyClicked,setMenabeClicked,setSavaClicked,setSofiaClicked,setVakinankaratraClicked,setVatovavyFitovinanyClicked}) => {
 
     const [region,setRegion] = useState([])
     const [nbTravaux,setNbTravaux] = useState([])
@@ -30,6 +30,7 @@ const AtsimoAtsinanana = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,se
       console.log("Alaotra Mangoro Cliquer!")
       regionName = region
       anneeTravaux = annee
+      handleAtsimoAtsinananaClick()
       setShowMapGoogle(false)
       setDateSelectedIndex(anneeTravaux)
       setRegionSearch(regionName)
@@ -73,7 +74,9 @@ const AtsimoAtsinanana = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,se
                      {`REGION: ${region}`}<br/>
                      {`TRAVAUX TERMINE: ${nbTravaux}`}
                    </Tooltip>
-             </Polygon> : <PieActiveArc nbTravaux={nbTravaux} enCours={enCours} resilie={resilie} phasePPM={phasePPM} aDemarrer={aDemarrer}/> }
+             </Polygon> : <>
+          <h3 style={{textAlign:'center'}}>Situation des travaux : {region}</h3>
+          <PieActiveArc nbTravaux={nbTravaux} enCours={enCours} resilie={resilie} phasePPM={phasePPM} aDemarrer={aDemarrer}/></> }
              
        </>
      )

@@ -12,7 +12,28 @@ import VoirPlus from './VoirPlus';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 
 
-const Projet = ({SetShowTableHead,dateSelectedIndex, regionSearch, axeSearch, pkDebutSearch, pkFinSearch}) => {
+const Projet = ({dianaClicked,
+  alaotraMangoroClicked, 
+  amoronIManiaClicked,
+analamangaClicked ,
+atsimoAtsinananaClicked,
+analanjirofoClicked,
+androyClicked ,
+anosyClicked ,
+atsimoAndrefanaClicked, 
+atsinananaClicked ,
+betsibokaClicked ,
+boenyClicked,
+ bongolavaClicked,
+  hauteMatsiatraClicked, 
+  ihorombeClicked, 
+  itasyClicked ,
+  melakyClicked ,
+  MenabeClicked, 
+  savaClicked ,
+  sofiaClicked ,
+  vakinankaratraClicked,
+  vatovavyFitovinanyClicked,SetShowTableHead,dateSelectedIndex, regionSearch, axeSearch, pkDebutSearch, pkFinSearch}) => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [id, setId] = useState();
@@ -140,6 +161,28 @@ const Projet = ({SetShowTableHead,dateSelectedIndex, regionSearch, axeSearch, pk
               </React.Fragment>
             );
           }) : <VoirPlus
+          alaotraMangoroClicked ={alaotraMangoroClicked}
+          amoronIManiaClicked={amoronIManiaClicked}
+        analamangaClicked ={analamangaClicked}
+        atsimoAtsinananaClicked={atsimoAtsinananaClicked}
+        analanjirofoClicked={analanjirofoClicked}
+        androyClicked ={androyClicked}
+        anosyClicked ={anosyClicked}
+        atsimoAndrefanaClicked= {atsimoAndrefanaClicked}
+        atsinananaClicked= {atsinananaClicked}
+        betsibokaClicked= {betsibokaClicked}
+        boenyClicked={boenyClicked}
+         bongolavaClicked={bongolavaClicked}
+          hauteMatsiatraClicked ={hauteMatsiatraClicked}
+          ihorombeClicked ={ihorombeClicked}
+          itasyClicked ={itasyClicked}
+          melakyClicked ={melakyClicked}
+          MenabeClicked= {MenabeClicked}
+          savaClicked ={savaClicked}
+          sofiaClicked ={sofiaClicked}
+          vakinankaratraClicked={vakinankaratraClicked}
+          vatovavyFitovinanyClicked={vatovavyFitovinanyClicked}
+          dianaClicked={dianaClicked}
             open={voirPlusClicked}
             setOpen={setVoirPlusClicked}
             resetId={() => setId()}

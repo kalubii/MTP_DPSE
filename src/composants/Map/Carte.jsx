@@ -28,7 +28,7 @@ import AtsimoAtsinanana from './AtsimoAtsinanana';
 import Anosy from './Anosy';
 
 
-const Carte = ({showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedIndex,setRegionSearch,alaotraMangoroClicked,setAtsimoAtsinananaClicked,setAlaotraMangoroClicked,setAmoronIManiaClicked,setAnalanjirofoClicked,setAnalamangaClicked,setAndroyClicked,setAnosyClicked,setAtsimoAndrefanaClicked,setAtsinananaClicked,setBetsibokaClicked,setBoenyClicked,setBongolavaClicked,setDianaClicked,setHauteMatsiatraClicked,setIhorombeClicked,setItasyClicked,setMelakyClicked,setMenabeClicked,setSavaClicked,setSofiaClicked,setVakinankaratraClicked,setVatovavyFitovinanyClicked}) => {
+const Carte = ({handleAlaotraMangoroClick,handleAmoronIManiaClick,handleAnalamangaClick,handleAnalanjirofoClick,handleAndroyClick,handleVatovavyFitovinanyClick,handleVakinankaratraClick,handleSofiaClick,handleSavaClick,handleMenabeClick,handleMelakyClick,handleItasyClick,handleIhorombeClick,handleHauteMatsiatraClick,handleBongolavaClick,handleBoenyClick,handleBetsibokaClick,handleAtsinananaClick,handleAtsimoAndrefanaClick,handleAtsimoAtsinananaClick,handleAnosyClick,handleDianaClick,showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedIndex,setRegionSearch,alaotraMangoroClicked,setAtsimoAtsinananaClicked,setAlaotraMangoroClicked,setAmoronIManiaClicked,setAnalanjirofoClicked,setAnalamangaClicked,setAndroyClicked,setAnosyClicked,setAtsimoAndrefanaClicked,setAtsinananaClicked,setBetsibokaClicked,setBoenyClicked,setBongolavaClicked,setDianaClicked,setHauteMatsiatraClicked,setIhorombeClicked,setItasyClicked,setMelakyClicked,setMenabeClicked,setSavaClicked,setSofiaClicked,setVakinankaratraClicked,setVatovavyFitovinanyClicked}) => {
 
         const [showMapGoogle,setShowMapGoogle] = useState(true)
         // const [showAlaotraMangoro,setShowAlaotraMangoro] = useState(false)
@@ -47,6 +47,7 @@ const Carte = ({showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedI
 
             
             <AlaotraMangoro
+            handleAlaotraMangoroClick={handleAlaotraMangoroClick}
                 showCarte={showCarte}
                 showProjet={showProjet}
                 setShowProjet={setShowProjet}
@@ -59,6 +60,7 @@ const Carte = ({showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedI
                 setRegionSearch={setRegionSearch}
             />
             <AmoronIMania
+            handleAmoronIManiaClick={handleAmoronIManiaClick}
                 showCarte={showCarte}
                 showProjet={showProjet}
                 setShowProjet={setShowProjet}
@@ -70,6 +72,7 @@ const Carte = ({showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedI
                 setRegionSearch={setRegionSearch}/>
 
             <Analamanga
+            handleAnalamangaClick={handleAnalamangaClick}
                 showCarte={showCarte}
                 showProjet={showProjet}
                 setShowProjet={setShowProjet}
@@ -81,6 +84,7 @@ const Carte = ({showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedI
                 setRegionSearch={setRegionSearch}/>
 
             <Analanjirofo
+            handleAnalanjirofoClick={handleAnalanjirofoClick}
                 showCarte={showCarte}
                 showProjet={showProjet}
                 setShowProjet={setShowProjet}
@@ -92,6 +96,7 @@ const Carte = ({showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedI
                 setRegionSearch={setRegionSearch}/>
 
             <Androy
+            handleAndroyClick={handleAndroyClick}
                 showCarte={showCarte}
                 showProjet={showProjet}
                 setShowProjet={setShowProjet}
@@ -103,6 +108,7 @@ const Carte = ({showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedI
                 setRegionSearch={setRegionSearch}/>
 
             <Anosy
+            handleAnosyClick={handleAnosyClick}
                 showCarte={showCarte}
                 showProjet={showProjet}
                 setShowProjet={setShowProjet}
@@ -114,6 +120,7 @@ const Carte = ({showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedI
                 setRegionSearch={setRegionSearch}/>
 
                 <AtsimoAndrefana
+                handleAtsimoAndrefanaClick={handleAtsimoAndrefanaClick}
                 showCarte={showCarte}
                 showProjet={showProjet}
                 setShowProjet={setShowProjet}
@@ -125,6 +132,7 @@ const Carte = ({showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedI
                 setRegionSearch={setRegionSearch}/>
 
                 <Atsinanana
+                handleAtsinananaClick={handleAtsinananaClick}
                 showCarte={showCarte}
                 showProjet={showProjet}
                 setShowProjet={setShowProjet}
@@ -136,6 +144,7 @@ const Carte = ({showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedI
                 setRegionSearch={setRegionSearch}/>
 
                 <Betsiboka
+                handleBetsibokaClick={handleBetsibokaClick}
                 showCarte={showCarte}
                 showProjet={showProjet}
                 setShowProjet={setShowProjet}
@@ -147,6 +156,7 @@ const Carte = ({showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedI
                 setRegionSearch={setRegionSearch}/>
 
                 <Boeny
+                handleBoenyClick={handleBoenyClick}
                 showCarte={showCarte}
                 showProjet={showProjet}
                 setShowProjet={setShowProjet}
@@ -157,6 +167,7 @@ const Carte = ({showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedI
                 setBoenyClicked={setBoenyClicked}
                 setRegionSearch={setRegionSearch}/>
                 <Bongolava
+                handleBongolavaClick={handleBongolavaClick}
                 showCarte={showCarte}
                 showProjet={showProjet}
                 setShowProjet={setShowProjet}
@@ -167,6 +178,7 @@ const Carte = ({showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedI
                 setBongolavaClicked={setBongolavaClicked}
                 setRegionSearch={setRegionSearch}/>
                 <Diana
+                handleDianaClick={handleDianaClick}
                 showCarte={showCarte}
                 showProjet={showProjet}
                 setShowProjet={setShowProjet}
@@ -177,6 +189,7 @@ const Carte = ({showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedI
                 setDianaClicked={setDianaClicked}
                 setRegionSearch={setRegionSearch}/>
                 <HauteMatsiatra
+                handleHauteMatsiatraClick={handleHauteMatsiatraClick}
                 showCarte={showCarte}
                 showProjet={showProjet}
                 setShowProjet={setShowProjet}
@@ -188,6 +201,7 @@ const Carte = ({showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedI
                 setRegionSearch={setRegionSearch}/>
 
                 <AtsimoAtsinanana
+                handleAtsimoAtsinananaClick={handleAtsimoAtsinananaClick}
                 showCarte={showCarte}
                 showProjet={showProjet}
                 setShowProjet={setShowProjet}
@@ -199,6 +213,7 @@ const Carte = ({showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedI
                 setAtsimoAtsinananaClicked={setAtsimoAtsinananaClicked}
                 />
                 <Ihorombe
+                handleIhorombeClick={handleIhorombeClick}
                 showCarte={showCarte}
                 showProjet={showProjet}
                 setShowProjet={setShowProjet}
@@ -209,6 +224,7 @@ const Carte = ({showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedI
                 setIhorombeClicked={setIhorombeClicked}
                 setRegionSearch={setRegionSearch}/>
                 <Itasy
+                handleItasyClick={handleItasyClick}
                 showCarte={showCarte}
                 showMapGoogle={showMapGoogle}
                 setShowMapGoogle={setShowMapGoogle}
@@ -218,6 +234,7 @@ const Carte = ({showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedI
                 setItasyClicked={setItasyClicked}
                 setRegionSearch={setRegionSearch}/>
                 <Melaky
+                handleMelakyClick={handleMelakyClick}
                 showCarte={showCarte}
                 showMapGoogle={showMapGoogle}
                 setShowMapGoogle={setShowMapGoogle}
@@ -227,6 +244,7 @@ const Carte = ({showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedI
                 setMelakyClicked={setMelakyClicked}
                 setRegionSearch={setRegionSearch}/>
                 <Menabe
+                handleMenabeClick={handleMenabeClick}
                 showCarte={showCarte}
                 showMapGoogle={showMapGoogle}
                 setShowMapGoogle={setShowMapGoogle}
@@ -236,6 +254,7 @@ const Carte = ({showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedI
                 setMenabeClicked={setMenabeClicked}
                 setRegionSearch={setRegionSearch}/>
                 <Sava
+                handleSavaClick={handleSavaClick}
                 showCarte={showCarte}
                 showMapGoogle={showMapGoogle}
                 setShowMapGoogle={setShowMapGoogle}
@@ -245,6 +264,7 @@ const Carte = ({showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedI
                 setSavaClicked={setSavaClicked}
                 setRegionSearch={setRegionSearch}/>
                 <Sofia
+                handleSofiaClick={handleSofiaClick}
                 showCarte={showCarte}
                 showMapGoogle={showMapGoogle}
                 setShowMapGoogle={setShowMapGoogle}
@@ -254,6 +274,7 @@ const Carte = ({showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedI
                 setSofiaClicked={setSofiaClicked}
                 setRegionSearch={setRegionSearch}/>
                 <Vakinankaratra
+                handleVakinankaratraClick={handleVakinankaratraClick}
                 showCarte={showCarte}
                 showMapGoogle={showMapGoogle}
                 setShowMapGoogle={setShowMapGoogle}
@@ -263,6 +284,7 @@ const Carte = ({showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedI
                 setVakinankaratraClicked={setVakinankaratraClicked}
                 setRegionSearch={setRegionSearch}/>
                 <VatovavyFitovinany
+                handleVatovavyFitovinanyClick={handleVatovavyFitovinanyClick}
                 showCarte={showCarte}
                 showMapGoogle={showMapGoogle}
                 setShowMapGoogle={setShowMapGoogle}
