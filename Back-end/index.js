@@ -104,13 +104,56 @@ app.get('/projet2022', (req, res) => {
 
   app.get('/travauxTermine',(req,res)=>{
     let sql = `
-    SELECT l.REGIONS_CONCERNEES, l.Annee, COUNT(*) as nbTravauxTermine
+    SELECT l.REGIONS_CONCERNEES, l.Annee,
+    COUNT(CASE WHEN a.SITUATION = 'EN COURS' THEN 1 END) as nbTravauxEnCours,
+    COUNT(CASE WHEN a.SITUATION = 'A DEMARRER' THEN 1 END) as nbTravauxADemarrer,
+    COUNT(CASE WHEN a.SITUATION = 'Phase PPM' THEN 1 END) as nbTravauxPhasePPM,
+    COUNT(CASE WHEN a.SITUATION = 'RESILIE' THEN 1 END) as nbTravauxResilie,
+    COUNT(*) as nbTravauxTermine
     FROM localisation l
     JOIN identification i ON l.id_localisation = i.id_localisation
     JOIN avancement a ON i.id_identification = a.id_identification
-    WHERE a.SITUATION = 'TERMINE'
+    WHERE 1=1
     GROUP BY l.REGIONS_CONCERNEES
   `;
+
+    db.query(sql, (err, results) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        // console.log(results)
+        res.json(results);
+      }
+    });
+  })
+
+  app.get('/situation', (req,res)=>{
+
+    const date = req.query.date;
+    const regions = req.query.region ? req.query.region.split(',') : [];
+    const axes = req.query.axe ? req.query.axe.split(',') : [];
+    const pkDebut = req.query.pkDebut;
+    const pkFin = req.query.pkFin;
+
+    let sql=`    SELECT l.REGIONS_CONCERNEES,
+    COUNT(CASE WHEN a.SITUATION = 'EN COURS' THEN 1 END) as nbTravauxEnCours,
+    COUNT(CASE WHEN a.SITUATION = 'A DEMARRER' THEN 1 END) as nbTravauxADemarrer,
+    COUNT(CASE WHEN a.SITUATION = 'Phase PPM' THEN 1 END) as nbTravauxPhasePPM,
+    COUNT(CASE WHEN a.SITUATION = 'RESILIE' THEN 1 END) as nbTravauxResilie
+    FROM avancement a
+    LEFT JOIN caracteristique c ON a.id_identification = c.id_identification
+    LEFT JOIN identification i ON a.id_identification = i.id_identification
+    LEFT JOIN localisation l ON i.id_localisation = l.id_localisation
+    LEFT JOIN suividae s ON i.id_identification = s.id_identification
+    WHERE 1=1  
+    GROUP BY l.REGIONS_CONCERNEES `;
+
+    if(date){
+      sql+= ` AND Annee = '${date}'`;
+    }
+    if (regions.length > 0) {
+      sql += ` AND REGIONS_CONCERNEES IN (${regions.map(region => `'${region}'`).join(',')})`;
+    }
 
     db.query(sql, (err, results) => {
       if (err) {

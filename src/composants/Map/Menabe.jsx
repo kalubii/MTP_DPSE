@@ -5,13 +5,17 @@ import menabe from '../../assets/imgMap/menabe.png'
 import axios from 'axios'
 import { MapContainer, TileLayer, Polygon, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-
+import PieActiveArc from '../Home/Drawer/BaseDeDonnee/Projets/PieActiveArc';
 
 const Menabe = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedIndex,setRegionSearch,setAlaotraMangoroClicked,setAmoronIManiaClicked,setAnalanjirofoClicked,setAnalamangaClicked,setAndroyClicked,setAnosyClicked,setAtsimoAndrefanaClicked,setAtsinananaClicked,setBetsibokaClicked,setBoenyClicked,setBongolavaClicked,setDianaClicked,setHauteMatsiatraClicked,setIhorombeClicked,setItasyClicked,setMelakyClicked,setMenabeClicked,setSavaClicked,setSofiaClicked,setVakinankaratraClicked,setVatovavyFitovinanyClicked}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])
   const [annee,setAnnee] =useState([])
+  const [enCours,setEnCours] = useState([])
+  const [resilie,setResilie] =useState([])
+  const [phasePPM,setPhasePPM] =useState([])
+  const [aDemarrer,setADemarrer] =useState([])
 
   const menabeCoordinates = [
     [-20.9000, 44.5000], // Point supérieur
@@ -24,7 +28,7 @@ const Menabe = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProje
   let regionName, anneeTravaux
   
   const handleClick = () => {
-    console.log("Alaotra Mangoro Cliquer!")
+    console.log("Menabe Cliquer!")
     regionName = region
     anneeTravaux = annee
     setShowMapGoogle(false)
@@ -35,22 +39,26 @@ const Menabe = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProje
     console.log(regionName,anneeTravaux)
   }
 
-  // useEffect(() => {
-  //     const fetchSearchResults = async () => {
-  //        try {
-  //          const response = await axios.get('http://localhost:8081/travauxTermine');
-  //          console.log(response)
-  //          setRegion(response.data[8].REGIONS_CONCERNEES);
-  //          setNbTravaux(response.data[8].nbTravauxTermine);
-  //          setAnnee(response.data[8].Annee)
-  //        } catch (error) {
-  //          console.error('', error);
-  //        }
-  //     };
-  //     fetchSearchResults();
-  // }, []);
+  useEffect(() => {
+      const fetchSearchResults = async () => {
+         try {
+           const response = await axios.get('http://localhost:8081/travauxTermine');
+           console.log(response)
+           setRegion(response.data[46].REGIONS_CONCERNEES);
+           setNbTravaux(response.data[46].nbTravauxTermine);
+           setAnnee(response.data[46].Annee)
+           setEnCours(response.data[46].nbTravauxEnCours)
+           setResilie(response.data[46].nbTravauxResilie)
+           setPhasePPM(response.data[46].nbTravauxPhasePPM)
+           setADemarrer(response.data[46].nbTravauxADemarrer)
+         } catch (error) {
+           console.error('', error);
+         }
+      };
+      fetchSearchResults();
+  }, []);
 
-  // console.log(region,nbTravaux)
+  console.log(region,nbTravaux)
 
   return (<>
 
@@ -58,7 +66,7 @@ const Menabe = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProje
          <Polygon positions={menabeCoordinates} pathOptions={{ color: 'transparent' }} 
                eventHandlers={{
                  click: (event) => {
-                        // handleClick();
+                        handleClick();
                  }
               }}
            >
@@ -66,11 +74,7 @@ const Menabe = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProje
                    {`REGION: ${region}`}<br/>
                    {`TRAVAUX TERMINE: ${nbTravaux}`}
                  </Tooltip>
-           </Polygon> : <div style={{border:'solid 1px',width:'fit-content'}}
-         title={`REGION: ${region}\nTRAVAUX TERMINE: ${nbTravaux}`}
-         >
-           <img src={menabe} onClick={handleClick}/>
-         </div> }
+           </Polygon> : <PieActiveArc nbTravaux={nbTravaux} enCours={enCours} resilie={resilie} phasePPM={phasePPM} aDemarrer={aDemarrer}/> }
            
      </>
    )

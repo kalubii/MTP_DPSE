@@ -5,12 +5,17 @@ import fitovinany from '../../assets/imgMap/vatovavy_fitovinany.png'
 import axios from 'axios'
 import { MapContainer, TileLayer, Polygon, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import PieActiveArc from '../Home/Drawer/BaseDeDonnee/Projets/PieActiveArc';
 
 const VatovavyFitovinany = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedIndex,setRegionSearch,setAlaotraMangoroClicked,setAmoronIManiaClicked,setAnalanjirofoClicked,setAnalamangaClicked,setAndroyClicked,setAnosyClicked,setAtsimoAndrefanaClicked,setAtsinananaClicked,setBetsibokaClicked,setBoenyClicked,setBongolavaClicked,setDianaClicked,setHauteMatsiatraClicked,setIhorombeClicked,setItasyClicked,setMelakyClicked,setMenabeClicked,setSavaClicked,setSofiaClicked,setVakinankaratraClicked,setVatovavyFitovinanyClicked}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])
   const [annee,setAnnee] =useState([])
+  const [enCours,setEnCours] = useState([])
+  const [resilie,setResilie] =useState([])
+  const [phasePPM,setPhasePPM] =useState([])
+  const [aDemarrer,setADemarrer] =useState([])
 
   const vatovavyCoordinates = [
     [-21.6000, 47.6000], // Point supérieur
@@ -38,9 +43,13 @@ const VatovavyFitovinany = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,
          try {
            const response = await axios.get('http://localhost:8081/travauxTermine');
            console.log(response)
-           setRegion(response.data[9].REGIONS_CONCERNEES);
-           setNbTravaux(response.data[9].nbTravauxTermine);
-           setAnnee(response.data[9].Annee)
+           setRegion(response.data[54].REGIONS_CONCERNEES);
+           setNbTravaux(response.data[54].nbTravauxTermine);
+           setAnnee(response.data[54].Annee)
+           setEnCours(response.data[54].nbTravauxEnCours)
+           setResilie(response.data[54].nbTravauxResilie)
+           setPhasePPM(response.data[54].nbTravauxPhasePPM)
+           setADemarrer(response.data[54].nbTravauxADemarrer)
          } catch (error) {
            console.error('', error);
          }
@@ -64,11 +73,7 @@ const VatovavyFitovinany = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,
                    {`REGION: ${region}`}<br/>
                    {`TRAVAUX TERMINE: ${nbTravaux}`}
                  </Tooltip>
-           </Polygon> : <div style={{border:'solid 1px',width:'fit-content'}}
-         title={`REGION: ${region}\nTRAVAUX TERMINE: ${nbTravaux}`}
-         >
-           <img src={fitovinany} onClick={handleClick}/>
-         </div> }
+           </Polygon> : <PieActiveArc nbTravaux={nbTravaux} enCours={enCours} resilie={resilie} phasePPM={phasePPM} aDemarrer={aDemarrer}/> }
            
      </>
    )

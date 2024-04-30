@@ -11,6 +11,28 @@ import VoirPlusPage from './VoirPlusPage';
 import Carte from '../composants/Map/Carte';
 import AlaotraMangoro from '../composants/Map/AlaotraMangoro';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import PieActiveArc from '../composants/Home/Drawer/BaseDeDonnee/Projets/PieActiveArc';
+import AmoronIMania from '../composants/Map/AmoronIMania';
+import Analamanga from '../composants/Map/Analamanga';
+import AtsimoAtsinanana from '../composants/Map/AtsimoAtsinanana';
+import Analanjirofo from '../composants/Map/Analanjirofo';
+import Androy from '../composants/Map/Androy';
+import Anosy from '../composants/Map/Anosy';
+import AtsimoAndrefana from '../composants/Map/AtsimoAndrefana';
+import Atsinanana from '../composants/Map/Atsinanana';
+import Betsiboka from '../composants/Map/Betsiboka';
+import Boeny from '../composants/Map/Boeny';
+import Bongolava from '../composants/Map/Bongolava';
+import Diana from '../composants/Map/Diana';
+import HauteMatsiatra from '../composants/Map/HauteMatsiatra';
+import Ihorombe from '../composants/Map/Ihorombe';
+import Itasy from '../composants/Map/Itasy';
+import Menabe from '../composants/Map/Menabe';
+import Sava from '../composants/Map/Sava';
+import Sofia from '../composants/Map/Sofia';
+import Vakinankaratra from '../composants/Map/Vakinankaratra';
+import VatovavyFitovinany from '../composants/Map/VatovavyFitovinany';
+import Melaky from '../composants/Map/Melaky';
 
 
 const ListeProjets = ({regionName,anneeTravaux}) => {
@@ -132,11 +154,16 @@ const ListeProjets = ({regionName,anneeTravaux}) => {
       setSofiaClicked={setSofiaClicked}
       setVakinankaratraClicked={setVakinankaratraClicked}
       setVatovavyFitovinanyClicked={setVatovavyFitovinanyClicked}
-      setRegionSearch={setRegionSearch}/>:null}
+      setRegionSearch={setRegionSearch}/>:  null}
   
   {alaotraMangoroClicked ||amoronIManiaClicked ||analamangaClicked ||atsimoAtsinananaClicked|| analanjirofoClicked ||androyClicked ||anosyClicked ||atsimoAndrefanaClicked ||atsinananaClicked ||betsibokaClicked ||boenyClicked || bongolavaClicked||dianaClicked ||hauteMatsiatraClicked ||ihorombeClicked ||itasyClicked ||melakyClicked ||MenabeClicked ||savaClicked ||sofiaClicked ||vakinankaratraClicked ||vatovavyFitovinanyClicked ?
     <Box>
-          <AlaotraMangoro/>
+
+    {/* DIAGRAMME DE SITUATION POUR CHAQUE REGION */}
+      {alaotraMangoroClicked?<AlaotraMangoro/>:amoronIManiaClicked? <AmoronIMania/>:analamangaClicked? <Analamanga/>:atsimoAtsinananaClicked? <AtsimoAtsinanana/>:analanjirofoClicked? <Analanjirofo/>:androyClicked? <Androy/>:anosyClicked? <Anosy/>:atsimoAndrefanaClicked? <AtsimoAndrefana/>:atsinananaClicked? <Atsinanana/>:betsibokaClicked? <Betsiboka/>:boenyClicked? <Boeny/>:bongolavaClicked? 
+      <Bongolava/>:dianaClicked? <Diana/>:hauteMatsiatraClicked? <HauteMatsiatra/>:ihorombeClicked? <Ihorombe/>:itasyClicked? <Itasy/>:melakyClicked? <Melaky/>:MenabeClicked? <Menabe/>:savaClicked? <Sava/>:sofiaClicked? <Sofia/>:vakinankaratraClicked? <Vakinankaratra/>:vatovavyFitovinanyClicked? <VatovavyFitovinany/>:null}
+
+      {/* DETAIL DE TRAVAUX POUR CHAQUE REGION */}
             <Box sx={{marginBottom:4}}>
                 <Box sx={{display:'flex',justifyContent:'center',margin:'auto'}}>
                     <TextField

@@ -5,6 +5,7 @@ import analamanga from '../../assets/imgMap/analamanga.png'
 import axios from 'axios'
 import { MapContainer, TileLayer, Polygon, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import PieActiveArc from '../Home/Drawer/BaseDeDonnee/Projets/PieActiveArc';
 
 
 const Analamanga = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedIndex,setRegionSearch,setAlaotraMangoroClicked,setAmoronIManiaClicked,setAnalanjirofoClicked,setAnalamangaClicked,setAndroyClicked,setAnosyClicked,setAtsimoAndrefanaClicked,setAtsinananaClicked,setBetsibokaClicked,setBoenyClicked,setBongolavaClicked,setDianaClicked,setHauteMatsiatraClicked,setIhorombeClicked,setItasyClicked,setMelakyClicked,setMenabeClicked,setSavaClicked,setSofiaClicked,setVakinankaratraClicked,setVatovavyFitovinanyClicked}) => {
@@ -12,6 +13,11 @@ const Analamanga = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowP
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])
   const [annee,setAnnee] =useState([])
+  const [enCours,setEnCours] = useState([])
+  const [resilie,setResilie] =useState([])
+  const [phasePPM,setPhasePPM] =useState([])
+  const [aDemarrer,setADemarrer] =useState([])
+
 
   const analamangaCoordinates = [
     [-17.9100, 47.2000],
@@ -23,7 +29,7 @@ const Analamanga = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowP
   let regionName, anneeTravaux
   
   const handleClick = () => {
-    console.log("Alaotra Mangoro Cliquer!")
+    console.log("Analamanga Cliquer!")
     regionName = region
     anneeTravaux = annee
     setShowMapGoogle(false)
@@ -39,9 +45,13 @@ const Analamanga = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowP
          try {
            const response = await axios.get('http://localhost:8081/travauxTermine');
            console.log(response)
-           setRegion(response.data[2].REGIONS_CONCERNEES);
-           setNbTravaux(response.data[2].nbTravauxTermine);
-           setAnnee(response.data[2].Annee)
+           setRegion(response.data[3].REGIONS_CONCERNEES);
+           setNbTravaux(response.data[3].nbTravauxTermine);
+           setAnnee(response.data[3].Annee)
+           setEnCours(response.data[3].nbTravauxEnCours)
+           setResilie(response.data[3].nbTravauxResilie)
+           setPhasePPM(response.data[3].nbTravauxPhasePPM)
+           setADemarrer(response.data[3].nbTravauxADemarrer)
          } catch (error) {
            console.error('', error);
          }
@@ -65,11 +75,7 @@ const Analamanga = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowP
                    {`REGION: ${region}`}<br/>
                    {`TRAVAUX TERMINE: ${nbTravaux}`}
                  </Tooltip>
-           </Polygon> : <div style={{border:'solid 1px',width:'fit-content'}}
-         title={`REGION: ${region}\nTRAVAUX TERMINE: ${nbTravaux}`}
-         >
-           <img src={analamanga} onClick={handleClick}/>
-         </div> }
+           </Polygon> : <PieActiveArc nbTravaux={nbTravaux} enCours={enCours} resilie={resilie} phasePPM={phasePPM} aDemarrer={aDemarrer}/> }
            
      </>
    )

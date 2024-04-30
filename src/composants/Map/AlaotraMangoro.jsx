@@ -5,12 +5,17 @@ import { useEffect } from 'react';
 import alaotraMangoro from '../../assets/imgMap/alaotra-mangoro.png'
 import { MapContainer, TileLayer, Polygon, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import PieActiveArc from '../Home/Drawer/BaseDeDonnee/Projets/PieActiveArc';
 
-const AlaotraMangoro = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedIndex,setRegionSearch,setAlaotraMangoroClicked,setAmoronIManiaClicked,setAnalanjirofoClicked,setAnalamangaClicked,setAndroyClicked,setAnosyClicked,setAtsimoAndrefanaClicked,setAtsinananaClicked,setBetsibokaClicked,setBoenyClicked,setBongolavaClicked,setDianaClicked,setHauteMatsiatraClicked,setIhorombeClicked,setItasyClicked,setMelakyClicked,setMenabeClicked,setSavaClicked,setSofiaClicked,setVakinankaratraClicked,setVatovavyFitovinanyClicked}) => {
+const AlaotraMangoro = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedIndex,setRegionSearch,alaotraMangoroClicked,setAlaotraMangoroClicked,setAmoronIManiaClicked,setAnalanjirofoClicked,setAnalamangaClicked,setAndroyClicked,setAnosyClicked,setAtsimoAndrefanaClicked,setAtsinananaClicked,setBetsibokaClicked,setBoenyClicked,setBongolavaClicked,setDianaClicked,setHauteMatsiatraClicked,setIhorombeClicked,setItasyClicked,setMelakyClicked,setMenabeClicked,setSavaClicked,setSofiaClicked,setVakinankaratraClicked,setVatovavyFitovinanyClicked}) => {
 
     const [region,setRegion] = useState([])
-    const [nbTravaux,setNbTravaux] = useState([])
+    const [nbTravaux,setNbTravaux] = useState([]) //Travaux TERMINE
     const [annee,setAnnee] =useState([])
+    const [enCours,setEnCours] = useState([])
+    const [resilie,setResilie] =useState([])
+    const [phasePPM,setPhasePPM] =useState([])
+    const [aDemarrer,setADemarrer] =useState([])
 
     const alaotraMangoroCoordinates = [
       [-17.0000, 48.0000], // Point supérieur
@@ -25,11 +30,12 @@ const AlaotraMangoro = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setS
       console.log("Alaotra Mangoro Cliquer!")
       regionName = region
       anneeTravaux = annee
+      setAlaotraMangoroClicked(true)
+      console.log('alaotreeeee',alaotraMangoroClicked)
       setShowMapGoogle(false)
       setDateSelectedIndex(anneeTravaux)
       setRegionSearch(regionName)
       setShowCarte(false)
-      setAlaotraMangoroClicked(true)
       console.log(regionName,anneeTravaux)
     }
 
@@ -38,9 +44,13 @@ const AlaotraMangoro = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setS
            try {
              const response = await axios.get('http://localhost:8081/travauxTermine');
              console.log(response)
-             setRegion(response.data[0].REGIONS_CONCERNEES);
-             setNbTravaux(response.data[0].nbTravauxTermine);
-             setAnnee(response.data[0].Annee)
+             setRegion(response.data[1].REGIONS_CONCERNEES);
+             setNbTravaux(response.data[1].nbTravauxTermine);
+             setAnnee(response.data[1].Annee)
+             setEnCours(response.data[1].nbTravauxEnCours)
+             setResilie(response.data[1].nbTravauxResilie)
+             setPhasePPM(response.data[1].nbTravauxPhasePPM)
+             setADemarrer(response.data[1].nbTravauxADemarrer)
            } catch (error) {
              console.error('', error);
            }
@@ -64,12 +74,7 @@ const AlaotraMangoro = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setS
                   {`REGION: ${region}`}<br/>
                   {`TRAVAUX TERMINE: ${nbTravaux}`}
                 </Tooltip>
-          </Polygon> : null }
-          {/* <div style={{border:'solid 1px',width:'fit-content'}}
-        title={`REGION: ${region}\nTRAVAUX TERMINE: ${nbTravaux}`}
-        >
-          <img src={alaotraMangoro} onClick={handleClick}/>
-        </div> */}
+          </Polygon> : <PieActiveArc nbTravaux={nbTravaux} enCours={enCours} resilie={resilie} phasePPM={phasePPM} aDemarrer={aDemarrer}/>}
     </>
   )
 }

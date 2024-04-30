@@ -5,13 +5,17 @@ import sava from '../../assets/imgMap/sava.png'
 import axios from 'axios'
 import { MapContainer, TileLayer, Polygon, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-
+import PieActiveArc from '../Home/Drawer/BaseDeDonnee/Projets/PieActiveArc';
 
 const Sava = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedIndex,setRegionSearch,setAlaotraMangoroClicked,setAmoronIManiaClicked,setAnalanjirofoClicked,setAnalamangaClicked,setAndroyClicked,setAnosyClicked,setAtsimoAndrefanaClicked,setAtsinananaClicked,setBetsibokaClicked,setBoenyClicked,setBongolavaClicked,setDianaClicked,setHauteMatsiatraClicked,setIhorombeClicked,setItasyClicked,setMelakyClicked,setMenabeClicked,setSavaClicked,setSofiaClicked,setVakinankaratraClicked,setVatovavyFitovinanyClicked}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])
   const [annee,setAnnee] =useState([])
+  const [enCours,setEnCours] = useState([])
+  const [resilie,setResilie] =useState([])
+  const [phasePPM,setPhasePPM] =useState([])
+  const [aDemarrer,setADemarrer] =useState([])
 
   const savaCoordinates = [
     [-14.0000, 50.0000], // Point supérieur
@@ -23,7 +27,7 @@ const Sava = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProjet,
   let regionName, anneeTravaux
   
   const handleClick = () => {
-    console.log("Alaotra Mangoro Cliquer!")
+    console.log("Sava Cliquer!")
     regionName = region
     anneeTravaux = annee
     setShowMapGoogle(false)
@@ -39,9 +43,13 @@ const Sava = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProjet,
          try {
            const response = await axios.get('http://localhost:8081/travauxTermine');
            console.log(response)
-           setRegion(response.data[13].REGIONS_CONCERNEES);
-           setNbTravaux(response.data[13].nbTravauxTermine);
-           setAnnee(response.data[13].Annee)
+           setRegion(response.data[47].REGIONS_CONCERNEES);
+           setNbTravaux(response.data[47].nbTravauxTermine);
+           setAnnee(response.data[47].Annee)
+           setEnCours(response.data[47].nbTravauxEnCours)
+           setResilie(response.data[47].nbTravauxResilie)
+           setPhasePPM(response.data[47].nbTravauxPhasePPM)
+           setADemarrer(response.data[47].nbTravauxADemarrer)
          } catch (error) {
            console.error('', error);
          }
@@ -65,11 +73,7 @@ const Sava = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProjet,
                    {`REGION: ${region}`}<br/>
                    {`TRAVAUX TERMINE: ${nbTravaux}`}
                  </Tooltip>
-           </Polygon> : <div style={{border:'solid 1px',width:'fit-content'}}
-         title={`REGION: ${region}\nTRAVAUX TERMINE: ${nbTravaux}`}
-         >
-           <img src={sava} onClick={handleClick}/>
-         </div> }
+           </Polygon> : <PieActiveArc nbTravaux={nbTravaux} enCours={enCours} resilie={resilie} phasePPM={phasePPM} aDemarrer={aDemarrer}/> }
            
      </>
    )

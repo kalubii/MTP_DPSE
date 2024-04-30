@@ -5,13 +5,17 @@ import boeny from '../../assets/imgMap/Boeny.png'
 import axios from 'axios'
 import { MapContainer, TileLayer, Polygon, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-
+import PieActiveArc from '../Home/Drawer/BaseDeDonnee/Projets/PieActiveArc';
 
 const Boeny = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedIndex,setRegionSearch,setAlaotraMangoroClicked,setAmoronIManiaClicked,setAnalanjirofoClicked,setAnalamangaClicked,setAndroyClicked,setAnosyClicked,setAtsimoAndrefanaClicked,setAtsinananaClicked,setBetsibokaClicked,setBoenyClicked,setBongolavaClicked,setDianaClicked,setHauteMatsiatraClicked,setIhorombeClicked,setItasyClicked,setMelakyClicked,setMenabeClicked,setSavaClicked,setSofiaClicked,setVakinankaratraClicked,setVatovavyFitovinanyClicked}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])
   const [annee,setAnnee] =useState([])
+  const [enCours,setEnCours] = useState([])
+  const [resilie,setResilie] =useState([])
+  const [phasePPM,setPhasePPM] =useState([])
+  const [aDemarrer,setADemarrer] =useState([])
 
   const boenyCoordinates = [
     [-17.1000, 45.5000], // Point supérieur
@@ -22,7 +26,7 @@ const Boeny = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProjet
   let regionName, anneeTravaux
   
   const handleClick = () => {
-    console.log("Alaotra Mangoro Cliquer!")
+    console.log("Boeny Cliquer!")
     regionName = region
     anneeTravaux = annee
     setShowMapGoogle(false)
@@ -33,22 +37,26 @@ const Boeny = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProjet
     console.log(regionName,anneeTravaux)
   }
 
-  // useEffect(() => {
-  //     const fetchSearchResults = async () => {
-  //        try {
-  //          const response = await axios.get('http://localhost:8081/travauxTermine');
-  //          console.log(response)
-  //          setRegion(response.data[8].REGIONS_CONCERNEES);
-  //          setNbTravaux(response.data[8].nbTravauxTermine);
-  //          setAnnee(response.data[8].Annee)
-  //        } catch (error) {
-  //          console.error('', error);
-  //        }
-  //     };
-  //     fetchSearchResults();
-  // }, []);
+  useEffect(() => {
+      const fetchSearchResults = async () => {
+         try {
+           const response = await axios.get('http://localhost:8081/travauxTermine');
+           console.log(response)
+           setRegion(response.data[29].REGIONS_CONCERNEES);
+           setNbTravaux(response.data[29].nbTravauxTermine);
+           setAnnee(response.data[29].Annee)
+           setEnCours(response.data[29].nbTravauxEnCours)
+           setResilie(response.data[29].nbTravauxResilie)
+           setPhasePPM(response.data[29].nbTravauxPhasePPM)
+           setADemarrer(response.data[29].nbTravauxADemarrer)
+         } catch (error) {
+           console.error('', error);
+         }
+      };
+      fetchSearchResults();
+  }, []);
 
-  // console.log(region,nbTravaux)
+  console.log(region,nbTravaux)
 
   return (<>
 
@@ -64,11 +72,7 @@ const Boeny = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProjet
                    {`REGION: ${region}`}<br/>
                    {`TRAVAUX TERMINE: ${nbTravaux}`}
                  </Tooltip>
-           </Polygon> : <div style={{border:'solid 1px',width:'fit-content'}}
-         title={`REGION: ${region}\nTRAVAUX TERMINE: ${nbTravaux}`}
-         >
-           <img src={boeny} onClick={handleClick}/>
-         </div> }
+           </Polygon> : <PieActiveArc nbTravaux={nbTravaux} enCours={enCours} resilie={resilie} phasePPM={phasePPM} aDemarrer={aDemarrer}/> }
            
      </>
    )

@@ -5,12 +5,17 @@ import { useState } from 'react'
 import atsimoAtsinanana from '../../assets/imgMap/atsimo_atsinanana.png'
 import { MapContainer, TileLayer, Polygon, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import PieActiveArc from '../Home/Drawer/BaseDeDonnee/Projets/PieActiveArc';
 
 const AtsimoAtsinanana = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedIndex,setRegionSearch,setAtsimoAtsinananaClicked,setAlaotraMangoroClicked,setAmoronIManiaClicked,setAnalanjirofoClicked,setAnalamangaClicked,setAndroyClicked,setAnosyClicked,setAtsimoAndrefanaClicked,setAtsinananaClicked,setBetsibokaClicked,setBoenyClicked,setBongolavaClicked,setDianaClicked,setHauteMatsiatraClicked,setIhorombeClicked,setItasyClicked,setMelakyClicked,setMenabeClicked,setSavaClicked,setSofiaClicked,setVakinankaratraClicked,setVatovavyFitovinanyClicked}) => {
 
     const [region,setRegion] = useState([])
     const [nbTravaux,setNbTravaux] = useState([])
     const [annee,setAnnee] =useState([])
+    const [enCours,setEnCours] = useState([])
+    const [resilie,setResilie] =useState([])
+    const [phasePPM,setPhasePPM] =useState([])
+    const [aDemarrer,setADemarrer] =useState([])
 
     const atsimoatsinananaCoordinates = [
         [-23.9000, 46.8000], // Point supérieur
@@ -38,9 +43,13 @@ const AtsimoAtsinanana = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,se
            try {
              const response = await axios.get('http://localhost:8081/travauxTermine');
              console.log(response)
-             setRegion(response.data[6].REGIONS_CONCERNEES);
-             setNbTravaux(response.data[6].nbTravauxTermine);
-             setAnnee(response.data[6].Annee)
+             setRegion(response.data[23].REGIONS_CONCERNEES);
+             setNbTravaux(response.data[23].nbTravauxTermine);
+             setAnnee(response.data[23].Annee)
+             setEnCours(response.data[23].nbTravauxEnCours)
+             setResilie(response.data[23].nbTravauxResilie)
+             setPhasePPM(response.data[23].nbTravauxPhasePPM)
+             setADemarrer(response.data[23].nbTravauxADemarrer)
            } catch (error) {
              console.error('', error);
            }
@@ -64,11 +73,7 @@ const AtsimoAtsinanana = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,se
                      {`REGION: ${region}`}<br/>
                      {`TRAVAUX TERMINE: ${nbTravaux}`}
                    </Tooltip>
-             </Polygon> : <div style={{border:'solid 1px',width:'fit-content'}}
-           title={`REGION: ${region}\nTRAVAUX TERMINE: ${nbTravaux}`}
-           >
-             <img src={atsimoAtsinanana} onClick={handleClick}/>
-           </div> }
+             </Polygon> : <PieActiveArc nbTravaux={nbTravaux} enCours={enCours} resilie={resilie} phasePPM={phasePPM} aDemarrer={aDemarrer}/> }
              
        </>
      )

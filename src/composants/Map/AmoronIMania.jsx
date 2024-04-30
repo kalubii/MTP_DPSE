@@ -5,13 +5,17 @@ import { useState } from 'react'
 import amoronIMania from '../../assets/imgMap/amoron_i_mania.png'
 import { MapContainer, TileLayer, Polygon, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-
+import PieActiveArc from '../Home/Drawer/BaseDeDonnee/Projets/PieActiveArc';
 
 const AmoronIMania = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedIndex,setRegionSearch,setAlaotraMangoroClicked,setAmoronIManiaClicked,setAnalanjirofoClicked,setAnalamangaClicked,setAndroyClicked,setAnosyClicked,setAtsimoAndrefanaClicked,setAtsinananaClicked,setBetsibokaClicked,setBoenyClicked,setBongolavaClicked,setDianaClicked,setHauteMatsiatraClicked,setIhorombeClicked,setItasyClicked,setMelakyClicked,setMenabeClicked,setSavaClicked,setSofiaClicked,setVakinankaratraClicked,setVatovavyFitovinanyClicked}) => {
 
   const [region,setRegion] = useState([])
   const [nbTravaux,setNbTravaux] = useState([])
   const [annee,setAnnee] =useState([])
+  const [enCours,setEnCours] = useState([])
+  const [resilie,setResilie] =useState([])
+  const [phasePPM,setPhasePPM] =useState([])
+  const [aDemarrer,setADemarrer] =useState([])
 
   const amoromaniaCoordinates = [
     [-20.9000, 46.0000], // Point supérieur
@@ -39,9 +43,13 @@ const AmoronIMania = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setSho
          try {
            const response = await axios.get('http://localhost:8081/travauxTermine');
            console.log(response)
-           setRegion(response.data[1].REGIONS_CONCERNEES);
-           setNbTravaux(response.data[1].nbTravauxTermine);
-           setAnnee(response.data[1].Annee)
+           setRegion(response.data[2].REGIONS_CONCERNEES);
+           setNbTravaux(response.data[2].nbTravauxTermine);
+           setAnnee(response.data[2].Annee)
+           setEnCours(response.data[2].nbTravauxEnCours)
+           setResilie(response.data[2].nbTravauxResilie)
+           setPhasePPM(response.data[2].nbTravauxPhasePPM)
+           setADemarrer(response.data[2].nbTravauxADemarrer)
          } catch (error) {
            console.error('', error);
          }
@@ -65,11 +73,7 @@ const AmoronIMania = ({setShowMapGoogle,showCarte,setShowCarte,showProjet,setSho
                    {`REGION: ${region}`}<br/>
                    {`TRAVAUX TERMINE: ${nbTravaux}`}
                  </Tooltip>
-           </Polygon> : <div style={{border:'solid 1px',width:'fit-content'}}
-         title={`REGION: ${region}\nTRAVAUX TERMINE: ${nbTravaux}`}
-         >
-           <img src={amoronIMania} onClick={handleClick}/>
-         </div> }
+           </Polygon> : <PieActiveArc nbTravaux={nbTravaux} enCours={enCours} resilie={resilie} phasePPM={phasePPM} aDemarrer={aDemarrer}/>}
            
      </>
    )
