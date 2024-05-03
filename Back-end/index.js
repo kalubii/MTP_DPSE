@@ -71,6 +71,49 @@ app.get('/projet2022', (req, res) => {
     });
   });
 
+  app.get('/localisation',(req,res)=>{
+
+    const idRef = req.query.idRef;
+    const regions = req.query.region ? req.query.region.split(',') : [];
+    const axes = req.query.axe ? req.query.axe.split(',') : [];
+    const pkDebut = req.query.pkDebut;
+    const pkFin = req.query.pkFin;
+
+    console.log(regions)
+
+    let sql = `SELECT * FROM localisation WHERE 1=1`;
+
+    if(idRef){
+      sql+= ` AND id_localisation = '${idRef}'`;
+    }
+    if (regions.length > 0) {
+      sql += ` AND REGIONS_CONCERNEES IN (${regions.map(region => `'${region}'`).join(',')})`;
+    }
+    if (axes.length > 0) {
+      sql += ` AND AXE IN (${axes.map(axe => `'${axe}'`).join(',')})`;
+    }
+    if (pkDebut) {
+      sql += ` AND PK_DEBUT = ${pkDebut}`;
+    }
+    if (pkFin) {
+      sql += ` AND PK_FIN = ${pkFin}`;
+    }
+
+    // if (date && regions.length === 0 && !axes.length && !pkDebut && !pkFin) {
+    //   sql += ` LIMIT 25`;
+    // } 
+
+    db.query(sql, (err, results) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        // console.log(results)
+        res.json(results);
+      }
+    });
+
+  })
+
   app.get('/nbTravauxTermine',(req,res)=> {
     // let sql = `SELECT COUNT(*) as nbTermine
     // FROM avancement
