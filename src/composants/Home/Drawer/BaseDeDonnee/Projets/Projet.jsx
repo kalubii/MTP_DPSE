@@ -44,6 +44,9 @@ boenyClicked,
     const [etatAvancement, setEtatAvancement] = useState({ ID: null, ETAT_D_AVANCEMENT: '' });
     const [avancementChange, setAvancementChange] = useState('');
     const [stateBtnModifier,setStateBtnModifier] = useState(false);
+
+    
+
     // const navigate = useNavigate();
     console.log(avancementChange)
 
@@ -64,6 +67,12 @@ boenyClicked,
     const handleUp = (e) => {
       if(e.key == "Enter"){
         console.log('ENTRER')
+        setStateBtnModifier(s => !s)
+        setEditingIndex(null)
+        const newList = data.map(li => (
+          li.id_avancement === index?{...li, [e.target.name] : e.target.value} : li
+        ))
+        setData(newList)
       }
       
   }
@@ -117,28 +126,30 @@ boenyClicked,
         {voirPlusClicked == false ?
           memoizedData.map((projet, index) => {
             return (
+              
               <React.Fragment key={index}>
                 {index === editingIndex ? (
-                  <TableRow>
-                   <TableCell>{projet.Annee}</TableCell>
-                   <TableCell>{projet.ACTIVITES}</TableCell>
-                   <TableCell>{projet.REGIONS_CONCERNEES}</TableCell>
-                   <TableCell>{projet.AXE}</TableCell>
-                   <TableCell>{projet.PK_DEBUT}</TableCell>
-                   <TableCell>{projet.PK_FIN}</TableCell>
-                   <TableCell>
-                      <TextField onKeyUp={handleUp} onChange={(e) => handleChangeAvancement(e, projet.id_avancement)} value={etatAvancement.ID === projet.id_avancement ? etatAvancement.ETAT_D_AVANCEMENT : projet.ETAT_D_AVANCEMENT} />
-                   </TableCell>
-                   <TableCell>
-                      <Modifier
-                        stateBtnModifier={stateBtnModifier}
-                        setStateBtnModifier={setStateBtnModifier}
-                        index={index + 1}
-                        id={projet.ID}
-                        onEdit={() => handleEdit(index)}
-                      />
-                   </TableCell>
-                  </TableRow>
+                    <TableRow>
+                    <TableCell>{projet.Annee}</TableCell>
+                    <TableCell>{projet.ACTIVITES}</TableCell>
+                    <TableCell>{projet.REGIONS_CONCERNEES}</TableCell>
+                    <TableCell>{projet.AXE}</TableCell>
+                    <TableCell>{projet.PK_DEBUT}</TableCell>
+                    <TableCell>{projet.PK_FIN}</TableCell>
+                    <TableCell>
+                        <TextField onKeyUp={handleUp} onChange={(e) => handleChangeAvancement(e, projet.id_avancement)} value={etatAvancement.ID === projet.id_avancement ? etatAvancement.ETAT_D_AVANCEMENT : projet.ETAT_D_AVANCEMENT} />
+                    </TableCell>
+                    <TableCell>
+                        <Modifier
+                          stateBtnModifier={stateBtnModifier}
+                          setStateBtnModifier={setStateBtnModifier}
+                          index={index + 1}
+                          id={projet.ID}
+                          onEdit={() => handleEdit(index)}
+                        />
+                    </TableCell>
+                    </TableRow>
+                  
                 ) : (
                    <TableRow key={index}>
                       <TableCell>{projet.Annee}</TableCell>

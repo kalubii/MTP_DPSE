@@ -8,9 +8,16 @@ const Modifier = ({stateBtnModifier,setStateBtnModifier,onEdit}) => {
       onEdit()
       setStateBtnModifier(!stateBtnModifier);
   };
+  const handleUp = (e) => {
+    if(e.key == "Enter"){
+      // console.log('ENTRER')
+      setStateBtnModifier(false);
+    }
+    
+}
 
   return (
-      <Box><Button startIcon={<EditOutlinedIcon/>} onClick={handleClick}>{stateBtnModifier?"Annuler":"Modifier"}</Button></Box>
+      <Box><Button startIcon={<EditOutlinedIcon/>} onClick={handleClick} onKeyUp={handleUp}>{stateBtnModifier?"Annuler":"Modifier"}</Button></Box>
   );
 };
 
