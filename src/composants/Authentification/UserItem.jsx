@@ -11,6 +11,7 @@ import MenuItem from '@mui/material/MenuItem'
 import { alpha, styled } from '@mui/material/styles'
 import * as React from 'react'
 import UpdateUser from './UpdateUser'
+import { Delete } from '@mui/icons-material'
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -58,6 +59,7 @@ const StyledMenu = styled((props) => (
 function CustomizedMenus({ onEdit, onArchive }) {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
   }
@@ -98,7 +100,7 @@ function CustomizedMenus({ onEdit, onArchive }) {
         {/* <MenuItem onClick={handleClose} disableRipple>
           <FileCopyIcon />
           Duplicate
-        </MenuItem>
+        </MenuItem> */}
         <Divider sx={{ my: 0.5 }} />
         <MenuItem
           onClick={() => {
@@ -106,10 +108,10 @@ function CustomizedMenus({ onEdit, onArchive }) {
             onArchive()
           }}
           disableRipple>
-          <ArchiveIcon />
-          Archive
+          <Delete />
+          Supprimer
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        {/* <MenuItem onClick={handleClose} disableRipple>
           <MoreHorizIcon />
           More
         </MenuItem> */}

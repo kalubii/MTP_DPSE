@@ -28,7 +28,7 @@ export default function UsersList() {
   return (
     <>
       <AddUser addUser={addUser} />
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} sx={{marginTop:4}}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
