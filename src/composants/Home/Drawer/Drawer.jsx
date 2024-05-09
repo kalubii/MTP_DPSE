@@ -7,7 +7,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { Assignment, DirectionsCar,ListAlt, MoreVert, NoteAddOutlined, PowerSettingsNew, Timeline } from '@mui/icons-material';
+import { AccountCircle, Assignment, DirectionsCar,ListAlt, MoreVert, NoteAddOutlined, PowerSettingsNew, SettingsAccessibilityOutlined, Timeline } from '@mui/icons-material';
 import Listes from './Listes';
 import Viabilite from './Viabilite';
 import { Divider } from '@mui/material';
@@ -23,6 +23,7 @@ import ListeLocalite from '../../../pages/ListeLocalites';
 import ListeProjets from '../../../pages/ListeProjets';
 import ShareLocationOutlinedIcon from '@mui/icons-material/ShareLocationOutlined';
 import LocationSearchingOutlinedIcon from '@mui/icons-material/LocationSearchingOutlined';
+import DashboardPage from '../../Authentification/Dashboard/DashboardPage';
 
 export default function TemporaryDrawer() {
   const [open, setOpen] = React.useState(false);
@@ -55,13 +56,13 @@ const DrawerList = (
         </Box>
 
     <List >
-      {['Tableau de Bord', 'Formulaire d`ajout ', 'Viabilité des Routes','Liste Localité'].map((text, index) => (
+      {['Tableau de Bord', 'Formulaire d`ajout ', 'Viabilité des Routes','Liste Localité', 'Gestion Utilisateur'].map((text, index) => (
         <ListItem key={text} disablePadding onClick={function () {
           return onItemClicked(index);
         }}> 
           <ListItemButton>
             <ListItemIcon >
-              {index === 0 ? <Timeline/> : index === 1 ? <NoteAddOutlined/> : index === 2 ? <ShareLocationOutlinedIcon /> : index === 3 ? <LocationSearchingOutlinedIcon /> : null }
+              {index === 0 ? <Timeline/> : index === 1 ? <NoteAddOutlined/> : index === 2 ? <ShareLocationOutlinedIcon /> : index === 3 ? <LocationSearchingOutlinedIcon /> : index === 4 ? <AccountCircle /> : null }
             </ListItemIcon>
             <ListItemText primary={text} />
           </ListItemButton>
@@ -98,6 +99,7 @@ return (
       {selectedIndex === 1 && <><Title> <NoteAddOutlined fontSize='large' sx={{marginRight:1, [theme.breakpoints.down('md')]:{fontSize:"1.7rem"}}}/>Formulaire de saisie</Title> <Formulaire/></>}
       {selectedIndex === 2 && <><Title> <ShareLocationOutlinedIcon fontSize='large' sx={{marginRight:1, [theme.breakpoints.down('md')]:{fontSize:"1.7rem"}}}/>Viabilité des Routes</Title> <ListeProjets/></>}
       {selectedIndex === 3 && <><Title> <LocationSearchingOutlinedIcon fontSize='large' sx={{marginRight:1, [theme.breakpoints.down('md')]:{fontSize:"1.7rem"}}}/>Liste Localité</Title> <ListeLocalite/></>}
+      {selectedIndex === 4 && <><Title> <SettingsAccessibilityOutlined fontSize='large' sx={{marginRight:1, [theme.breakpoints.down('md')]:{fontSize:"1.7rem"}}}/>Gestion d'utilisateur</Title> <DashboardPage/></>}
     </div>
     
  </div>

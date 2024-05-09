@@ -13,6 +13,7 @@ import googleMapReact from '../src/pages/SimpleMap'
 import SimpleMap from '../src/pages/SimpleMap'
 import MapGoogle from '../src/pages/MapGoogle'
 import PieActiveArc from '../src/composants/Home/Drawer/BaseDeDonnee/Projets/PieActiveArc'
+import DashboardPage from '../src/composants/Authentification/Dashboard/DashboardPage'
 function App() {
 
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="/simpleMap" element={<SimpleMap />} />
             <Route path="/mapGoogle" element={<MapGoogle />} />
             <Route path="/pieActive" element={<PieActiveArc />} />
+            <Route path="/AuthConfig" element={<DashboardPage />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>

@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react'
-// import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from 'uuid'
 import { users as data } from './../assets/Data/users.json'
 
 const AuthContext = createContext({
@@ -45,35 +45,35 @@ const AuthProvider = ({ children }) => {
     setIsSignedIn(false)
   }
 
-//   const addUser = ({ username, email, password }) => {
-//     setUsers([...users, { userId: uuidv4(), username, email, password }])
-//   }
+  const addUser = ({ username, email, password }) => {
+    setUsers([...users, { userId: uuidv4(), username, email, password }])
+  }
 
-//   const removeUser = (userId) => {
-//     const newUsersList = []
-//     users.forEach((user) => {
-//       if (user.userId !== userId) {
-//         newUsersList.push(user)
-//       }
-//     })
-//     setUsers(newUsersList)
-//   }
+  const removeUser = (userId) => {
+    const newUsersList = []
+    users.forEach((user) => {
+      if (user.userId !== userId) {
+        newUsersList.push(user)
+      }
+    })
+    setUsers(newUsersList)
+  }
 
-//   const updateUser = (userId, { username, email, password }) => {
-//     console.log(userId, { username, email, password })
+  const updateUser = (userId, { username, email, password }) => {
+    console.log(userId, { username, email, password })
 
-//     const newUsersList = users.map((user) =>
-//       user.userId == userId
-//         ? {
-//             userId: user.userId,
-//             username,
-//             email,
-//             password
-//           }
-//         : user
-//     )
-//     setUsers(newUsersList)
-//   }
+    const newUsersList = users.map((user) =>
+      user.userId == userId
+        ? {
+            userId: user.userId,
+            username,
+            email,
+            password
+          }
+        : user
+    )
+    setUsers(newUsersList)
+  }
 
   return (
     <AuthContext.Provider
@@ -83,9 +83,9 @@ const AuthProvider = ({ children }) => {
         isSignedIn,
         login,
         logout,
-        // addUser,
-        // removeUser,
-        // updateUser
+        addUser,
+        removeUser,
+        updateUser
       }}>
       {children}
     </AuthContext.Provider>
