@@ -144,7 +144,7 @@ function ListeLocalite() {
 
   return(<>  
   <Box sx={{marginBottom:4}}>      
-        {/* <Box noValidate  autoComplete="off" sx={{'& .MuiTextField-root': { m: 1, width: '25ch' }, display:'flex', justifyContent:'center'}}>
+        <Box noValidate  autoComplete="off" sx={{'& .MuiTextField-root': { m: 1, width: '25ch' }, display:'flex', justifyContent:'center', marginTop:3}}>
             <TextField select label="Faritany" id="outlined-select-currency" defaultValue="ANTANANARIVO">
 
                   {Regions.map((option) => (
@@ -155,7 +155,7 @@ function ListeLocalite() {
                     </MenuItem>
                   ))}
             </TextField>
-        </Box> */}
+        </Box>
         
         <Box sx={{display:'flex',justifyContent:'center',margin:'auto'}}>
 
@@ -224,8 +224,8 @@ function ListeLocalite() {
                         </li>
                         {
                           numbresPagination.map((n,i)=>(
-                            <li className={`page-item ${currentPage === n ? 'active':''}`} key={i}>
-                              <a href="#" onClick={()=>changeCPage(n)}></a>
+                            <li className={`page-link ${currentPage === n ? 'active':''}`} key={i}>
+                              <a href="#" onClick={()=>changeCPage(n)}>{}</a>
                             </li>
                           ))
                         }

@@ -73,13 +73,14 @@ app.get('/projet2022', (req, res) => {
 
   app.get('/localisation',(req,res)=>{
 
+    const faritany = req.query.faritany;
     const idRef = req.query.idRef;
     const regions = req.query.region ? req.query.region.split(',') : [];
     const axes = req.query.axe ? req.query.axe.split(',') : [];
     const pkDebut = req.query.pkDebut;
     const pkFin = req.query.pkFin;
 
-    console.log(regions)
+    console.log(faritany)
 
     let sql = `SELECT * FROM localisation WHERE 1=1`;
 
