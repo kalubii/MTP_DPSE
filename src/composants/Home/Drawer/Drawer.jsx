@@ -46,7 +46,8 @@ export default function TemporaryDrawer() {
   }
 
 const DrawerList = (
- <Box sx={{ width: 250}} role="presentation" onClick={toggleDrawer(false)}>
+ <Box sx={{ width: 250, backgroundImage: `linear-gradient(0deg, #7fd162 5%, #cfeabb 33%, #ffffff 98%, #f5fff2 99%, #ffffff 100%)`,
+ height: '100vh'}} role="presentation" onClick={toggleDrawer(false)}>
 
         <Box sx={{ display: { xs: 'none', md: 'flex' }, marginY:3 , justifyContent:'center'}}>
             <img src={mtp} style={{ width: '70px', height: '80px', objectFit: 'cover' }} alt="Logo" />
@@ -88,7 +89,7 @@ const DrawerList = (
 );
 
 return (
- <div>
+ <Box >
     <Button onClick={toggleDrawer(true)} variant='contained' color='info' sx={{[theme.breakpoints.down('md')]:{marginBottom: 3}}} > <MoreVert fontSize='medium'/> Menu</Button>
     <Drawer open={open} onClose={toggleDrawer(false)} variant='persistent'>
       {DrawerList}
@@ -102,6 +103,6 @@ return (
       {selectedIndex === 4 && <><Title> <SettingsAccessibilityOutlined fontSize='large' sx={{marginRight:1, [theme.breakpoints.down('md')]:{fontSize:"1.7rem"}}}/>Gestion d'utilisateur</Title> <DashboardPage/></>}
     </div>
     
- </div>
+ </Box>
 );
 }

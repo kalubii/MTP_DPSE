@@ -25,7 +25,7 @@ function ListeLocalite() {
   const [editingIndex, setEditingIndex] = useState(null);
   const [loading, setLoading] = useState(true);
   const [currentPage,setCurrentPage] = useState(1);
-  const nbrPageAfficher = 10;
+  const nbrPageAfficher = 8;
   const lastIndex = currentPage*nbrPageAfficher
   const firstIndex = lastIndex - nbrPageAfficher
   const donnees = data.slice(firstIndex,lastIndex)
@@ -186,17 +186,17 @@ function ListeLocalite() {
                 <Table size="small" sx={{marginBottom:3}}>
                     <TableHead>
                         <TableRow>
-                            <TableCell sx={{paddingRight:11}}>Regions</TableCell>
-                            <TableCell sx={{paddingRight:10}}>Axes</TableCell>
-                            <TableCell>PK Début</TableCell>
-                            <TableCell>PK Fin</TableCell>
-                            <TableCell>Géo_Refercement Début</TableCell>
-                            <TableCell>Géo_Refercement Fin</TableCell>
-                            <TableCell>Trafic</TableCell>
-                            <TableCell>District</TableCell>
+                            <TableCell sx={{paddingRight:11}}>REGIONS</TableCell>
+                            <TableCell sx={{paddingRight:10}}>AXES</TableCell>
+                            <TableCell>PK DEBUT</TableCell>
+                            <TableCell>PK FIN</TableCell>
+                            <TableCell>GEO_REFERENCEMENT DEBUT</TableCell>
+                            <TableCell>GEO_REFERENCEMENT FIN</TableCell>
+                            <TableCell>TRAFIC</TableCell>
+                            <TableCell>DISTRICT</TableCell>
                         </TableRow>
                     </TableHead>
-                    <TableBody>
+                    <TableBody >
                         {memoizedData && memoizedData.length > 0 ? (
                             memoizedData.map((projet, index) => (
                                 <TableRow key={index}>

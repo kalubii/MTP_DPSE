@@ -68,11 +68,11 @@ export default function UpdateUser({ user, onClose, updateUser }) {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              New user
+              Nouvelle utilisateur
             </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
-              save
-            </Button>
+            {/* <Button autoFocus color="inherit" onClick={handleClose}>
+              Quitter
+            </Button> */}
           </Toolbar>
         </AppBar>
         <Box
@@ -122,7 +122,7 @@ export default function UpdateUser({ user, onClose, updateUser }) {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}>
-            Save
+            Enregistrer
           </Button>
         </Box>
       </Dialog>

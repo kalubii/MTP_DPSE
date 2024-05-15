@@ -309,13 +309,15 @@ const ListeProjets = ({regionName,anneeTravaux}) => {
                             <Table size="small">
                                 <TableHead>
                                 <TableRow>
-                                    <TableCell>Année</TableCell>
-                                    <TableCell>Travaux</TableCell>
-                                    <TableCell>Regions</TableCell>
-                                    <TableCell>Axes</TableCell>
-                                    <TableCell>PK Début</TableCell>
-                                    <TableCell>PK Fin</TableCell>
-                                    <TableCell>Avancement</TableCell>
+                                    <TableCell>ANNEE</TableCell>
+                                    <TableCell>TRAVAUX</TableCell>
+                                    <TableCell>REGIONS</TableCell>
+                                    <TableCell>AXES</TableCell>
+                                    <TableCell>PK DEBUT</TableCell>
+                                    <TableCell>PK FIN</TableCell>
+                                    <TableCell>AVANCEMENT</TableCell>
+                                    <TableCell></TableCell>
+                                    <TableCell></TableCell>
                                 </TableRow>
                                 </TableHead>
                                 <TableBody>
