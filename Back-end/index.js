@@ -322,6 +322,73 @@ app.get('/travauxRecents',(req,res) => {
       });
 })
 
+app.delete('/identification/:id_identification', (req, res) => {
+  const id_identification = req.params.id_identification;
+
+  // Démarrer une transaction pour garantir la cohérence des données
+  db.beginTransaction((err) => {
+      if (err) {
+          return res.status(500).send('Erreur lors de l\'initialisation de la transaction');
+      }
+
+      // Liste des tables dépendantes pour lesquelles les données doivent être supprimées
+      const tablesToDelete = [
+          { table: 'suividae', column: 'id_identification' },
+          { table: 'avancement', column: 'id_identification' },
+          { table: 'caracteristique', column: 'id_identification' },
+      ];
+
+      // Fonction pour supprimer les données des tables dépendantes
+      const deleteDependentData = (index) => {
+          if (index >= tablesToDelete.length) {
+              // Toutes les données dépendantes ont été supprimées, supprimer l'enregistrement dans la table identification
+              
+                  // Supprimer l'enregistrement de la table localisation associé à l'enregistrement d'identification
+                  db.query('DELETE FROM localisation WHERE id_localisation = (SELECT id_localisation FROM identification WHERE id_identification = ?)', [id_identification], (err, result) => {
+                      if (err) {
+                          return db.rollback(() => {
+                              res.status(500).send('Erreur lors de la suppression de l\'enregistrement dans localisation');
+                          });
+                      }
+                  db.query('DELETE FROM identification WHERE id_identification = ?', [id_identification], (err, result) => {
+                      if (err) {
+                          return db.rollback(() => {
+                              res.status(500).send('Erreur lors de la suppression de l\'enregistrement dans identification');
+                          });
+                        }
+      
+                      // Valider la transaction
+                      db.commit((err) => {
+                          if (err) {
+                              return db.rollback(() => {
+                                  res.status(500).send('Erreur lors de la validation de la transaction');
+                              });
+                          }
+
+                          // Suppression réussie
+                          res.status(200).send('Données supprimées avec succès');
+                      });
+                  });
+              });
+          } else {
+              const { table, column } = tablesToDelete[index];
+              db.query(`DELETE FROM ${table} WHERE ${column} = ?`, [id_identification], (err, result) => {
+                  if (err) {
+                      return db.rollback(() => {
+                          res.status(500).send(`Erreur lors de la suppression des données dans la table ${table}`);
+                      });
+                  }
+
+                  // Suppression réussie dans cette table, passer à la table suivante
+                  deleteDependentData(index + 1);
+              });
+          }
+      };
+
+      // Démarrer le processus de suppression avec la première table dépendante
+      deleteDependentData(0);
+  });
+});
 
 app.listen(8081, ()=>{
     console.log('Serveur démarrer avec succès...')

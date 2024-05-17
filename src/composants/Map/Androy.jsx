@@ -6,6 +6,9 @@ import axios from 'axios'
 import { MapContainer, TileLayer, Polygon, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import PieActiveArc from '../Home/Drawer/BaseDeDonnee/Projets/PieActiveArc';
+import { Button } from '@mui/material'; 
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import './style.css';
 
 const Androy = ({handleAndroyClick,setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedIndex,setRegionSearch,setAlaotraMangoroClicked,setAmoronIManiaClicked,setAnalanjirofoClicked,setAnalamangaClicked,setAndroyClicked,setAnosyClicked,setAtsimoAndrefanaClicked,setAtsinananaClicked,setBetsibokaClicked,setBoenyClicked,setBongolavaClicked,setDianaClicked,setHauteMatsiatraClicked,setIhorombeClicked,setItasyClicked,setMelakyClicked,setMenabeClicked,setSavaClicked,setSofiaClicked,setVakinankaratraClicked,setVatovavyFitovinanyClicked}) => {
 
@@ -16,6 +19,7 @@ const Androy = ({handleAndroyClick,setShowMapGoogle,showCarte,setShowCarte,showP
   const [resilie,setResilie] =useState([])
   const [phasePPM,setPhasePPM] =useState([])
   const [aDemarrer,setADemarrer] =useState([])
+  const [iframeSrc, setIframeSrc] = useState(null);
 
   const androyCoordinates = [
     [-25.3000, 45.1000], // Point supérieur
@@ -23,6 +27,15 @@ const Androy = ({handleAndroyClick,setShowMapGoogle,showCarte,setShowCarte,showP
     [-24.2000, 45.9000], // Point inférieur
     [-24.2000, 45.1000]  // Point gauche
 ];
+
+const handleRN13Click = () => {
+  const rn13MapURL = 'https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d1869395.3456525244!2d45.38957054113215!3d-23.77721695102919!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e6!4m5!1s0x21de98c6502026db%3A0x92b037a42f518b07!2sIhosy!3m2!1d-22.400887299999997!2d46.127902!4m5!1s0x21d1bab73bbd2271%3A0xc248f47b6e3495eb!2stolanaro!3m2!1d-25.0225309!2d46.985368799999996!5e0!3m2!1sfr!2smg!4v1714717590618!5m2!1sfr!2smg';
+  if(iframeSrc === rn13MapURL){
+    setIframeSrc(null);
+  }else{
+    setIframeSrc(rn13MapURL);
+  }
+};
 
   let regionName, anneeTravaux
   
@@ -77,7 +90,16 @@ const Androy = ({handleAndroyClick,setShowMapGoogle,showCarte,setShowCarte,showP
            </Polygon> :<>
           <h3 style={{textAlign:'center'}}>Situation des travaux : {region}</h3>
           <PieActiveArc nbTravaux={nbTravaux} enCours={enCours} resilie={resilie} phasePPM={phasePPM} aDemarrer={aDemarrer}/></>}
-           
+          <Button startIcon={<LocationOnOutlinedIcon/>} onClick={handleRN13Click}> Voir L'Axe</Button>
+           {iframeSrc && (
+                <iframe
+                    title="RN13 Map"
+                    src={iframeSrc}
+                    width="100%"
+                    height="400px"
+                    frameBorder="0"
+                ></iframe>
+            )}
      </>
    )
 }

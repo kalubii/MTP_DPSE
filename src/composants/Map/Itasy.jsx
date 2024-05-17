@@ -6,7 +6,9 @@ import axios from 'axios'
 import { MapContainer, TileLayer, Polygon, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import PieActiveArc from '../Home/Drawer/BaseDeDonnee/Projets/PieActiveArc';
-
+import { Button } from '@mui/material'; 
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import './style.css';
 
 const Itasy = ({handleItasyClick,setShowMapGoogle,showCarte,setShowCarte,showProjet,setShowProjet,setDateSelectedIndex,setRegionSearch,setAlaotraMangoroClicked,setAmoronIManiaClicked,setAnalanjirofoClicked,setAnalamangaClicked,setAndroyClicked,setAnosyClicked,setAtsimoAndrefanaClicked,setAtsinananaClicked,setBetsibokaClicked,setBoenyClicked,setBongolavaClicked,setDianaClicked,setHauteMatsiatraClicked,setIhorombeClicked,setItasyClicked,setMelakyClicked,setMenabeClicked,setSavaClicked,setSofiaClicked,setVakinankaratraClicked,setVatovavyFitovinanyClicked}) => {
 
@@ -17,14 +19,21 @@ const Itasy = ({handleItasyClick,setShowMapGoogle,showCarte,setShowCarte,showPro
   const [resilie,setResilie] =useState([])
   const [phasePPM,setPhasePPM] =useState([])
   const [aDemarrer,setADemarrer] =useState([])
-
+  const [iframeSrc, setIframeSrc] = useState(null);
   const itasyCoordinates = [
     [-18.6000, 46.9000], // Point supérieur
     [-19.3000, 46.5000], // Point droit
     [-19.4000, 46.7000], // Point inférieur
     [-18.9000, 47.5000]  // Point gauche
   ];
-
+  const handleRN1Click = () => {
+    const rn1MapURL = 'https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d482747.6067979338!2d46.78683453583603!3d-19.04325253958331!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x21f07de34f1f4eb3%3A0xdf110608bcc082f9!2sTananarive!3m2!1d-18.9184607!2d47.5211293!4m5!1s0x21fb2ed07e72f1c3%3A0x1e7f919df1467faa!2sSoavinandriana!3m2!1d-19.1694375!2d46.740595899999995!5e0!3m2!1sfr!2smg!4v1714738326307!5m2!1sfr!2smg';
+      if (iframeSrc === rn1MapURL) {
+          setIframeSrc(null); 
+      } else {
+          setIframeSrc(rn1MapURL); 
+      }
+  };
   let regionName, anneeTravaux
   
   const handleClick = () => {
@@ -78,7 +87,20 @@ const Itasy = ({handleItasyClick,setShowMapGoogle,showCarte,setShowCarte,showPro
            </Polygon> :<>
           <h3 style={{textAlign:'center'}}>Situation des travaux : {region}</h3>
           <PieActiveArc nbTravaux={nbTravaux} enCours={enCours} resilie={resilie} phasePPM={phasePPM} aDemarrer={aDemarrer}/></> }
-           
+          <Button startIcon={<LocationOnOutlinedIcon/>} onClick={handleRN1Click}> Voir L'Axe</Button>
+           {iframeSrc && (
+            <iframe 
+                title="RN5 Map"
+                    src={iframeSrc}
+                    width="100%"
+                    height="500px"
+                    frameBorder="0"
+                    style={{ border: 'none', marginTop: '10px' }} 
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+        )} 
      </>
    )
 }

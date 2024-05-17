@@ -46,8 +46,7 @@ export default function TemporaryDrawer() {
   }
 
 const DrawerList = (
- <Box sx={{ width: 250, backgroundImage: `linear-gradient(0deg, #7fd162 5%, #cfeabb 33%, #ffffff 98%, #f5fff2 99%, #ffffff 100%)`,
- height: '100vh'}} role="presentation" onClick={toggleDrawer(false)}>
+ <Box role="presentation" onClick={toggleDrawer(false)}>
 
         <Box sx={{ display: { xs: 'none', md: 'flex' }, marginY:3 , justifyContent:'center'}}>
             <img src={mtp} style={{ width: '70px', height: '80px', objectFit: 'cover' }} alt="Logo" />
