@@ -10,6 +10,8 @@ import Modifier from '../CRUD/Modifier';
 import { Button, TextField } from '@mui/material';
 import VoirPlus from './VoirPlus';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import DeleteButton from '../CRUD/Delete';
+import { Visibility } from '@mui/icons-material';
 
 
 const Projet = ({dianaClicked,
@@ -90,6 +92,49 @@ boenyClicked,
       setEtatAvancement({ ID: id, ETAT_D_AVANCEMENT: e.target.value });
     };
     
+// Fonction pour mettre à jour les données affichées après la suppression
+const updateDataAfterDelete = async () => {
+  try {
+      const response = await axios.get('http://localhost:8081/projet2022', {
+          params: {
+              idRef: id,
+              pkDebutRef: pkDebutRef,
+              pkFinRef: pkFinRef,
+              date: dateSelectedIndex,
+              region: regionSearch,
+              axe: axeSearch,
+              pkDebut: pkDebutSearch,
+              pkFin: pkFinSearch,
+          },
+      });
+      setData(response.data);
+      setLoading(false);
+  } catch (error) {
+      console.error('Erreur lors de la récupération des données :', error);
+      setLoading(false);
+  }
+}
+
+const handleDelete = async (id_identification) => {
+  // Demander une confirmation avant de supprimer les données
+  const confirmed = window.confirm('Voulez-vous vraiment supprimer ces données ?');
+  if (!confirmed) {
+      return;
+  }
+
+  try {
+      await axios.delete(`http://localhost:8081/identification/${id_identification}`);
+      // Après la suppression, mettre à jour les données affichées
+      await updateDataAfterDelete();
+  } catch (error) {
+      console.error('Erreur lors de la suppression du projet :', error);
+  }
+};
+
+// Utilisez `useEffect` pour appeler `updateDataAfterDelete` lorsque les dépendances changent
+useEffect(() => {
+updateDataAfterDelete();
+}, [id, dateSelectedIndex, regionSearch, axeSearch, pkDebutSearch, pkFinSearch]);
 
     useEffect(() => {
       const fetchSearchResults = async () => {
@@ -167,11 +212,14 @@ boenyClicked,
                         />
                       </TableCell>
                       <TableCell>
-                        <Button startIcon={<VisibilityOutlinedIcon/>} variant="text" onClick={() => handleClickOpen(projet.id_avancement)} disabled={!(loading===false)}>
+                        <Button startIcon={<Visibility/>} variant="text" onClick={() => handleClickOpen(projet.id_avancement)} disabled={!(loading===false)}>
                         {loading?(
                           <span>Chargement...</span>
                         ):(<span>Detail</span>)}
                         </Button>
+                      </TableCell>
+                      <TableCell>
+                        <DeleteButton onDelete={() => handleDelete(projet.id_identification)}/>
                       </TableCell>
                    </TableRow>
                

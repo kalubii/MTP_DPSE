@@ -1,6 +1,7 @@
 import { Box, Button } from '@mui/material'
 import React, { useState } from 'react'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import { Edit } from '@mui/icons-material';
 
 const Modifier = ({stateBtnModifier,setStateBtnModifier,onEdit}) => {
 
@@ -17,7 +18,7 @@ const Modifier = ({stateBtnModifier,setStateBtnModifier,onEdit}) => {
 }
 
   return (
-      <Box><Button startIcon={<EditOutlinedIcon/>} onClick={handleClick} onKeyUp={handleUp}>{stateBtnModifier?"Annuler":"Modifier"}</Button></Box>
+      <Box><Button startIcon={<Edit/>} onClick={handleClick} onKeyUp={handleUp}>{stateBtnModifier?"Annuler":"Modifier"}</Button></Box>
   );
 };
 
